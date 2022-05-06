@@ -45,7 +45,7 @@ let layout (ctx : SiteContents) active bodyCnt =
         a [Class cls; Href p.link] [!! p.title ])
       |> Seq.toList
 
-    html [] [
+    html [Class "has-navbar-fixed-top"] [
         head [] [
             meta [CharSet "utf-8"]
             meta [Name "viewport"; Content "width=device-width, initial-scale=1"]
@@ -53,27 +53,15 @@ let layout (ctx : SiteContents) active bodyCnt =
             link [Rel "icon"; Type "image/png"; Sizes "32x32"; Href "/images/favicon.png"]
             link [Rel "stylesheet"; Href "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"]
             link [Rel "stylesheet"; Href "https://fonts.googleapis.com/css?family=Open+Sans"]
-            link [Rel "stylesheet"; Href "https://unpkg.com/bulma@0.8.0/css/bulma.min.css"]
             link [Rel "stylesheet"; Type "text/css"; Href "/style/style.css"]
+            link [Rel "stylesheet"; Type "text/css"; Href "https://cdn.jsdelivr.net/npm/@creativebulma/bulma-collapsible@1.0.4/dist/css/bulma-collapsible.min.css"]
+            script [ Type "module"; Src "/js/bundle.js"] []
 
         ]
         body [] [
-          nav [Class "navbar"] [
-            div [Class "container"] [
-              div [Class "navbar-brand"] [
-                a [Class "navbar-item"; Href "/"] [
-                  img [Src "/images/bulma.png"; Alt "Logo"]
-                ]
-                span [Class "navbar-burger burger"; HtmlProperties.Custom ("data-target", "navbarMenu")] [
-                  span [] []
-                  span [] []
-                  span [] []
-                ]
-              ]
-              div [Id "navbarMenu"; Class "navbar-menu"] menuEntries
-            ]
-          ]
+          custom "nfdi-navbar" [] []
           yield! bodyCnt
+          custom "nfdi-footer" [] []
         ]
     ]
 
