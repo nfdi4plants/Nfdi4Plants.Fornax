@@ -3,10 +3,26 @@ layout: docs
 title: Metadata
 published: 2022-05-09
 Author: Dominik Brilhaus <https://orcid.org/0000-0001-9021-3197>
+add toc: true
+add sidebar: true
 Article Status: Publishable
 To-Dos: 
     - Update links to other KB articles
 ---
+title: Metadata
+# What is metadata?:#what-is-metadata
+# Where does metadata come from?:#where-does-metadata-come-from
+# Why do I benefit from metadata?:#why-do-i-benefit-from-metadata
+# What tasks are important for rich metadata?:#what-tasks-are-important-for-rich-metadata
+## Collection
+## Structuring
+## Sharing and curation
+# How does DataPLANT support me in metadata annotation
+# DataPLANT Support
+
+
+<!--sidebar-->
+
 <!-- 
 # export all .md files in current dir to .docx via pandoc 
 for f in *.md; do pandoc -s -o "${f%.md}.docx" "$f"; done

@@ -6,23 +6,25 @@ open Html
 let generate' (ctx : SiteContents) (_: string) =
     let docs0 = ctx.TryGetValues<Docsloader.Docs> () |> Option.defaultValue Seq.empty
 
-    printfn "%A" (docs0|> Seq.length) // 1
-
-    let layoutForMinimalDocsAncestor docs =
+    let layoutForMinimalDocsAncestor (docsLists: seq<HtmlElement> list) =
         Layout.layout ctx "Home" [
             section [Class "section"] [
                 div [Class "container"] [
-                    div [Class "tile is-ancestor"] [
-                        yield! docs
-                    ]
+                    yield! docsLists
+                    |> List.map (fun docs ->
+                        div [Class "tile is-ancestor"] [
+                            yield! docs
+                        ]
+                    )
                 ]
             ]
         ]
 
     docs0
     |> Seq.sortByDescending (fun x -> x.published)
+    |> Seq.chunkBySize 3
+    |> Seq.map (Seq.map Layout.docsMinimalLayout)
     |> Seq.toList
-    |> List.map Layout.docsMinimalLayout
     |> layoutForMinimalDocsAncestor
     |> Layout.render ctx
 

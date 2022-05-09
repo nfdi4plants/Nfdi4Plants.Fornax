@@ -56,6 +56,16 @@ let layout (ctx : SiteContents) active bodyCnt =
                 body {
                   margin: 0px;
                 }
+                
+                nfdi-navbar, nfdi-footer, nfdi-toc, nfdi-body {
+                  --element-background-color: black;
+                  --element-text-color: white;
+                  --link-color: #4FB3D9;
+                  --link-hover-color: #84cae4;
+                  --header-color: white;
+                  --outside-background-color: #191919;
+                  --accent-text-color: #1FC2A7
+                }
 
                 thead tr th, strong {
                     color: var(--accent-text-color) !important
@@ -72,15 +82,6 @@ let layout (ctx : SiteContents) active bodyCnt =
                   font-size: 1.2rem;
                 }
              """
-                // nfdi-navbar, nfdi-footer, nfdi-toc, nfdi-body {
-                //   --element-background-color: black;
-                //   --element-text-color: white;
-                //   --link-color: #4FB3D9;
-                //   --link-hover-color: #84cae4;
-                //   --header-color: white;
-                //   --outside-background-color: #191919;
-                //   --accent-text-color: #1FC2A7
-                // }
 
 
             ]
@@ -99,40 +100,30 @@ let render (ctx : SiteContents) cnt =
   |> HtmlElement.ToString
   |> fun n -> if disableLiveRefresh then n else injectWebsocketCode n
 
-// let published (post: Postloader.Post) =
-//     post.published
-//     |> Option.defaultValue System.DateTime.Now
-//     |> fun n -> n.ToString("yyyy-MM-dd")
-
-// let postLayout (useSummary: bool) (post: Postloader.Post) =
-//     div [Class "card article"] [
-//         div [Class "card-content"] [
-//             div [Class "media-content has-text-centered"] [
-//                 p [Class "title article-title"; ] [ a [Href post.link] [!! post.title]]
-//                 p [Class "subtitle is-6 article-subtitle"] [
-//                 a [Href "#"] [!! (defaultArg post.author "")]
-//                 !! (sprintf "on %s" (published post))
-//                 ]
-//             ]
-//             div [Class "content article-body"] [
-//                 !! (if useSummary then post.summary else post.content)
-//             ]
-//         ]
-//     ]
 
 let docsLayout (docs: Docsloader.Docs) =
   custom "nfdi-body" [Class "content"] [
-    custom "nfdi-sidebar-element" [HtmlProperties.Custom ("slot", "sidebar"); HtmlProperties.Custom ("isAcitve","true") ] [
-      div [HtmlProperties.Custom ("slot", "title")] [!! "Metadata"]
-      h1 [HtmlProperties.Custom ("slot", "inner"); Href "https://www.youtube.com/watch?v=dQw4w9WgXcQ"] [!! "What is metadata?"]
+    if Array.isEmpty docs.sidebar |> not then custom "nfdi-sidebar-element" [HtmlProperties.Custom ("slot", "sidebar"); HtmlProperties.Custom ("isActive","true") ] [
+        let sidebar =  
+            docs.sidebar
+            |> Array.collect (fun sidebarEle ->
+                [|
+                    div [HtmlProperties.Custom ("slot", "title")] [!! sidebarEle.Title]
+                    !! sidebarEle.Content
+                |]
+            )
+        yield! sidebar
+        
+        // div [HtmlProperties.Custom ("slot", "title")] [!! "Metadata"]
+        // h1 [HtmlProperties.Custom ("slot", "inner"); Href "https://www.youtube.com/watch?v=dQw4w9WgXcQ"] [!! "What is metadata?"]
     ]
     custom "nfdi-h1" [] [!! docs.title]
-    custom "nfdi-toc" [] []
+    if docs.add_toc then custom "nfdi-toc" [] []
     !! docs.content
   ]
 
 let docsMinimalLayout (docs: Docsloader.Docs) =
-  div [Class "tile is-2 is-parent"] [
+  div [Class "tile is-4 is-parent"] [
     div [Class "tile is-child box"] [
       p [Class "title"] [ a [Href docs.link] [!! docs.title] ]
       p [] [ !! $"""by {docs.author.Value}, {docs.published.Value.ToString("yyyy-MM-dd")}""" ]
