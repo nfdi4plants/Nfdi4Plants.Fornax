@@ -3,7 +3,6 @@
 
 open Html
 
-
 let generate' (ctx : SiteContents) (page: string) =
     let post =
         ctx.TryGetValues<Postloader.Post> ()

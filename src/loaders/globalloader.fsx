@@ -8,7 +8,7 @@ type SiteInfo = {
 
 let loader (projectRoot: string) (siteContent: SiteContents) =
     let siteInfo =
-        { title = "Sample Fornax blog";
+        { title = "DataPLANT documentation";
           description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
           postPageSize = 5 }
     siteContent.Add(siteInfo)

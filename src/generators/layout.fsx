@@ -1,6 +1,7 @@
 #r "../_lib/Fornax.Core.dll"
 #if !FORNAX
-#load "../loaders/postloader.fsx"
+// #load "../loaders/postloader.fsx"
+#load "../loaders/docsloader.fsx"
 #load "../loaders/pageloader.fsx"
 #load "../loaders/globalloader.fsx"
 #endif
@@ -37,13 +38,6 @@ let layout (ctx : SiteContents) active bodyCnt =
       siteInfo
       |> Option.map (fun si -> si.title)
       |> Option.defaultValue ""
-
-    let menuEntries =
-      pages
-      |> Seq.map (fun p ->
-        let cls = if p.title = active then "navbar-item is-active" else "navbar-item"
-        a [Class cls; Href p.link] [!! p.title ])
-      |> Seq.toList
 
     html [Class "has-navbar-fixed-top"] [
         head [] [
@@ -94,50 +88,53 @@ let layout (ctx : SiteContents) active bodyCnt =
         ]
         custom "nfdi-navbar" [] []
         body [] [
-          nav [Class "navbar"] [
-            div [Class "container"] [
-              div [Class "navbar-brand"] [
-                a [Class "navbar-item"; Href "/"] [
-                  img [Src "/images/bulma.png"; Alt "Logo"]
-                ]
-                span [Class "navbar-burger burger"; HtmlProperties.Custom ("data-target", "navbarMenu")] [
-                  span [] []
-                  span [] []
-                  span [] []
-                ]
-              ]
-              div [Id "navbarMenu"; Class "navbar-menu"] menuEntries
-            ]
-          ]
           yield! bodyCnt
-          custom "nfdi-footer" [] []
         ]
+        custom "nfdi-footer" [] []
     ]
 
 let render (ctx : SiteContents) cnt =
-  let disableLiveRefresh = ctx.TryGetValue<Postloader.PostConfig> () |> Option.map (fun n -> n.disableLiveRefresh) |> Option.defaultValue false
+  let disableLiveRefresh = ctx.TryGetValue<Docsloader.DocsConfig> () |> Option.map (fun n -> n.disableLiveRefresh) |> Option.defaultValue false
   cnt
   |> HtmlElement.ToString
   |> fun n -> if disableLiveRefresh then n else injectWebsocketCode n
 
-let published (post: Postloader.Post) =
-    post.published
-    |> Option.defaultValue System.DateTime.Now
-    |> fun n -> n.ToString("yyyy-MM-dd")
+// let published (post: Postloader.Post) =
+//     post.published
+//     |> Option.defaultValue System.DateTime.Now
+//     |> fun n -> n.ToString("yyyy-MM-dd")
 
-let postLayout (useSummary: bool) (post: Postloader.Post) =
-    div [Class "card article"] [
-        div [Class "card-content"] [
-            div [Class "media-content has-text-centered"] [
-                p [Class "title article-title"; ] [ a [Href post.link] [!! post.title]]
-                p [Class "subtitle is-6 article-subtitle"] [
-                a [Href "#"] [!! (defaultArg post.author "")]
-                !! (sprintf "on %s" (published post))
-                ]
-            ]
-            div [Class "content article-body"] [
-                !! (if useSummary then post.summary else post.content)
+// let postLayout (useSummary: bool) (post: Postloader.Post) =
+//     div [Class "card article"] [
+//         div [Class "card-content"] [
+//             div [Class "media-content has-text-centered"] [
+//                 p [Class "title article-title"; ] [ a [Href post.link] [!! post.title]]
+//                 p [Class "subtitle is-6 article-subtitle"] [
+//                 a [Href "#"] [!! (defaultArg post.author "")]
+//                 !! (sprintf "on %s" (published post))
+//                 ]
+//             ]
+//             div [Class "content article-body"] [
+//                 !! (if useSummary then post.summary else post.content)
+//             ]
+//         ]
+//     ]
 
-            ]
-        ]
+let docsLayout (docs: Docsloader.Docs) =
+  custom "nfdi-body" [Class "content"] [
+    custom "nfdi-sidebar-element" [HtmlProperties.Custom ("slot", "sidebar"); HtmlProperties.Custom ("isAcitve","true") ] [
+      div [HtmlProperties.Custom ("slot", "title")] [!! "Metadata"]
+      h1 [HtmlProperties.Custom ("slot", "inner"); Href "https://www.youtube.com/watch?v=dQw4w9WgXcQ"] [!! "What is metadata?"]
     ]
+    custom "nfdi-h1" [] [!! docs.title]
+    custom "nfdi-toc" [] []
+    !! docs.content
+  ]
+
+let docsMinimalLayout (docs: Docsloader.Docs) =
+  div [Class "tile is-2 is-parent"] [
+    div [Class "tile is-child box"] [
+      p [Class "title"] [ a [Href docs.link] [!! docs.title] ]
+      p [] [ !! $"""by {docs.author.Value}, {docs.published.Value.ToString("yyyy-MM-dd")}""" ]
+    ]
+  ]
