@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 src/_public
 src/generators/docs.fsx
+.vscode/settings.json
