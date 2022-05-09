@@ -56,16 +56,6 @@ let layout (ctx : SiteContents) active bodyCnt =
                 body {
                   margin: 0px;
                 }
-                
-                nfdi-navbar, nfdi-footer, nfdi-toc, nfdi-body {
-                  --element-background-color: black;
-                  --element-text-color: white;
-                  --link-color: #4FB3D9;
-                  --link-hover-color: #84cae4;
-                  --header-color: white;
-                  --outside-background-color: #191919;
-                  --accent-text-color: #1FC2A7
-                }
 
                 thead tr th, strong {
                     color: var(--accent-text-color) !important
@@ -83,6 +73,15 @@ let layout (ctx : SiteContents) active bodyCnt =
                 }
              """
 
+                // nfdi-navbar, nfdi-footer, nfdi-toc, nfdi-body {
+                //   --element-background-color: black;
+                //   --element-text-color: white;
+                //   --link-color: #4FB3D9;
+                //   --link-hover-color: #84cae4;
+                //   --header-color: white;
+                //   --outside-background-color: #191919;
+                //   --accent-text-color: #1FC2A7
+                // }
 
             ]
 
