@@ -54,23 +54,13 @@ let layout (ctx : SiteContents) active bodyCnt =
             link [Rel "stylesheet"; Href "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"]
             link [Rel "stylesheet"; Href "https://fonts.googleapis.com/css?family=Open+Sans"]
             link [Rel "stylesheet"; Type "text/css"; Href "/style/style.css"]
-            link [Rel "stylesheet"; Type "text/css"; Href "https://cdn.jsdelivr.net/npm/@creativebulma/bulma-collapsible@1.0.4/dist/css/bulma-collapsible.min.css"]
+            // link [Rel "stylesheet"; Type "text/css"; Href "https://cdn.jsdelivr.net/npm/@creativebulma/bulma-collapsible@1.0.4/dist/css/bulma-collapsible.min.css"]
+            link [Rel "stylesheet"; Href "https://unpkg.com/bulma@0.8.0/css/bulma.min.css"]
             script [ Type "module"; Src "/js/bundle.js"] []
             style [] [
                 !! """
                 body {
                   margin: 0px;
-                  color: red !important;
-                }
-
-                nfdi-navbar, nfdi-footer, nfdi-toc, nfdi-body {
-                  --element-background-color: black;
-                  --element-text-color: white;
-                  --link-color: #4FB3D9;
-                  --link-hover-color: #84cae4;
-                  --header-color: white;
-                  --outside-background-color: #191919;
-                  --accent-text-color: #1FC2A7
                 }
 
                 thead tr th, strong {
@@ -84,16 +74,41 @@ let layout (ctx : SiteContents) active bodyCnt =
                 a:hover {
                   color: var(--link-hover-color, #3A3A3A) !important;
                 }
-
                 thead {
                   font-size: 1.2rem;
                 }
              """
+                // nfdi-navbar, nfdi-footer, nfdi-toc, nfdi-body {
+                //   --element-background-color: black;
+                //   --element-text-color: white;
+                //   --link-color: #4FB3D9;
+                //   --link-hover-color: #84cae4;
+                //   --header-color: white;
+                //   --outside-background-color: #191919;
+                //   --accent-text-color: #1FC2A7
+                // }
+
+
             ]
 
         ]
+        custom "nfdi-navbar" [] []
         body [] [
-          custom "nfdi-navbar" [] []
+          nav [Class "navbar"] [
+            div [Class "container"] [
+              div [Class "navbar-brand"] [
+                a [Class "navbar-item"; Href "/"] [
+                  img [Src "/images/bulma.png"; Alt "Logo"]
+                ]
+                span [Class "navbar-burger burger"; HtmlProperties.Custom ("data-target", "navbarMenu")] [
+                  span [] []
+                  span [] []
+                  span [] []
+                ]
+              ]
+              div [Id "navbarMenu"; Class "navbar-menu"] menuEntries
+            ]
+          ]
           yield! bodyCnt
           custom "nfdi-footer" [] []
         ]

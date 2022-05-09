@@ -32,6 +32,7 @@ let isSeparator (input : string) =
 let isSummarySeparator (input: string) =
     input.Contains "<!--more-->"
 
+// Parse over line to find area between "---". Parse input, very simple by separating by ":"
 
 ///`fileContent` - content of page to parse. Usually whole content of `.md` file
 ///returns content of config that should be used for the page
@@ -60,6 +61,8 @@ let getContent (fileContent : string) =
     let fileContent = fileContent |> Array.skip 1 //First line must be ---
     let indexOfSeperator = fileContent |> Array.findIndex isSeparator
     let _, content = fileContent |> Array.splitAt indexOfSeperator
+
+    // check for <!--more--> separator in content, and add everything after to "extend area in page". (when you click on the header)
 
     let summary, content =
         match content |> Array.tryFindIndex isSummarySeparator with
