@@ -11190,6 +11190,7 @@ Sidebar.styles = [
             :host {
                 display: block;
                 position: relative;
+                width: inherit
             }
 
             .inner-wrapper {
@@ -11197,7 +11198,8 @@ Sidebar.styles = [
                 max-height: 90%;
                 scrollbar-color: var(--element-background-color, ${nfdiWhite}) var(--accent-text-color, ${nfdiBlack});
                 overscroll-behavior: contain;
-                overflow-y: auto
+                overflow-y: auto;
+                width: 300px;
             }
 
             .inner-wrapper::-webkit-scrollbar {
@@ -11358,17 +11360,24 @@ var __decorateClass$4 = (decorators, target, key, kind) => {
     __defProp$4(target, key, result);
   return result;
 };
+const sidebar = $`
+    <div class="column is-narrow sidebar-column">
+        <nfdi-sidebar>
+            <slot name="sidebar"></slot>
+        </nfdi-sidebar>
+    </div>
+`;
 let Body = class extends s$1 {
+  constructor() {
+    super(...arguments);
+    this.hasSidebar = false;
+  }
   render() {
     return $`
         <div class="variable-colors">
             <div class="container is-max-desktop" style="padding: 2vh 0">
                 <div class="columns is-mobile">
-                    <div class="column is-narrow sidebar-column">
-                        <nfdi-sidebar>
-                            <slot name="sidebar"></slot>
-                        </nfdi-sidebar>
-                    </div>
+                    ${this.hasSidebar ? sidebar : $``}
                     <div class="column">
                         <nfdi-content>  
                             <slot></slot>
@@ -11413,6 +11422,9 @@ Body.styles = [
             }
         `
 ];
+__decorateClass$4([
+  e$1({ type: Boolean })
+], Body.prototype, "hasSidebar", 2);
 Body = __decorateClass$4([
   n$2("nfdi-body")
 ], Body);

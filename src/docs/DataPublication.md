@@ -4,7 +4,7 @@ title: Data Publications
 published: 2022-05-09
 Author: ?
 add toc: true
-add sidebar: true
+add sidebar: sidebars\mainSidebar.md
 Article Status: Publishable
 ---
 

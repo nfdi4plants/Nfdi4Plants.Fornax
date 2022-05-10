@@ -4,7 +4,7 @@ title: Version control
 published: 2022-05-09
 Author: Dominik Brilhaus <https://orcid.org/0000-0001-9021-3197>
 add toc: true
-add sidebar: true
+add sidebar: sidebars\mainSidebar.md
 Article Status: draft
 To-Dos:
   - write
@@ -16,7 +16,7 @@ To-Dos:
 for f in *.md; do pandoc -s -o "${f%.md}.docx" "$f"; done
 -->
 
-# Version control
+<!-- # Version control
 
 - [Scientific iteration and versioning](#scientific-iteration-and-versioning)
 - [Git](#git)
@@ -24,7 +24,7 @@ for f in *.md; do pandoc -s -o "${f%.md}.docx" "$f"; done
 - [Git? - it's not for me!](#git---its-not-for-me)
 - [How does DataPLANT support me to version control my data?](#how-does-dataplant-support-me-to-version-control-my-data)
   - [Register with DataPLANT](#register-with-dataplant)
-  - [DataPLANT Support](#dataplant-support)
+  - [DataPLANT Support](#dataplant-support) -->
 
 ## Scientific iteration and versioning
 

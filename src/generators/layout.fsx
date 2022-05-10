@@ -48,8 +48,7 @@ let layout (ctx : SiteContents) active bodyCnt =
             link [Rel "stylesheet"; Href "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"]
             link [Rel "stylesheet"; Href "https://fonts.googleapis.com/css?family=Open+Sans"]
             link [Rel "stylesheet"; Type "text/css"; Href "/style/style.css"]
-            // link [Rel "stylesheet"; Type "text/css"; Href "https://cdn.jsdelivr.net/npm/@creativebulma/bulma-collapsible@1.0.4/dist/css/bulma-collapsible.min.css"]
-            link [Rel "stylesheet"; Href "https://unpkg.com/bulma@0.8.0/css/bulma.min.css"]
+            link [Rel "stylesheet"; Type "text/css"; Href "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"]
             script [ Type "module"; Src "/js/bundle.js"] []
             style [] [
                 !! """
@@ -101,25 +100,17 @@ let render (ctx : SiteContents) cnt =
 
 
 let docsLayout (docs: Docsloader.Docs) =
-  custom "nfdi-body" [Class "content"] [
-    if Array.isEmpty docs.sidebar |> not then custom "nfdi-sidebar-element" [HtmlProperties.Custom ("slot", "sidebar"); HtmlProperties.Custom ("isActive","true") ] [
-        let sidebar =  
-            docs.sidebar
-            |> Array.collect (fun sidebarEle ->
-                [|
+    custom "nfdi-body" [Class "content"; if Array.isEmpty docs.sidebar |> not then HtmlProperties.Custom("hasSidebar", "true")] [
+        if Array.isEmpty docs.sidebar |> not then 
+            for sidebarEle in docs.sidebar do
+                custom "nfdi-sidebar-element" [HtmlProperties.Custom ("slot", "sidebar"); HtmlProperties.Custom ("isActive","true") ] [
                     div [HtmlProperties.Custom ("slot", "title")] [!! sidebarEle.Title]
                     !! sidebarEle.Content
-                |]
-            )
-        yield! sidebar
-        
-        // div [HtmlProperties.Custom ("slot", "title")] [!! "Metadata"]
-        // h1 [HtmlProperties.Custom ("slot", "inner"); Href "https://www.youtube.com/watch?v=dQw4w9WgXcQ"] [!! "What is metadata?"]
+                ]
+        custom "nfdi-h1" [] [!! docs.title]
+        if docs.add_toc then custom "nfdi-toc" [] []
+        !! docs.content
     ]
-    custom "nfdi-h1" [] [!! docs.title]
-    if docs.add_toc then custom "nfdi-toc" [] []
-    !! docs.content
-  ]
 
 let docsMinimalLayout (docs: Docsloader.Docs) =
   div [Class "tile is-4 is-parent"] [
