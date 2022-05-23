@@ -10887,7 +10887,7 @@ let Navbar = class extends s$1 {
                 <path fill="currentColor" d="M464 64C490.5 64 512 85.49 512 112C512 127.1 504.9 141.3 492.8 150.4L275.2 313.6C263.8 322.1 248.2 322.1 236.8 313.6L19.2 150.4C7.113 141.3 0 127.1 0 112C0 85.49 21.49 64 48 64H464zM217.6 339.2C240.4 356.3 271.6 356.3 294.4 339.2L512 176V384C512 419.3 483.3 448 448 448H64C28.65 448 0 419.3 0 384V176L217.6 339.2z"/>
               </svg>
             </a>
-            <p class="navbar-item is-lightblue">
+            <p id="navbar-v-divide" class="navbar-item is-lightblue">
               |
             </p>
             <a class="navbar-item" href="https://twitter.com/nfdi4plants" title="Twitter">
@@ -10921,24 +10921,30 @@ let Navbar = class extends s$1 {
 Navbar.styles = [
   bulmaStyles,
   r$2`
-      :host {
-        position: fixed;
-        z-index: 30;
-        width: 100%;
-      }
-      .icon {
-        width: 1em;
-        height: 1em;
-        vertical-align: -.125em;
-      }
-      .variable-colors, .navbar-item, .navbar-link, .navbar-dropdown {
-        background-color: var(--element-background-color, ${nfdiDarkblue});
-        color: var(--element-text-color, white);
-        border-color: var(--element-text-color, white);
-      }
-      .navbar-divider {
-        background-color: var(--element-text-color, white);
-      }
+        :host {
+            position: fixed;
+            z-index: 30;
+            width: 100%;
+        }
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -.125em;
+        }
+        .variable-colors, .navbar-item, .navbar-link, .navbar-dropdown {
+            background-color: var(--element-background-color, ${nfdiDarkblue});
+            color: var(--element-text-color, white);
+            border-color: var(--element-text-color, white);
+        }
+        .navbar-divider {
+            background-color: var(--element-text-color, white);
+        }
+
+        @media only screen and (max-width: 1023px) {
+            #navbar-v-divide {
+                display: none
+            }
+        }
     `
 ];
 __decorateClass$8([
@@ -11172,12 +11178,16 @@ let Sidebar = class extends s$1 {
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" class="icon" height=16 width=16><path fill="currentcolor" d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"/></svg>
                 </button>
             </footer>
-            <div class=${this.navbarIsActive ? "inner-wrapper is-active" : "inner-wrapper"}>
-                <button class="button is-ghost close-sidebar-button" @click=${this._toggleSidebar}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon" height=16 width=16><path fill="currentcolor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
-                </button>
-                <slot></slot>
-            </div>    
+            <div class="main">
+                <div class="wrapper">
+                    <div class=${this.navbarIsActive ? "inner-wrapper is-active" : "inner-wrapper"}>
+                        <button class="button is-ghost close-sidebar-button" @click=${this._toggleSidebar}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon" height=16 width=16><path fill="currentcolor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+                        </button>
+                        <slot></slot>
+                    </div>    
+                </div>
+            </div>
         `;
   }
   _toggleSidebar() {
@@ -11187,16 +11197,14 @@ let Sidebar = class extends s$1 {
 Sidebar.styles = [
   bulmaStyles,
   r$2`
-            :host {
-                display: block;
-                position: relative;
-                width: inherit
-            }
-
             .inner-wrapper {
-                position: fixed;
+                position: sticky;
+                top: 71px;
                 max-height: 90%;
                 scrollbar-color: var(--element-background-color, ${nfdiWhite}) var(--accent-text-color, ${nfdiBlack});
+                background-color: var(--sidebar-background-color, transparent);
+                padding: 1rem;
+                border-radius: 10px;
                 overscroll-behavior: contain;
                 overflow-y: auto;
                 width: 300px;
@@ -11233,7 +11241,7 @@ Sidebar.styles = [
                 z-index: 10000;
                 width: 100%;
                 border-top: .5px solid var(--element-text-color, ${nfdiBlack});
-                background-color: var(--element-background-color, ${nfdiDarkblue});;
+                background-color: var(--element-background-color, ${nfdiDarkblue});
                 justify-content: center;
                 padding: .5rem;
             }
@@ -11246,18 +11254,33 @@ Sidebar.styles = [
                 display: none;
             }
 
+            @media only screen and (min-width: 1024px) {
+                .main {
+                    display: grid; 
+                    height: 100%;
+                    grid-template-columns: 1fr; grid-template-rows: 1fr;
+                }
+
+                .wrapper {
+                    display: inline-block;
+                    grid-column: 1 / span 1; 
+                    grid-row: 1 / span 1;
+                }
+            }
+
             @media only screen and (max-width: 1023px) {
                 .inner-wrapper {
+                    position: fixed;
                     height: 100%;
                     top: 0;
-                    left: -300px;
-                    display: fixed;
+                    left: -320px;
                     border-right: .5px solid var(--element-text-color, ${nfdiBlack});
                     border-bottom: .5px solid var(--element-text-color, ${nfdiBlack});
                     border-top: .5px solid var(--element-text-color, ${nfdiBlack});
-                    background-color: var(--element-background-color, ${nfdiWhite});
+                    background-color: var(--sidebar-background-color, ${nfdiWhite});
+                    border-radius: 0;
                     z-index: 10000;
-                    width: 300px;
+                    width: 320px;
                     transition: left .5s;
                     padding: 1rem;
                     max-height: 100%;
@@ -11325,7 +11348,8 @@ Content.styles = [
                 background-color: var(--element-background-color, ${nfdiWhite});
                 color: var(--element-text-color, ${nfdiBlack}) !important;
                 border-color: var(--element-text-color, ${nfdiBlack});
-                border: 1px solid
+                border: 1px solid;
+                /* box-shadow: unset */
             }
 
             ::slotted(nfdi-h1), ::slotted(nfdi-h2), ::slotted(nfdi-h3), ::slotted(nfdi-h4), ::slotted(nfdi-h5), ::slotted(nfdi-h6) {
@@ -11334,6 +11358,13 @@ Content.styles = [
 
             ::slotted(*) {
                 min-width: 0 !important;
+            }
+
+            @media only screen and (max-width: 1023px) {
+                .box {
+                   border: none;
+                   border-radius: 0;
+                }
             }
 
             @media only screen and (max-width: 599px) {
@@ -11375,8 +11406,8 @@ let Body = class extends s$1 {
   render() {
     return $`
         <div class="variable-colors">
-            <div class="container is-max-desktop" style="padding: 2vh 0">
-                <div class="columns is-mobile">
+            <div class="container" style="padding: 2vh 0">
+                <div class="columns">
                     ${this.hasSidebar ? sidebar : $``}
                     <div class="column">
                         <nfdi-content>  
@@ -11392,27 +11423,29 @@ let Body = class extends s$1 {
 Body.styles = [
   bulmaStyles,
   r$2`
-
             .variable-colors {
                 background-color: var(--outside-background-color, ${nfdiOliveLighter80});
                 color: var(--element-text-color, ${nfdiBlack});
                 border-color: var(--element-text-color, ${nfdiBlack})
             }
 
-            @media only screen and (max-width: 1023px) {
-                .columns {
-                    padding-left: 1rem;
-                    padding-right: 1rem
-                }
-
-                .sidebar-column {
-                    padding: 0
+            @media screen and (min-width: 1216px) {
+                .container:not(.is-max-desktop) {
+                    max-width: 1152px !important;
                 }
             }
 
-            @media only screen and (max-width: 599px) {
+            @media only screen and (max-width: 1023px) {
+                .sidebar-column {
+                    padding: 0
+                }
+
                 .columns {
                     padding: 0
+                }
+
+                .variable-colors {
+                    border: none
                 }
 
                 .container {
@@ -11673,6 +11706,184 @@ __decorateClass$3([
 H6 = __decorateClass$3([
   n$2("nfdi-h6")
 ], H6);
+function isLight(color) {
+  color = color.trim();
+  const colors = {
+    aliceblue: "#F0F8FF",
+    antiquewhite: "#FAEBD7",
+    aqua: "#00FFFF",
+    aquamarine: "#7FFFD4",
+    azure: "#F0FFFF",
+    beige: "#F5F5DC",
+    bisque: "#FFE4C4",
+    black: "#000000",
+    blanchedalmond: "#FFEBCD",
+    blue: "#0000FF",
+    blueviolet: "#8A2BE2",
+    brown: "#A52A2A",
+    burlywood: "#DEB887",
+    cadetblue: "#5F9EA0",
+    chartreuse: "#7FFF00",
+    chocolate: "#D2691E",
+    coral: "#FF7F50",
+    cornflowerblue: "#6495ED",
+    cornsilk: "#FFF8DC",
+    crimson: "#DC143C",
+    cyan: "#00FFFF",
+    darkblue: "#00008B",
+    darkcyan: "#008B8B",
+    darkgoldenrod: "#B8860B",
+    darkgray: "#A9A9A9",
+    darkgrey: "#A9A9A9",
+    darkgreen: "#006400",
+    darkkhaki: "#BDB76B",
+    darkmagenta: "#8B008B",
+    darkolivegreen: "#556B2F",
+    darkorange: "#FF8C00",
+    darkorchid: "#9932CC",
+    darkred: "#8B0000",
+    darksalmon: "#E9967A",
+    darkseagreen: "#8FBC8F",
+    darkslateblue: "#483D8B",
+    darkslategray: "#2F4F4F",
+    darkslategrey: "#2F4F4F",
+    darkturquoise: "#00CED1",
+    darkviolet: "#9400D3",
+    deeppink: "#FF1493",
+    deepskyblue: "#00BFFF",
+    dimgray: "#696969",
+    dimgrey: "#696969",
+    dodgerblue: "#1E90FF",
+    firebrick: "#B22222",
+    floralwhite: "#FFFAF0",
+    forestgreen: "#228B22",
+    fuchsia: "#FF00FF",
+    gainsboro: "#DCDCDC",
+    ghostwhite: "#F8F8FF",
+    gold: "#FFD700",
+    goldenrod: "#DAA520",
+    gray: "#808080",
+    grey: "#808080",
+    green: "#008000",
+    greenyellow: "#ADFF2F",
+    honeydew: "#F0FFF0",
+    hotpink: "#FF69B4",
+    indianred: "#CD5C5C",
+    indigo: "#4B0082",
+    ivory: "#FFFFF0",
+    khaki: "#F0E68C",
+    lavender: "#E6E6FA",
+    lavenderblush: "#FFF0F5",
+    lawngreen: "#7CFC00",
+    lemonchiffon: "#FFFACD",
+    lightblue: "#ADD8E6",
+    lightcoral: "#F08080",
+    lightcyan: "#E0FFFF",
+    lightgoldenrodyellow: "#FAFAD2",
+    lightgray: "#D3D3D3",
+    lightgrey: "#D3D3D3",
+    lightgreen: "#90EE90",
+    lightpink: "#FFB6C1",
+    lightsalmon: "#FFA07A",
+    lightseagreen: "#20B2AA",
+    lightskyblue: "#87CEFA",
+    lightslategray: "#778899",
+    lightslategrey: "#778899",
+    lightsteelblue: "#B0C4DE",
+    lightyellow: "#FFFFE0",
+    lime: "#00FF00",
+    limegreen: "#32CD32",
+    linen: "#FAF0E6",
+    magenta: "#FF00FF",
+    maroon: "#800000",
+    mediumaquamarine: "#66CDAA",
+    mediumblue: "#0000CD",
+    mediumorchid: "#BA55D3",
+    mediumpurple: "#9370DB",
+    mediumseagreen: "#3CB371",
+    mediumslateblue: "#7B68EE",
+    mediumspringgreen: "#00FA9A",
+    mediumturquoise: "#48D1CC",
+    mediumvioletred: "#C71585",
+    midnightblue: "#191970",
+    mintcream: "#F5FFFA",
+    mistyrose: "#FFE4E1",
+    moccasin: "#FFE4B5",
+    navajowhite: "#FFDEAD",
+    navy: "#000080",
+    oldlace: "#FDF5E6",
+    olive: "#808000",
+    olivedrab: "#6B8E23",
+    orange: "#FFA500",
+    orangered: "#FF4500",
+    orchid: "#DA70D6",
+    palegoldenrod: "#EEE8AA",
+    palegreen: "#98FB98",
+    paleturquoise: "#AFEEEE",
+    palevioletred: "#DB7093",
+    papayawhip: "#FFEFD5",
+    peachpuff: "#FFDAB9",
+    peru: "#CD853F",
+    pink: "#FFC0CB",
+    plum: "#DDA0DD",
+    powderblue: "#B0E0E6",
+    purple: "#800080",
+    rebeccapurple: "#663399",
+    red: "#FF0000",
+    rosybrown: "#BC8F8F",
+    royalblue: "#4169E1",
+    saddlebrown: "#8B4513",
+    salmon: "#FA8072",
+    sandybrown: "#F4A460",
+    seagreen: "#2E8B57",
+    seashell: "#FFF5EE",
+    sienna: "#A0522D",
+    silver: "#C0C0C0",
+    skyblue: "#87CEEB",
+    slateblue: "#6A5ACD",
+    slategray: "#708090",
+    slategrey: "#708090",
+    snow: "#FFFAFA",
+    springgreen: "#00FF7F",
+    steelblue: "#4682B4",
+    tan: "#D2B48C",
+    teal: "#008080",
+    thistle: "#D8BFD8",
+    tomato: "#FF6347",
+    turquoise: "#40E0D0",
+    violet: "#EE82EE",
+    wheat: "#F5DEB3",
+    white: "#FFFFFF",
+    whitesmoke: "#F5F5F5",
+    yellow: "#FFFF00",
+    yellowgreen: "#9ACD32"
+  };
+  var r, g, b, hsp;
+  let c = colors[color.toLowerCase()];
+  if (color.match(/^rgb/)) {
+    color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+    r = color[1];
+    g = color[2];
+    b = color[3];
+  } else if (typeof c != "undefined") {
+    color = c;
+    color = +("0x" + color.slice(1).replace(color.length < 5 && /./g, "$&$&"));
+    r = color >> 16;
+    g = color >> 8 & 255;
+    b = color & 255;
+  } else {
+    color = +("0x" + color.slice(1).replace(color.length < 5 && /./g, "$&$&"));
+    r = color >> 16;
+    g = color >> 8 & 255;
+    b = color & 255;
+  }
+  hsp = Math.sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
+  if (hsp > 127.5) {
+    return true;
+  } else {
+    return false;
+  }
+}
 var __defProp$2 = Object.defineProperty;
 var __getOwnPropDesc$2 = Object.getOwnPropertyDescriptor;
 var __decorateClass$2 = (decorators, target, key, kind) => {
@@ -11687,7 +11898,7 @@ var __decorateClass$2 = (decorators, target, key, kind) => {
 let Code = class extends s$1 {
   render() {
     return $`
-            <pre><button class="button is-small copybutton is-ghost" @click=${this._copyTextToClipboard}>copy</button><code><slot></slot></code></pre>
+            <pre id="code"><button class="button is-small copybutton is-ghost" @click=${this._copyTextToClipboard}>copy</button><code><slot></slot></code></pre>
         `;
   }
   fallbackCopyTextToClipboard(text) {
@@ -11714,6 +11925,24 @@ let Code = class extends s$1 {
       console.error("Async: Could not copy text: ", err);
     });
   }
+  connectedCallback() {
+    super.connectedCallback();
+    setTimeout(() => {
+      var _a;
+      let customBGC = getComputedStyle(this).getPropertyValue("--outside-background-color");
+      let customCTC = getComputedStyle(this).getPropertyValue("--code-text-color");
+      if (customBGC !== "" && customCTC == "") {
+        const newC = isLight(customBGC) ? "black" : "white";
+        this.style.setProperty("--code-text-color", newC);
+      }
+      let c = (_a = this.shadowRoot) == null ? void 0 : _a.getElementById("code");
+      if (c != void 0 && customBGC !== "") {
+        const newC = isLight(customBGC) ? "black" : "white";
+        c.style.color = newC;
+      }
+      this.requestUpdate();
+    });
+  }
 };
 Code.styles = [
   bulmaStyles,
@@ -11722,7 +11951,7 @@ Code.styles = [
                 background-color: var(--outside-background-color,#F8F8FF);
                 border: 1px solid #ddd;
                 border-left: 3px solid var(--accent-text-color,${nfdiLightblue});
-                color: var(--element-text-color, ${nfdiBlack});;
+                color: ${nfdiBlack};
                 page-break-inside: avoid;
                 font-family: monospace;
                 font-size: 15px;
@@ -11745,24 +11974,13 @@ Code.styles = [
             }
 
             .copybutton:active {
-                box-shadow: 0 0 0 1px var(--element-text-color,#F8F8FF) !important;
+                box-shadow: -1 1 0 1px var(--element-text-color,#F8F8FF) !important;
             }
         `
 ];
 Code = __decorateClass$2([
   n$2("nfdi-code")
 ], Code);
-var __defProp$1 = Object.defineProperty;
-var __getOwnPropDesc$1 = Object.getOwnPropertyDescriptor;
-var __decorateClass$1 = (decorators, target, key, kind) => {
-  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$1(target, key) : target;
-  for (var i = decorators.length - 1, decorator; i >= 0; i--)
-    if (decorator = decorators[i])
-      result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-  if (kind && result)
-    __defProp$1(target, key, result);
-  return result;
-};
 function findlowestLevelHeader(headers) {
   const min = Math.min(...headers.map((h) => h.depth));
   return headers.filter((x_2) => x_2.depth === min);
@@ -11779,6 +11997,17 @@ function nest(currentHeaders) {
     return updatedH;
   });
 }
+var __defProp$1 = Object.defineProperty;
+var __getOwnPropDesc$1 = Object.getOwnPropertyDescriptor;
+var __decorateClass$1 = (decorators, target, key, kind) => {
+  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$1(target, key) : target;
+  for (var i = decorators.length - 1, decorator; i >= 0; i--)
+    if (decorator = decorators[i])
+      result = (kind ? decorator(target, key, result) : decorator(result)) || result;
+  if (kind && result)
+    __defProp$1(target, key, result);
+  return result;
+};
 function headerToHtml(header) {
   const nextHtml = header.children.length !== 0 ? $`
                     <li>
@@ -11862,8 +12091,6 @@ var __decorateClass = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-const angleRight = $`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" width=1rem height=1rem class="myIcon"><path fill="currentColor" d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z"/></svg>`;
-const angleDown = $`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width=1rem height=1rem class="myIcon"><path fill="currentColor" d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z"/></svg>`;
 let SidebarTitle = class extends s$1 {
   constructor() {
     super(...arguments);
@@ -11871,28 +12098,43 @@ let SidebarTitle = class extends s$1 {
   }
   render() {
     return $`
-            <div>
+            <div id="slot-container">
                 <slot></slot>
-                ${this.isActive ? angleDown : angleRight}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" width=1rem height=1rem class="${this.isActive ? `myIcon isActive` : `myIcon`}">
+                    <path fill="currentColor" d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z"/>
+                </svg>
             </div>
-        `;
+            `;
   }
 };
 SidebarTitle.styles = [
   bulmaStyles,
   r$2`
             .myIcon {
+                position: absolute;
+                right: -1.5rem;
+                top: 0.5rem;
                 display: inline-block;
                 font-style: normal;
                 font-variant: normal;
                 text-rendering: auto;
                 -webkit-font-smoothing: antialiased;
                 color: var(--accent-text-color, ${nfdiBlack}) !important;
-                margin-left: 1rem;
+                transition: transform 0.1s ease-in-out;
+            }
+
+            .myIcon.isActive { 
+                transform: rotate(90deg);
             }
 
             ::slotted(*) {
                 display: inline-block
+            }
+
+            #slot-container {
+                position: relative;
+                width: fit-content;
+                text-align: left;
             }
         `
 ];
@@ -11919,11 +12161,16 @@ let SidebarElement = class extends s$1 {
   }
   _toggleActive() {
     this.isActive = !this.isActive;
-    console.log(this.isActive);
   }
   connectedCallback() {
     super.connectedCallback();
     setTimeout(() => {
+      const customSBGC = getComputedStyle(this).getPropertyValue("--sidebar-background-color");
+      const customSTC = getComputedStyle(this).getPropertyValue("--sidebar-text-color");
+      if (customSBGC !== "" && customSTC == "") {
+        const newC = isLight(customSBGC) ? "black" : "white";
+        this.style.setProperty("--sidebar-text-color", newC);
+      }
       const children = Array.from(this.children);
       const anchoredChildren = children.map((child) => {
         if (child.hasAttribute("slot") && child.getAttribute("slot") === "title") {
@@ -11950,6 +12197,7 @@ SidebarElement.styles = [
             }
             
             button {
+                width: 90%;
                 padding: 0rem;
                 border: none;
                 background: none;
@@ -11981,8 +12229,9 @@ SidebarElement.styles = [
             }
             
             .inner-wrapper ::slotted(h1) {
-                font-size: 1rem !important;
-                color: var(--element-text-color, ${nfdiBlack}) !important;
+                font-size: 0.9rem !important;
+                color: var(--sidebar-text-color, ${nfdiBlack}) !important;
+                color: ${nfdiBlack};
                 padding: 2px !important;
                 border-radius: 5px;
                 margin: 0 !important;
@@ -11991,7 +12240,7 @@ SidebarElement.styles = [
 
             .inner-wrapper ::slotted(h2) {
                 font-size: 0.9rem !important;
-                color: var(--element-text-color, ${nfdiBlack}) !important;
+                color: var(--sidebar-text-color, ${nfdiBlack}) !important;
                 padding: 2px !important;
                 border-radius: 5px;
                 margin: 0 0 0 1rem !important;
@@ -11999,8 +12248,8 @@ SidebarElement.styles = [
             }
 
             .inner-wrapper ::slotted(h3) {
-                font-size: 0.8rem !important;
-                color: var(--element-text-color, ${nfdiBlack}) !important;
+                font-size: 0.9rem !important;
+                color: var(--sidebar-text-color, ${nfdiBlack}) !important;
                 padding: 2px !important;
                 border-radius: 5px;
                 margin: 0 0 0 2rem !important;

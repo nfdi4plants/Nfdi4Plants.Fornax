@@ -39,8 +39,9 @@ let layout (ctx : SiteContents) active bodyCnt =
       |> Option.map (fun si -> si.title)
       |> Option.defaultValue ""
 
-    html [Class "has-navbar-fixed-top"] [
+    html [Class "has-navbar-fixed-top"; HtmlProperties.Style [CSSProperties.Custom("scroll-behavior", "smooth")]] [
         head [] [
+            
             meta [CharSet "utf-8"]
             meta [Name "viewport"; Content "width=device-width, initial-scale=1"]
             title [] [!! ttl]
@@ -70,6 +71,17 @@ let layout (ctx : SiteContents) active bodyCnt =
                 thead {
                   font-size: 1.2rem;
                 }
+
+                nfdi-toc, nfdi-body {
+                    --outside-background-color: rgb(240, 243, 246);
+                    --element-background-color: #ffffff;
+                    --element-text-color: #0E1116;
+                    --header-color: rgb(10, 12, 16);
+                    --accent-text-color: rgb(31, 194, 167);
+                    --link-color: #4FB3D9;
+                    --link-hover-color: #8ad3ee;
+                }
+
              """
 
                 // nfdi-navbar, nfdi-footer, nfdi-toc, nfdi-body {
