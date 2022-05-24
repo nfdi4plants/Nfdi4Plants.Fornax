@@ -38,6 +38,7 @@ type NFDIHeaderRenderer() =
             renderer.WriteAttributes(hb) |> ignore
             renderer.Write('>') |> ignore
         
+        // renderer.WriteLeafRawLines(hb, true, true, true) |> ignore
         renderer.WriteLeafInline(hb) |> ignore
 
         if (renderer.EnableHtmlForBlock) then
@@ -47,7 +48,7 @@ type NFDIHeaderRenderer() =
  
         renderer.EnsureLine() |> ignore
 
-/// An extension for Markdig that highlights syntax in fenced code blocks
+/// 
 type NFDIHeaderExtension() =
 
     interface IMarkdownExtension with

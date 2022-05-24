@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/Freymaurer/nfdi4plants-fornax-template#readme",
   "dependencies": {
-    "@nfdi4plants/web-components": "^0.4.0-beta05",
+    "@nfdi4plants/web-components": "^0.4.0-beta06",
     "bulma": "^0.9.2"
   },
   "devDependencies": {
