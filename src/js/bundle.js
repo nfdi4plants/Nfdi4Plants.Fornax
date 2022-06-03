@@ -10828,9 +10828,6 @@ let Navbar = class extends s$1 {
     this.navbarIsActive = false;
     this.url = window.location.href;
   }
-  static test() {
-    console.log(window.location.href);
-  }
   render() {
     return $`
       <nav class="navbar is-fixed-top variable-colors" style="border-bottom: 1px solid">
@@ -10848,7 +10845,7 @@ let Navbar = class extends s$1 {
           <div class="navbar-start is-justify-content-center is-flex-grow-1">
               <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link" href="${mainPageBaseUrl}">
-                Home
+                About
                 </a>
                 <div class="navbar-dropdown is-active smooth-hover">
                   <a class=${this.url == "${mainPageBaseUrl}content/learn-more/our-mission.html" ? "navbar-item is-active smooth-hover" : "navbar-item"} href="${mainPageBaseUrl}content/learn-more/our-mission.html">
@@ -10864,7 +10861,7 @@ let Navbar = class extends s$1 {
                     Service
                   </a>
                   <a class=${this.url == "${mainPageBaseUrl}content/about.html" ? "navbar-item is-active smooth-hover" : "navbar-item"} href="${mainPageBaseUrl}content/about.html">
-                    Consortium
+                    The Consortium
                   </a>
                 </div>
               </div>
@@ -10877,6 +10874,19 @@ let Navbar = class extends s$1 {
             <a class=${this.url == gitlabBaseUrl ? "navbar-item is-active smooth-hover" : "navbar-item"} href="${gitlabBaseUrl}">
               DataHUB
             </a>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" href="${mainPageBaseUrl}content/docs/ResearchDataManagement.html">
+                Knowledge Base
+                </a>
+                <div class="navbar-dropdown is-active smooth-hover">
+                  <a class=${this.url == "${mainPageBaseUrl}content/docs/ResearchDataManagement.html" ? "navbar-item is-active smooth-hover" : "navbar-item"} href="${mainPageBaseUrl}content/docs/ResearchDataManagement.html">
+                    Fundamentals
+                  </a>
+                  <a class=${this.url == "${mainPageBaseUrl}content/docs/AnnotatedResearchContext.html" ? "navbar-item is-active smooth-hover" : "navbar-item"} href="${mainPageBaseUrl}content/docs/AnnotatedResearchContext.html">
+                    Integration within DataPLANT
+                  </a>
+                </div>
+              </div>
           </div>
           <div class="navbar-end">
             <a class="navbar-item" href="https://helpdesk.nfdi4plants.org/" title="Helpdesk">
@@ -11043,6 +11053,13 @@ let Footer = class extends s$1 {
                         <li>
                             <a href="${gitlabBaseUrl}">
                             DataHUB
+                            </a>
+                        </li>
+                        </div>
+                        <div class="block">
+                        <li>
+                            <a href="${mainPageBaseUrl}content/docs/research-data-management.html">
+                            Knowledge Base
                             </a>
                         </li>
                         </div>
@@ -12161,17 +12178,54 @@ let SidebarElement = class extends s$1 {
         this.style.setProperty("--sidebar-text-color", newC);
       }
       const currentPage = window.location.pathname;
-      const currentUrl = window.location.href;
       const children = Array.from(this.children);
+      function getHrefURL(ele) {
+        const sidebarHref = ele.getAttribute("href");
+        const sidebarURL = new URL(sidebarHref, window.location.href);
+        return sidebarURL;
+      }
+      function isInnerAndHref(element) {
+        return element.hasAttribute("slot") && element.getAttribute("slot") != "title" && element.hasAttribute("href");
+      }
+      function isOnPathAndHasHash(element) {
+        const sidebarURL = getHrefURL(element);
+        return sidebarURL.origin == window.location.origin && sidebarURL.pathname == currentPage && sidebarURL.hash != "";
+      }
+      const filteredChildren = children.filter(isInnerAndHref).filter(isOnPathAndHasHash);
+      function filterExistingNFDIHeaders(nfdiHeader) {
+        let sidebarHrefHashs = filteredChildren.map((child) => getHrefURL(child).hash);
+        return sidebarHrefHashs.includes("#" + nfdiHeader.id);
+      }
+      const headers = Array.from(document.querySelectorAll("nfdi-body nfdi-h1, nfdi-body nfdi-h2, nfdi-body nfdi-h3"));
+      if (filteredChildren.length > 0 && headers.length > 0) {
+        window.addEventListener("scroll", () => {
+          let current = "";
+          headers.filter(filterExistingNFDIHeaders).forEach((header0) => {
+            const header = header0;
+            const distanceTopHeader = header.offsetTop;
+            if (scrollY + 50 >= distanceTopHeader) {
+              current = "#" + header.id;
+            }
+          });
+          filteredChildren.forEach((sideBarHeader) => {
+            sideBarHeader.classList.remove("active-page-scroll");
+            const sidebarHref = sideBarHeader.getAttribute("href");
+            const sidebarURL = new URL(sidebarHref, window.location.href);
+            if (sidebarURL.hash == current) {
+              sideBarHeader.classList.add("active-page-scroll");
+            }
+          });
+        });
+      }
       const anchoredChildren = children.map((child) => {
         if (child.hasAttribute("slot") && child.getAttribute("slot") === "title") {
           child.innerHTML = child.innerHTML;
           return child;
         } else {
           let hasHref = child.hasAttribute("href");
-          let url = hasHref ? child.getAttribute("href") : "";
-          let href = `href="${url}" `;
-          if (url == currentPage || url == currentUrl) {
+          let sidebarHref = hasHref ? child.getAttribute("href") : "";
+          let href = `href="${sidebarHref}" `;
+          if (sidebarHref == currentPage) {
             child.classList.add("active-sub-page");
           }
           child.innerHTML = `<a ${href}style="color: unset !important">${child.innerHTML}</a>`;
@@ -12249,6 +12303,14 @@ SidebarElement.styles = [
             }
 
             ::slotted(.active-sub-page) {
+                font-weight: bold !important;
+                text-decoration: underline !important;
+                /* border-radius: 2px !important; */
+                /* background-color: lightgrey; */
+                /* border-radius: 0; */
+            }
+
+            ::slotted(.active-page-scroll) {
                 font-weight: bold !important;
                 text-decoration: underline !important;
                 /* border-radius: 2px !important; */

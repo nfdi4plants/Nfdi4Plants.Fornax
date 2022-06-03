@@ -14,7 +14,6 @@ Article Status: Publishable
 - [Elements of a DMP](#Elements-of-a-DMP)
 - [DataPLANT's Data Management Plan Generator](#DataPLANT's-Data-Management-Plan-Generator)
 
-
 A data management plan (DMP) structures the handling of research data in a scientific project and describes how you are planning to deal with the data during and after the end of the project. Many third-party funders, such as DFG, Horizon Europe, or BMBF expect you to provide information on the handling of research data as part of your funding application. While a formal DMP is only required in rare cases, a DMP is almost exclusively beneficial for your work on a research project. 
 
 ## Advantages of a DMP

@@ -53,47 +53,37 @@ let layout (ctx : SiteContents) active bodyCnt =
             script [ Type "module"; Src "/js/bundle.js"] []
             style [] [
                 !! """
-                body {
-                  margin: 0px;
-                }
+                    body {
+                    margin: 0px;
+                    }
 
-                thead tr th, strong {
-                    color: var(--accent-text-color) !important
-                }
+                    thead tr th, strong {
+                        color: var(--accent-text-color) !important
+                    }
 
-                a {
-                  color: var(--link-color, #4FB3D9) !important;
-                }
+                    a {
+                    color: var(--link-color, #4FB3D9) !important;
+                    }
 
-                a:hover {
-                  color: var(--link-hover-color, #3A3A3A) !important;
-                }
-                thead {
-                  font-size: 1.2rem;
-                }
+                    a:hover {
+                    color: var(--link-hover-color, #3A3A3A) !important;
+                    }
+                    
+                    thead {
+                    font-size: 1.2rem;
+                    }
 
-                nfdi-toc, nfdi-body {
-                    --outside-background-color: rgb(240, 243, 246);
-                    --element-background-color: #ffffff;
-                    --element-text-color: #0E1116;
-                    --header-color: rgb(10, 12, 16);
-                    --accent-text-color: rgb(31, 194, 167);
-                    --link-color: #4FB3D9;
-                    --link-hover-color: #8ad3ee;
-                }
+                    nfdi-toc, nfdi-body {
+                        --outside-background-color: rgb(240, 243, 246);
+                        --header-color: rgb(10, 12, 16)
+                        --element-text-color: #0E1116;
+                        --element-background-color: #fff;
+                        --accent-text-color: rgb(31, 194, 167);
+                        --link-color: #4FB3D9;
+                        --link-hover-color: #8ad3ee;
+                    }
 
-             """
-
-                // nfdi-navbar, nfdi-footer, nfdi-toc, nfdi-body {
-                //   --element-background-color: black;
-                //   --element-text-color: white;
-                //   --link-color: #4FB3D9;
-                //   --link-hover-color: #84cae4;
-                //   --header-color: white;
-                //   --outside-background-color: #191919;
-                //   --accent-text-color: #1FC2A7
-                // }
-
+                """
             ]
 
         ]
@@ -112,6 +102,7 @@ let render (ctx : SiteContents) cnt =
 
 
 let docsLayout (docs: Docsloader.Docs) =
+    let publishedDate = docs.published.Value.ToString("yyyy-MM-dd")
     custom "nfdi-body" [Class "content"; if Array.isEmpty docs.sidebar |> not then HtmlProperties.Custom("hasSidebar", "true")] [
         if Array.isEmpty docs.sidebar |> not then 
             for sidebarEle in docs.sidebar do
@@ -119,9 +110,30 @@ let docsLayout (docs: Docsloader.Docs) =
                     div [HtmlProperties.Custom ("slot", "title")] [!! sidebarEle.Title]
                     !! sidebarEle.Content
                 ]
-        custom "nfdi-h1" [] [!! docs.title]
+        
+        h1 [Class "front-header"] [!! docs.title]
+        i [Class "help" ] [!! $"last updated at {publishedDate}" ]
+
         if docs.add_toc then custom "nfdi-toc" [] []
         !! docs.content
+
+        // support contact
+        h3 [] [!! "Dataplant Support"]
+        div [] [
+            !! "Besides these technical solutions, DataPLANT supports you with community-engaged data stewardship. For further assistance, feel free to reach out via our "
+            a [Href "https://support.nfdi4plants.org"] [!! "helpdesk"]
+            !! " or by contacting us " 
+            a [Href "javascript:location='mailto:\u0069\u006e\u0066\u006f\u0040\u006e\u0066\u0064\u0069\u0034\u0070\u006c\u0061\u006e\u0074\u0073\u002e\u006f\u0072\u0067';void 0"] [!! "directly"]
+            !! "."
+        ]
+
+        // Edit this page link
+        div [] [
+            a [
+                Href $"https://github.com/nfdi4plants/nfdi4plants.github.io/tree/main/src/{docs.file}"; 
+                HtmlProperties.Style [MarginLeft "auto"; Display "block"; CSSProperties.Width "130px"]
+            ] [!! "✏️ Edit this page"]
+        ]
     ]
 
 let docsMinimalLayout (docs: Docsloader.Docs) =

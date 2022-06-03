@@ -142,7 +142,7 @@ let loadFile (rootDir: string) (filePath: string) =
     let addToc = config |> Map.tryFind "add toc" |> Option.map (trimString >> System.Boolean.Parse) |> Option.defaultValue true
     let addSidebar = 
         let docsPath = Path.Combine(rootDir, contentDir)
-        config |> Map.tryFind "add sidebar" |> Option.map (trimString >> fun x -> Path.Combine(docsPath, x))
+        config |> Map.tryFind "add sidebar" |> Option.map (trimString >> fun x -> Path.Combine(docsPath, x.Replace('\\','/')))
 
     let content = getContent text
     let sidebar = addSidebar |> Option.map getSidebar 
@@ -171,10 +171,14 @@ let loader (projectRoot: string) (siteContent: SiteContents) =
     let docsPath = Path.Combine(projectRoot, contentDir)
     // let options = EnumerationOptions(RecurseSubdirectories = true)
     // let files = Directory.GetFiles(docsPath, "*"), options)
-    let files = Directory.GetFiles(docsPath, "*")
-    files
-    |> Array.filter (fun n -> n.EndsWith ".md")
-    |> Array.map (loadFile projectRoot)
+    let files = 
+        Directory.GetFiles(docsPath, "*")
+        |> Array.filter (fun n -> n.EndsWith ".md")
+        |> Array.filter (fun n -> n.Contains "README.md" |> not)
+    let docs = 
+        files 
+        |> Array.map (loadFile projectRoot)
+    docs
     |> Array.iter siteContent.Add
 
     siteContent.Add({disableLiveRefresh = false})
