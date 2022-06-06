@@ -3,16 +3,6 @@
 open Config
 open System.IO
 
-// let postPredicate (projectRoot: string, page: string) =
-//     let fileName = Path.Combine(projectRoot,page)
-//     let ext = Path.GetExtension page
-//     if ext = ".md" then
-//         let ctn = File.ReadAllText fileName
-//         page.Contains("_public") |> not
-//         && ctn.Contains("layout: post")
-//     else
-//         false
-
 let docsPredicate (projectRoot: string, page: string) =
     let fileName = Path.Combine(projectRoot,page)
     let ext = Path.GetExtension page
@@ -44,11 +34,8 @@ let config = {
     Generators = [
         {Script = "less.fsx"; Trigger = OnFileExt ".less"; OutputFile = ChangeExtension "css" }
         {Script = "sass.fsx"; Trigger = OnFileExt ".scss"; OutputFile = ChangeExtension "css" }
-        // {Script = "post.fsx"; Trigger = OnFilePredicate postPredicate; OutputFile = ChangeExtension "html" }
         {Script = "docs.fsx"; Trigger = OnFilePredicate docsPredicate; OutputFile = ChangeExtension "html" }
         {Script = "staticfile.fsx"; Trigger = OnFilePredicate staticPredicate; OutputFile = SameFileName }
         {Script = "index.fsx"; Trigger = Once; OutputFile = NewFileName "index.html" }
-        {Script = "about.fsx"; Trigger = Once; OutputFile = NewFileName "about.html" }
-        {Script = "contact.fsx"; Trigger = Once; OutputFile = NewFileName "contact.html" }
     ]
 }

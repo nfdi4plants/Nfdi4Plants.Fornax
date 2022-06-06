@@ -1,6 +1,5 @@
 #r "../_lib/Fornax.Core.dll"
 #if !FORNAX
-// #load "../loaders/postloader.fsx"
 #load "../loaders/docsloader.fsx"
 #load "../loaders/pageloader.fsx"
 #load "../loaders/globalloader.fsx"
@@ -32,7 +31,6 @@ let injectWebsocketCode (webpage:string) =
     webpage.Insert ( (index + head.Length + 1),websocketScript)
 
 let layout (ctx : SiteContents) active bodyCnt =
-    let pages = ctx.TryGetValues<Pageloader.Page> () |> Option.defaultValue Seq.empty
     let siteInfo = ctx.TryGetValue<Globalloader.SiteInfo> ()
     let ttl =
       siteInfo
@@ -103,13 +101,17 @@ let render (ctx : SiteContents) cnt =
 
 let docsLayout (docs: Docsloader.Docs) =
     let publishedDate = docs.published.Value.ToString("yyyy-MM-dd")
-    custom "nfdi-body" [Class "content"; if Array.isEmpty docs.sidebar |> not then HtmlProperties.Custom("hasSidebar", "true")] [
+    let sidebar = [
         if Array.isEmpty docs.sidebar |> not then 
             for sidebarEle in docs.sidebar do
-                custom "nfdi-sidebar-element" [HtmlProperties.Custom ("slot", "sidebar"); HtmlProperties.Custom ("isActive","true") ] [
+                yield custom "nfdi-sidebar-element" [HtmlProperties.Custom ("slot", "sidebar"); HtmlProperties.Custom ("isActive","true") ] [
                     div [HtmlProperties.Custom ("slot", "title")] [!! sidebarEle.Title]
                     !! sidebarEle.Content
                 ]
+        else ()
+    ]
+    custom "nfdi-body" [Class "content"; if Array.isEmpty docs.sidebar |> not then HtmlProperties.Custom("hasSidebar", "true")] [
+        yield! sidebar
         
         h1 [Class "front-header"] [!! docs.title]
         i [Class "help" ] [!! $"last updated at {publishedDate}" ]
