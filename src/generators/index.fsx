@@ -32,7 +32,6 @@ let generate' (ctx : SiteContents) (_: string) =
     let landingPage = docs0 |> Seq.tryFind(fun x -> x.title = "Index")
     match landingPage with
     | Some docs -> 
-        printfn "found!"
         Layout.layout ctx docs.title [
             docs |> Layout.docsLayout
         ]

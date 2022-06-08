@@ -30,12 +30,17 @@ let injectWebsocketCode (webpage:string) =
     let index = webpage.IndexOf head
     webpage.Insert ( (index + head.Length + 1),websocketScript)
 
-let layout (ctx : SiteContents) active bodyCnt =
+let layout (ctx : SiteContents) (activePageTitle: string) bodyCnt =
     let siteInfo = ctx.TryGetValue<Globalloader.SiteInfo> ()
     let ttl =
-      siteInfo
-      |> Option.map (fun si -> si.title)
-      |> Option.defaultValue ""
+        siteInfo
+        |> Option.map (fun si ->
+            if activePageTitle <> "" then
+                si.title + " - " + activePageTitle
+            else
+                si.title
+        )
+        |> Option.defaultValue ""
 
     html [Class "has-navbar-fixed-top"; HtmlProperties.Style [CSSProperties.Custom("scroll-behavior", "smooth")]] [
         head [] [
@@ -132,6 +137,7 @@ let docsLayout (docs: Docsloader.Docs) =
         // Edit this page link
         div [] [
             a [
+                Target "_blank"
                 Href $"https://github.com/nfdi4plants/nfdi4plants.github.io/tree/main/src/{docs.file}"; 
                 HtmlProperties.Style [MarginLeft "auto"; Display "block"; CSSProperties.Width "130px"]
             ] [!! "✏️ Edit this page"]
