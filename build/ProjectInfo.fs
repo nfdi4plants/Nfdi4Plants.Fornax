@@ -10,7 +10,7 @@ let project = "Nfdi4Plants.Fornax"
 let testProjects = 
     [
         // add relative paths (from project root) to your testprojects here
-        @"tests\Fornax.Nfdi4Plants.Tests\Fornax.Nfdi4Plants.Tests.fsproj"
+        @"tests\Nfdi4Plants.Fornax.Tests\Nfdi4Plants.Fornax.Tests.fsproj"
     ]
 
 let solutionFile  = $"{project}.sln"
