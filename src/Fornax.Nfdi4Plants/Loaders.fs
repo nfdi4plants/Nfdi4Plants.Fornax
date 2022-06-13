@@ -18,28 +18,26 @@ module Pipelines =
             .UseSidebarHeader()
             .Build()
 
-[<AutoOpen>]
-module Types =
 
-    type DocsConfig = {
-        disableLiveRefresh: bool
-    }
+type DocsConfig = {
+    disableLiveRefresh: bool
+}
 
-    type SidebarElement = {
-        Title: string
-        Content: string
-    }
+type SidebarElement = {
+    Title: string
+    Content: string
+}
 
-    type Docs = {
-        file: string
-        link : string
-        title: string
-        author: string option
-        published: System.DateTime option
-        add_toc: bool
-        sidebar: SidebarElement []
-        content: string
-    }
+type Docs = {
+    file: string
+    link : string
+    title: string
+    author: string option
+    published: System.DateTime option
+    add_toc: bool
+    sidebar: SidebarElement []
+    content: string
+}
 
 module internal Aux =
     
@@ -68,7 +66,6 @@ module internal Aux =
         |> Map.ofSeq
 
     open System.IO
-    open Types
 
     /// <summary>Read sidebar markdown file at `sidebarPath` to and parse it nfdi-sidebar-element's.</summary>
     /// <param name="contentDir">Name of the subfolder in which the docs files are.</param>
@@ -140,8 +137,7 @@ module internal Aux =
 module Docs = 
 
     open System.IO
-    open Types
-
+    
     /// <summary>Parse markdown `fileContent` to HTML with markdig and custom nfdi-webcomponent converter.</summary>
     /// <param name="rootDir">Base root directory path, will be appended to 'contentDir'.</param>
     /// <param name="contentDir">Folder which to search for docs .md files. This folder will be used a relative root for sidebars.</param>

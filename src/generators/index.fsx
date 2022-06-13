@@ -2,10 +2,11 @@
 #load "layout.fsx"
 
 open Html
+open Fornax.Nfdi4Plants
 
 let generate' (ctx : SiteContents) (_: string) =
-    let docs0 = ctx.TryGetValues<Docsloader.Docs> () |> Option.defaultValue Seq.empty
-
+    let docs0 = ctx.TryGetValues<Docs> () |> Option.defaultValue Seq.empty
+    printfn "hier3: %i" <| Seq.length docs0
     // let layoutForMinimalDocsAncestor (docsLists: seq<HtmlElement> list) =
     //     Layout.layout ctx "Home" [
     //         section [Class "section"] [
@@ -29,7 +30,7 @@ let generate' (ctx : SiteContents) (_: string) =
     // |> layoutForMinimalDocsAncestor
     // |> Layout.render ctx
 
-    let landingPage = docs0 |> Seq.tryFind(fun x -> x.title = "Index")
+    let landingPage = docs0 |> Seq.tryFind(fun x -> x.title = "Index" || x.title = "Home")
     match landingPage with
     | Some docs -> 
         Layout.layout ctx docs.title [

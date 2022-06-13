@@ -16,20 +16,22 @@ open TestTasks
 open PackageTasks
 open ReleaseTasks
 open ReleaseNotesTasks
+open FornaxTasks
 
 /// Referenced here to make ReleaseNotesTasks accessible.
 let _ = updateReleaseNotes
+let _ = watchFornax
 
 /// Full release of nuget package for the prerelease version.
 let _release = 
     BuildTask.createEmpty 
-        "ReleaseNoDocs" 
+        "Release" 
         [clean; build; runTests; pack; createTag; publishNuget;]
 
 /// Full release of nuget package for the prerelease version.
 let _preRelease = 
     BuildTask.createEmpty 
-        "PreReleaseNoDocs" 
+        "PreRelease" 
         [setPrereleaseTag; clean; build; runTests; packPrerelease; createPrereleaseTag; publishNugetPrerelease]
 
 

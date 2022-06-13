@@ -5,7 +5,7 @@
     <Title>Fornax.Nfdi4Plants</Title>
     <Description>Loaders, web-component integration and general structures for the Nfdi4Plants documentation</Description>
     <!-- <PackageLicenseExpression>MIT</PackageLicenseExpression> -->
-    <PackageIconUrl>https://raw.githubusercontent.com/nfdi4plants/Branding/138420e3b6f9ec9e125c1ca8840874b2be2a1262/logos/DataPLANT_logo_minimal_rounded_bg_transparent.svg</PackageIconUrl>
+    <Icon>https://raw.githubusercontent.com/nfdi4plants/Branding/138420e3b6f9ec9e125c1ca8840874b2be2a1262/logos/DataPLANT_logo_minimal_rounded_bg_transparent.svg</Icon>
     <PackageTags></PackageTags>
     <RepositoryUrl>https://github.com/Freymaurer/nfdi4plants-fornax-template</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

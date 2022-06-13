@@ -2,10 +2,11 @@
 #load "layout.fsx"
 
 open Html
+open Fornax.Nfdi4Plants
 
 let generate' (ctx : SiteContents) (page: string) =
     let doc =
-        ctx.TryGetValues<Docsloader.Docs> ()
+        ctx.TryGetValues<Docs> ()
         |> Option.defaultValue Seq.empty
         |> Seq.find (fun n -> n.file = page)
 
