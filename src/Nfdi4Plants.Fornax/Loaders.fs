@@ -1,6 +1,5 @@
 namespace Fornax.Nfdi4Plants
 
-
 module Pipelines =
     open Markdig
     open Fornax.Nfdi4Plants.MarkdigExtensions.NfdiHeader
@@ -28,7 +27,7 @@ type SidebarElement = {
     Content: string
 }
 
-type Docs = {
+type DocsData = {
     file: string
     link : string
     title: string
@@ -133,7 +132,6 @@ module internal Aux =
 
         Markdig.Markdown.ToHtml(content, Pipelines.markdownPipeline)  
 
-[<AutoOpen>]
 module Docs = 
 
     open System.IO

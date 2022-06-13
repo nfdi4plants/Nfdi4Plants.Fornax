@@ -1,6 +1,7 @@
-#r "../_lib/Fornax.Core.dll"
-#r "../_lib/Markdig.dll"
+#r "../Fornax.Nfdi4Plants/bin/Debug/net5.0/Fornax.Core.dll"
 #r "../Fornax.Nfdi4Plants/bin/Debug/net5.0/Fornax.Nfdi4Plants.dll"
+// #i """nuget: C:\Users\Kevin\source\repos\Nfdi4Plants.Fornax\pkg"""
+// #r "nuget: Nfdi4Plants.Fornax"
 
 open System.IO
 open Fornax.Nfdi4Plants
@@ -18,7 +19,7 @@ let loader (projectRoot: string) (siteContent: SiteContents) =
     printfn "HIER: %i" files.Length
     let docs = 
         files 
-        |> Array.map (loadFile projectRoot)
+        |> Array.map (Docs.loadFile projectRoot)
     printfn "HIER2: %i" docs.Length
     docs
     |> Array.iter siteContent.Add

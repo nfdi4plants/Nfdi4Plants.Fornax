@@ -1,4 +1,4 @@
-#r "../_lib/Fornax.Core.dll"
+#r "../Fornax.Nfdi4Plants/bin/Debug/net5.0/Fornax.Core.dll"
 #if !FORNAX
 #load "../loaders/docsloader.fsx"
 #load "../loaders/pageloader.fsx"
@@ -106,7 +106,7 @@ let render (ctx : SiteContents) cnt =
   |> fun n -> if disableLiveRefresh then n else injectWebsocketCode n
 
 
-let docsLayout (docs: Docs) =
+let docsLayout (docs: DocsData) =
     let publishedDate = docs.published.Value.ToString("yyyy-MM-dd")
     let sidebar = [
         if Array.isEmpty docs.sidebar |> not then 
@@ -146,7 +146,7 @@ let docsLayout (docs: Docs) =
         ]
     ]
 
-let docsMinimalLayout (docs: Docs) =
+let docsMinimalLayout (docs: DocsData) =
   div [Class "tile is-4 is-parent"] [
     div [Class "tile is-child box"] [
       p [Class "title"] [ a [Href docs.link] [!! docs.title] ]

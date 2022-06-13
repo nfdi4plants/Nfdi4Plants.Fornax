@@ -19,6 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-	<ProjectReference Include="..\..\src\Fornax.Nfdi4Plants\Fornax.Nfdi4Plants.fsproj" />
+	<ProjectReference Include="..\..\src\Nfdi4Plants.Fornax\Nfdi4Plants.Fornax.fsproj" />
   </ItemGroup>
 </Project>

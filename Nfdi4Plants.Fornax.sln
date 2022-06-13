@@ -5,11 +5,7 @@ VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2B672946-D10B-4804-93DE-B11DE6B85259}"
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fornax.Nfdi4Plants", "src\Fornax.Nfdi4Plants\Fornax.Nfdi4Plants.fsproj", "{CFC6EB06-696A-4542-94CF-4D607A2E1225}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{569B21DD-E434-48EF-9D28-FC864B6A7EC3}"
-EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fornax.Nfdi4Plants.Tests", "tests\Fornax.Nfdi4Plants.Tests\Fornax.Nfdi4Plants.Tests.fsproj", "{1FA65D34-DF8B-4B24-8A11-084219DDC133}"
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "build", "build\build.fsproj", "{C125CB69-05E3-4D86-B099-55B213B624DB}"
 EndProject
@@ -20,31 +16,35 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		rollup.config.js = rollup.config.js
 	EndProjectSection
 EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Nfdi4Plants.Fornax", "src\Nfdi4Plants.Fornax\Nfdi4Plants.Fornax.fsproj", "{235EF1A1-0447-40A7-ADF7-35FD0FBA9685}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Nfdi4Plants.Fornax.Tests", "tests\Nfdi4Plants.Fornax.Tests\Nfdi4Plants.Fornax.Tests.fsproj", "{DB4ECEE1-1EF6-4DE6-B358-4A63F2DF74FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CFC6EB06-696A-4542-94CF-4D607A2E1225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CFC6EB06-696A-4542-94CF-4D607A2E1225}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CFC6EB06-696A-4542-94CF-4D607A2E1225}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CFC6EB06-696A-4542-94CF-4D607A2E1225}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1FA65D34-DF8B-4B24-8A11-084219DDC133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1FA65D34-DF8B-4B24-8A11-084219DDC133}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1FA65D34-DF8B-4B24-8A11-084219DDC133}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1FA65D34-DF8B-4B24-8A11-084219DDC133}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C125CB69-05E3-4D86-B099-55B213B624DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C125CB69-05E3-4D86-B099-55B213B624DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C125CB69-05E3-4D86-B099-55B213B624DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C125CB69-05E3-4D86-B099-55B213B624DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{235EF1A1-0447-40A7-ADF7-35FD0FBA9685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{235EF1A1-0447-40A7-ADF7-35FD0FBA9685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{235EF1A1-0447-40A7-ADF7-35FD0FBA9685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{235EF1A1-0447-40A7-ADF7-35FD0FBA9685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB4ECEE1-1EF6-4DE6-B358-4A63F2DF74FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB4ECEE1-1EF6-4DE6-B358-4A63F2DF74FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB4ECEE1-1EF6-4DE6-B358-4A63F2DF74FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB4ECEE1-1EF6-4DE6-B358-4A63F2DF74FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{CFC6EB06-696A-4542-94CF-4D607A2E1225} = {2B672946-D10B-4804-93DE-B11DE6B85259}
-		{1FA65D34-DF8B-4B24-8A11-084219DDC133} = {569B21DD-E434-48EF-9D28-FC864B6A7EC3}
+		{235EF1A1-0447-40A7-ADF7-35FD0FBA9685} = {2B672946-D10B-4804-93DE-B11DE6B85259}
+		{DB4ECEE1-1EF6-4DE6-B358-4A63F2DF74FD} = {569B21DD-E434-48EF-9D28-FC864B6A7EC3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9591E7EB-8243-4661-BA6B-3DD822EB60EB}

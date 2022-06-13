@@ -1,12 +1,12 @@
-#r "../_lib/Fornax.Core.dll"
 #load "layout.fsx"
+#r "../Fornax.Nfdi4Plants/bin/Debug/net5.0/Fornax.Nfdi4Plants.dll"
 
 open Html
 open Fornax.Nfdi4Plants
 
 let generate' (ctx : SiteContents) (page: string) =
     let doc =
-        ctx.TryGetValues<Docs> ()
+        ctx.TryGetValues<DocsData> ()
         |> Option.defaultValue Seq.empty
         |> Seq.find (fun n -> n.file = page)
 

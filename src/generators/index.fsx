@@ -1,11 +1,10 @@
-#r "../_lib/Fornax.Core.dll"
 #load "layout.fsx"
 
 open Html
 open Fornax.Nfdi4Plants
 
 let generate' (ctx : SiteContents) (_: string) =
-    let docs0 = ctx.TryGetValues<Docs> () |> Option.defaultValue Seq.empty
+    let docs0 = ctx.TryGetValues<DocsData> () |> Option.defaultValue Seq.empty
     printfn "hier3: %i" <| Seq.length docs0
     // let layoutForMinimalDocsAncestor (docsLists: seq<HtmlElement> list) =
     //     Layout.layout ctx "Home" [

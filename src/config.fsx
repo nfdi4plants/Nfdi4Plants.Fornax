@@ -1,4 +1,4 @@
-#r "_lib/Fornax.Core.dll"
+#r "Fornax.Nfdi4Plants/bin/Debug/net5.0/Fornax.Core.dll"
 
 open Config
 open System.IO
