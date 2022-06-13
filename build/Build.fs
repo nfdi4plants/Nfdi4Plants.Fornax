@@ -15,6 +15,10 @@ open BasicTasks
 open TestTasks
 open PackageTasks
 open ReleaseTasks
+open ReleaseNotesTasks
+
+/// Referenced here to make ReleaseNotesTasks accessible.
+let _ = updateReleaseNotes
 
 /// Full release of nuget package for the prerelease version.
 let _release = 
@@ -27,6 +31,8 @@ let _preRelease =
     BuildTask.createEmpty 
         "PreReleaseNoDocs" 
         [setPrereleaseTag; clean; build; runTests; packPrerelease; createPrereleaseTag; publishNugetPrerelease]
+
+
 
 [<EntryPoint>]
 let main args = 
