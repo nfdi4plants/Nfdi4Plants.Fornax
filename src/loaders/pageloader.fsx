@@ -1,4 +1,4 @@
-#r "../Fornax.Nfdi4Plants/bin/Debug/net5.0/Fornax.Core.dll"
+#r "../_lib/Fornax.Core.dll"
 
 type Page = {
     title: string

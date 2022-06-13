@@ -1,4 +1,4 @@
-#r "../Fornax.Nfdi4Plants/bin/Debug/net5.0/Fornax.Core.dll"
+#r "../_lib/Fornax.Core.dll"
 #if !FORNAX
 #load "../loaders/docsloader.fsx"
 #load "../loaders/pageloader.fsx"
@@ -104,7 +104,6 @@ let render (ctx : SiteContents) cnt =
   cnt
   |> HtmlElement.ToString
   |> fun n -> if disableLiveRefresh then n else injectWebsocketCode n
-
 
 let docsLayout (docs: DocsData) =
     let publishedDate = docs.published.Value.ToString("yyyy-MM-dd")

@@ -1,4 +1,5 @@
-#r "Fornax.Nfdi4Plants/bin/Debug/net5.0/Fornax.Core.dll"
+// #load "_lib/loadscript.fsx"
+#r "_lib/Fornax.Core.dll"
 
 open Config
 open System.IO

@@ -1,11 +1,12 @@
+#r "../_lib/Fornax.Core.dll"
 #load "layout.fsx"
 
 open Html
-open Fornax.Nfdi4Plants
+open Fornax
 
 let generate' (ctx : SiteContents) (_: string) =
-    let docs0 = ctx.TryGetValues<DocsData> () |> Option.defaultValue Seq.empty
-    printfn "hier3: %i" <| Seq.length docs0
+    let docs0 = ctx.TryGetValues<Nfdi4Plants.DocsData> () |> Option.defaultValue Seq.empty
+    printfn "GENERATOR: %i" <| Seq.length docs0
     // let layoutForMinimalDocsAncestor (docsLists: seq<HtmlElement> list) =
     //     Layout.layout ctx "Home" [
     //         section [Class "section"] [
@@ -36,7 +37,7 @@ let generate' (ctx : SiteContents) (_: string) =
             docs |> Layout.docsLayout
         ]
     | None -> 
-        failwith "Could not find index markdown file (title: 'Index') in docs folder."
+        failwith "Could not find index markdown file (title: 'Index' or title: 'Home') in docs folder."
 
 let generate (ctx : SiteContents) (projectRoot: string) (page: string) =
     generate' ctx page
