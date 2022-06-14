@@ -10,6 +10,8 @@ open BlackFox.Fake
 open Fake.Core
 open Fake.IO.Globbing.Operators
 
+open System.IO
+
 let pack = BuildTask.create "Pack" [clean; build; runTests] {
     if promptYesNo (sprintf "creating stable package with version %s OK?" stableVersionTag ) 
         then
@@ -29,6 +31,13 @@ let pack = BuildTask.create "Pack" [clean; build; runTests] {
                         OutputPath = Some pkgDir
                 }
             ))
+            // // copy the fresh nuget packages to fornax test client dependency folder
+            // let files = Directory.GetFiles(pkgDir, "*.nupkg")
+            // files |> Array.iter (fun x -> 
+            //     let fileName = Path.GetFileName(x)
+            //     printfn "%A" fileName
+            //     File.Copy(x, Path.Combine(fornaxTestClientDependencies, fileName))
+            // )
     else failwith "aborted"
 }
 

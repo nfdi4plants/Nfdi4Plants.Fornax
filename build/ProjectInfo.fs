@@ -5,6 +5,8 @@ open Fake.Extensions.Release
 
 Release.exists()
 
+let fornaxTestClientDependencies = "client/_lib"
+
 let project = "Nfdi4Plants.Fornax"
 
 let testProjects = 

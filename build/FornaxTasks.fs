@@ -4,6 +4,7 @@ open BlackFox.Fake
 open Helpers
 
 let watchFornax = BuildTask.create "fornax" [] {
-    runDotNet "dotnet build" "src/Nfdi4Plants.Fornax"
-    runDotNet "fornax watch" "src"
+    // Sadly this did not work out. Was not possible to reference build .dll on hot reload. Maybe in the future
+    // runDotNet "dotnet build" "src/Nfdi4Plants.Fornax"
+    runDotNet "fornax watch" "client"
 }
