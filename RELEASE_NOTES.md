@@ -1,6 +1,12 @@
-### 0.0.0+9132222 (Released 2022-6-13)
+### 0.1.0+5a62562 (Released 2022-6-14)
 * Additions:
-    * latest commit #9132222
+    * latest commit #5a62562
+    * [[#5a62562](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/5a62562d7913119af92cf325a4b6abba47defbb7)] Move fornax test client to different folder :hammer:
+    * [[#e03fb21](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/e03fb21df30872acfc242b0458f7c0e9eba2320b)] update gitignore
+    * [[#675aa1a](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/675aa1aa20a8c26dbde9995442e70beaf336cdb7)] set up nuget.config :art:
+    * [[#7c6bc44](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/7c6bc44065359371fc3c2ee1522b91b4154e7745)] Update test target.
+    * [[#c3af9d4](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/c3af9d4492a664f685d5b3e3e9ff659bd4df5cbb)] renam packages
+    * [[#240ed47](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/240ed4760d2d33a8106687e7e80be105fe498a7c)] try set up to use .fsproj in fornax
     * [[#6f16a43](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/6f16a43dcfb516d36793e1274ad99e85d7e8ff27)] Initial commit
     * [[#65ad6f6](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/65ad6f655ce2a1a22f366ae916d5e1fd870d8627)] Init fornax :tada:
     * [[#49a0ff5](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/49a0ff5615ccd084d88856216ff57a10c18478ad)] add npm, add web-components, roll-up, bulma :tada:
@@ -23,6 +29,9 @@
 * Deletions:
     * [[#e7f99c1](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/e7f99c1748fa7e4b86f6c58e927ebe50014f8d7f)] delete most post logic and establish docs
     * [[#ce316fe](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/ce316fe882632c100a938a998b3a695a7a80d794)] remove post code
+* Bugfixes:
+    * [[#ee3b12a](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/ee3b12ae09d6cc5d2ea077e5c20240e7485dff3d)] Fix loader issues! :bug:
+    * [[#9b30791](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/9b307917d099f72e737b6977d5a839b28aa2cb16)] try fix empty sitecontent issue
 
 ### 0.0.0 (Released 2022-6-13)
 * Additions:

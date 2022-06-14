@@ -351,3 +351,4 @@ MigrationBackup/
 client/_public
 .vscode/settings.json
 .vscode/
+pkg/

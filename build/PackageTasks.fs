@@ -12,6 +12,20 @@ open Fake.IO.Globbing.Operators
 
 open System.IO
 
+/// copy the fresh nuget packages to fornax test client dependency folder
+let copy_nupkg() =
+    // copy the fresh nuget packages to fornax test client dependency folder
+    let files = Directory.GetFiles(pkgDir, "*.nupkg")
+    Trace.trace "Copy .nupkg files to test client dependency folder"
+    files |> Array.iter (fun x -> 
+        let fileName = Path.GetFileName(x)
+        let fullPath = Path.GetFullPath(fornaxTestClientDependencies)
+        let targetFilePath = Path.Combine(fullPath, fileName)
+        if File.Exists targetFilePath then
+            File.Delete targetFilePath
+        File.Copy(x, targetFilePath)
+    )
+
 let pack = BuildTask.create "Pack" [clean; build; runTests] {
     if promptYesNo (sprintf "creating stable package with version %s OK?" stableVersionTag ) 
         then
@@ -31,13 +45,7 @@ let pack = BuildTask.create "Pack" [clean; build; runTests] {
                         OutputPath = Some pkgDir
                 }
             ))
-            // // copy the fresh nuget packages to fornax test client dependency folder
-            // let files = Directory.GetFiles(pkgDir, "*.nupkg")
-            // files |> Array.iter (fun x -> 
-            //     let fileName = Path.GetFileName(x)
-            //     printfn "%A" fileName
-            //     File.Copy(x, Path.Combine(fornaxTestClientDependencies, fileName))
-            // )
+            copy_nupkg()
     else failwith "aborted"
 }
 
@@ -61,6 +69,7 @@ let packPrerelease = BuildTask.create "PackPrerelease" [setPrereleaseTag; clean;
                                 MSBuildParams = msBuildParams
                         }
             ))
+            copy_nupkg()
     else
         failwith "aborted"
 }
