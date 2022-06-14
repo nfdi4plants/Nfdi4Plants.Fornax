@@ -1,7 +1,7 @@
 #r "../_lib/Fornax.Core.dll"
 #r "../_lib/Markdig.dll"
-#i """nuget: C:\Users\Kevin\source\repos\Nfdi4Plants.Fornax\pkg"""
-#r "nuget: Nfdi4Plants.Fornax"
+// This can be used to access local .nupkg, thanks to the nuget.config file.
+#r "nuget: Nfdi4Plants.Fornax, 0.0.0"
 
 open System.IO
 open Fornax.Nfdi4Plants
@@ -10,8 +10,6 @@ let contentDir = "docs"
 
 let loader (projectRoot: string) (siteContent: SiteContents) =
     let docsPath = Path.Combine(projectRoot, contentDir)
-    // let options = EnumerationOptions(RecurseSubdirectories = true)
-    // let files = Directory.GetFiles(docsPath, "*"), options)
     let files = 
         Directory.GetFiles(docsPath, "*")
         |> Array.filter (fun n -> n.EndsWith ".md")
@@ -19,7 +17,7 @@ let loader (projectRoot: string) (siteContent: SiteContents) =
     let docs = 
         files 
         |> Array.map (Docs.loadFile projectRoot contentDir)
-        
+
     printfn "LOADER: %i" <| Seq.length docs
 
     docs 
