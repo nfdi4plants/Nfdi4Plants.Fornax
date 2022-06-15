@@ -9,6 +9,7 @@
     </PackageTags>
     <RepositoryUrl>https://github.com/Freymaurer/nfdi4plants-fornax-template</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <!-- <FsDocsLicenseLink>https://github.com/nfdi4plants/ISADotNet/blob/developer/LICENSE</FsDocsLicenseLink>
     <FsDocsReleaseNotesLink>https://github.com/nfdi4plants/ISADotNet/blob/developer/RELEASE_NOTES.md</FsDocsReleaseNotesLink> -->
   </PropertyGroup>
@@ -35,5 +36,6 @@
       <Pack>true</Pack>
       <PackagePath>lib\$(TargetFramework)</PackagePath>
     </Content>
+    <None Include="../../LICENSE" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>
