@@ -1,6 +1,10 @@
-### 0.1.0+5a62562 (Released 2022-6-14)
+### 0.1.0+7fe6e3c (Released 2022-6-15)
 * Additions:
-    * latest commit #5a62562
+    * latest commit #7fe6e3c
+    * [[#7fe6e3c](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/7fe6e3ca480406383c8565a230c6831ef971ae29)] Update README.md :books:
+    * [[#4d7c266](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/4d7c26668c8456e132d4c5c70c683bb2acea26f1)] Create LICENSE
+    * [[#0c70cb8](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/0c70cb81a89cd6813790d77ff57b734a6a0c95e1)] rem license
+    * [[#682f790](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/682f790cacd6fa07745ef5e0bc6d0abb416bd110)] Add components to library :sparkles:
     * [[#5a62562](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/5a62562d7913119af92cf325a4b6abba47defbb7)] Move fornax test client to different folder :hammer:
     * [[#e03fb21](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/e03fb21df30872acfc242b0458f7c0e9eba2320b)] update gitignore
     * [[#675aa1a](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/675aa1aa20a8c26dbde9995442e70beaf336cdb7)] set up nuget.config :art:
