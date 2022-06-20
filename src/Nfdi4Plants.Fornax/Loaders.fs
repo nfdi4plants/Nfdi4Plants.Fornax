@@ -2,6 +2,7 @@ namespace Fornax.Nfdi4Plants
 
 module Pipelines =
     open Markdig
+    open Fornax.Nfdi4Plants.MarkdigExtensions.NfdiCode
     open Fornax.Nfdi4Plants.MarkdigExtensions.NfdiHeader
     open Fornax.Nfdi4Plants.MarkdigExtensions.NfdiSidebarElementHeader
 
@@ -10,6 +11,7 @@ module Pipelines =
             .UseAdvancedExtensions()
             .UseEmojiAndSmiley()
             .UseNFDIHeader()
+            .UseNFDICodeBlock()
             .Build()
 
     let sidebarMarkdownPipeline =
