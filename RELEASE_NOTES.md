@@ -1,3 +1,9 @@
+### 0.2.2+03ba89a (Released 2022-6-21)
+* Additions:
+    * latest commit #03ba89a
+* Deletions:
+    * [[#03ba89a](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/03ba89a2ac5567df6d21a0da0825d125ee405832)] Remove live refresh type
+
 ### 0.2.1+31c939c (Released 2022-6-21)
 * Additions:
     * latest commit #31c939c
