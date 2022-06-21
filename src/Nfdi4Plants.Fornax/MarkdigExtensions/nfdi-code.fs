@@ -60,6 +60,7 @@ module NfdiCode =
                         .Write(code)
                         .Write("</nfdi-code>")
                     |> ignore
+                renderer.EnsureLine() |> ignore
             else
                 // let codeBlockRenderer = new CodeBlockRenderer()
                 renderer.Write(cb) |> ignore

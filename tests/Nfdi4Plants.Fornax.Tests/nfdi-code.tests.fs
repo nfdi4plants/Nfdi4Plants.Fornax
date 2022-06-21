@@ -27,8 +27,8 @@ let tests =
 let someCode = 42
 ```
 """
-            let result = Markdown.ToHtml(markdown, pipeline).Trim()
-            let expected = $"""<p>Test line</p>{'\010'}<nfdi-code>let someCode = 42</nfdi-code>""".Trim()
+            let result = Markdown.ToHtml(markdown, pipeline)
+            let expected = $"""<p>Test line</p>{'\010'}<nfdi-code>let someCode = 42</nfdi-code>{'\010'}"""
             Expect.equal result expected ""
         }
         test "Fenced code block" {
@@ -38,7 +38,7 @@ let someCode = 42
 ```
 """
             let result = Markdown.ToHtml(markdown, pipeline)
-            let expected = $"""<p>Test line</p>{'\010'}<nfdi-code class="language-fsharp">let someCode = 42</nfdi-code>"""
+            let expected = $"""<p>Test line</p>{'\010'}<nfdi-code class="language-fsharp">let someCode = 42</nfdi-code>{'\010'}"""
             Expect.equal result expected ""
         }
     ]
