@@ -1,3 +1,9 @@
+### 0.2.0+7538a7f (Released 2022-6-20)
+* Additions:
+    * latest commit #7538a7f
+    * [[#a54f783](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/a54f783ff3193195bde18f2d16dc4cfd195199ab)] add nfdi-code parsing
+    * [[#7538a7f](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/7538a7f977e5f2643b3ab69f43038a8034599539)] Add unit tests :white_check_mark:
+
 ### 0.1.0+7fe6e3c (Released 2022-6-15)
 * Additions:
     * latest commit #7fe6e3c
