@@ -1,3 +1,9 @@
+### 0.2.1+31c939c (Released 2022-6-21)
+* Additions:
+    * latest commit #31c939c
+    * [[#31c939c](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/31c939c32ef76bc7fd15917188358e116dcf54e1)] Update to new nfdi web-components :arrow_up:
+    * [[#02889c4](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/02889c4b595d39b4a4b0a051391bb5aeb3cdbef9)] Add newline to nfdi-code parsing
+
 ### 0.2.0+7538a7f (Released 2022-6-20)
 * Additions:
     * latest commit #7538a7f
