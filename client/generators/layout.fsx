@@ -98,21 +98,22 @@ let layout (ctx : SiteContents) (activePageTitle: string) bodyCnt =
     ]
 
 open Fornax.Nfdi4Plants
+open Docsloader
 
 let render (ctx : SiteContents) cnt =
-  let disableLiveRefresh = ctx.TryGetValue<DocsConfig> () |> Option.map (fun n -> n.disableLiveRefresh) |> Option.defaultValue false
-  cnt
-  |> HtmlElement.ToString
-  |> fun n -> if disableLiveRefresh then n else injectWebsocketCode n
+    let disableLiveRefresh = ctx.TryGetValue<DocsConfig> () |> Option.map (fun n -> n.disableLiveRefresh) |> Option.defaultValue false
+    cnt
+    |> HtmlElement.ToString
+    |> fun n -> if disableLiveRefresh then n else injectWebsocketCode n
 
 let docsLayout (docs: DocsData) =
     // just an example url
     Components.docsLayout "https://github.com/nfdi4plants/nfdi4plants.github.io/tree/main/src/" docs
 
 let docsMinimalLayout (docs: DocsData) =
-  div [Class "tile is-4 is-parent"] [
-    div [Class "tile is-child box"] [
-      p [Class "title"] [ a [Href docs.link] [!! docs.title] ]
-      p [] [ !! $"""by {docs.author.Value}, {docs.published.Value.ToString("yyyy-MM-dd")}""" ]
+    div [Class "tile is-4 is-parent"] [
+        div [Class "tile is-child box"] [
+        p [Class "title"] [ a [Href docs.link] [!! docs.title] ]
+        p [] [ !! $"""by {docs.author.Value}, {docs.published.Value.ToString("yyyy-MM-dd")}""" ]
+        ]
     ]
-  ]

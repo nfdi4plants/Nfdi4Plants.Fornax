@@ -3,12 +3,13 @@
 
 open Html
 open Fornax
+open Docsloader
 
 let generate' (ctx : SiteContents) (page: string) =
     let doc =
         ctx.TryGetValues<Nfdi4Plants.DocsData> ()
         |> Option.defaultValue Seq.empty
-        |> Seq.find (fun n -> n.file = page)
+        |> Seq.findBack (fun n -> n.file = page)
 
     Layout.layout ctx doc.title [
         Layout.docsLayout doc

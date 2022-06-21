@@ -4,6 +4,7 @@
 #r "nuget: Nfdi4Plants.Fornax, 0.2.2"
 
 open System.IO
+open Fornax
 open Fornax.Nfdi4Plants
 
 let contentDir = "docs"
@@ -22,10 +23,24 @@ let loader (projectRoot: string) (siteContent: SiteContents) =
         files 
         |> Array.map (Docs.loadFile projectRoot contentDir)
 
-    printfn "LOADER: %i" <| Seq.length docs
+    let doc =
+        siteContent.TryGetValues<Nfdi4Plants.DocsData> ()
+        |> Option.defaultValue Seq.empty
+
+    printfn "LOADER CURRENT DOCS: %i" <| Seq.length doc
+    printfn "LOADER ADDING DOCS: %i" <| Seq.length docs
+
+    /// Alternative.
+    let sc = new SiteContents()
 
     docs 
     |> Array.iter siteContent.Add
+
+    let doc2 =
+        siteContent.TryGetValues<Nfdi4Plants.DocsData> ()
+        |> Option.defaultValue Seq.empty
+
+    printfn "LOADER NEXT DOCS: %i" <| Seq.length doc2
 
     siteContent.Add({disableLiveRefresh = false})
     siteContent
