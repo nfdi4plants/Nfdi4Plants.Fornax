@@ -19,11 +19,6 @@ module Pipelines =
             .UseSidebarHeader()
             .Build()
 
-
-type DocsConfig = {
-    disableLiveRefresh: bool
-}
-
 type SidebarElement = {
     Title: string
     Content: string
