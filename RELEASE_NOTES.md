@@ -1,3 +1,11 @@
+### 0.3.0+e40d9be (Released 2022-7-8)
+* Additions:
+    * latest commit #e40d9be
+    * [[#01008e1](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/01008e1bf83787fba955f13eaaee662471729e65)] Push testing.
+    * [[#e40d9be](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/e40d9be8cea57956e2bd4f4d421ccdc44f08d02d)] Add more descriptive error messages.
+* Bugfixes:
+    * [[#0af7b87](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/0af7b87f6aede5f02ee87fe1af58327aa8cf3a8b)] try fix hot reload issue
+
 ### 0.2.2+03ba89a (Released 2022-6-21)
 * Additions:
     * latest commit #03ba89a
