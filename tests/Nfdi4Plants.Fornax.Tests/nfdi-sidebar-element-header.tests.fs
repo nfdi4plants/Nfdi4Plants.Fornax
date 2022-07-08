@@ -11,6 +11,12 @@ let pipeline =
         .UseSidebarHeader()
         .Build()
 
+let basePathPipeline = 
+    let builder = new MarkdownPipelineBuilder()
+    builder
+        .UseSidebarHeader("TestURL")
+        .Build()        
+
 [<Tests>]
 let tests = 
     testList "UseSidebarHeader" [
@@ -28,5 +34,10 @@ let tests =
             let markdown = """###### Start testing!"""
             let result = Markdown.ToHtml(markdown, pipeline)
             Expect.equal result $"""<h3 slot="inner">Start testing!</h3>{'\010'}""" ""
+        }
+        test "basePathPipeline" {
+            let markdown = """# Start testing!:/docs/start-testing"""
+            let result = Markdown.ToHtml(markdown, basePathPipeline)
+            Expect.equal result $"""<h1 slot="inner" href="TestURL/docs/start-testing">Start testing!</h1>{'\010'}""" ""
         }
     ]

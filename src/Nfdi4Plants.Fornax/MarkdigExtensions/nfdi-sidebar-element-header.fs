@@ -20,7 +20,7 @@ module internal Aux =
 
 module NfdiSidebarElementHeader =
 
-    type SidebarHeaderRenderer() =
+    type SidebarHeaderRenderer(?productionBasePath: string) =
         inherit HeadingRenderer()
 
         override __.Write(renderer : HtmlRenderer, hb : HeadingBlock ) =
@@ -29,9 +29,6 @@ module NfdiSidebarElementHeader =
                 "h1";
                 "h2";
                 "h3";
-                // "nfdi-h4";
-                // "nfdi-h5";
-                // "nfdi-h6";
             |]
             let index = hb.Level - 1
             let headingText =
@@ -45,7 +42,11 @@ module NfdiSidebarElementHeader =
 
             let attr = hb.GetAttributes()
             attr.AddProperty("slot", "inner")
-            if href.IsSome then attr.AddProperty("href", href.Value)
+            if href.IsSome then 
+                attr.AddProperty(
+                    "href", 
+                    if productionBasePath.IsSome then System.IO.Path.Combine(productionBasePath.Value, href.Value) else href.Value
+                )
 
             if (renderer.EnableHtmlForBlock) then
                 renderer.Write('<') |> ignore
@@ -63,14 +64,15 @@ module NfdiSidebarElementHeader =
             renderer.EnsureLine() |> ignore
 
     /// An extension for Markdig that highlights syntax in fenced code blocks
-    type SidebarHeaderExtension() =
+    type SidebarHeaderExtension(?productionBasePath: string) =
 
         interface IMarkdownExtension with
 
             member __.Setup(_) = ()
 
             member __.Setup(_, renderer) = 
-                renderer.ObjectRenderers.ReplaceOrAdd<HeadingRenderer>(new SidebarHeaderRenderer()) |> ignore
+                let x = if productionBasePath.IsSome then new SidebarHeaderRenderer(productionBasePath.Value) else new SidebarHeaderRenderer()
+                renderer.ObjectRenderers.ReplaceOrAdd<HeadingRenderer>(x) |> ignore
 
     open System.Runtime.CompilerServices
 
@@ -79,6 +81,7 @@ module NfdiSidebarElementHeader =
         [<Extension>]
         // <summary>Highlight code in fenced code blocks</summary>
         // <param name="pipeline">The Markdig <see cref="MarkdownPipelineBuilder"/> to add the extension to</param>
-        static member UseSidebarHeader(pipeline : MarkdownPipelineBuilder) =
-            pipeline.Extensions.Add(SidebarHeaderExtension())
+        static member UseSidebarHeader(pipeline : MarkdownPipelineBuilder, ?productionBasePath) =
+            let x = if productionBasePath.IsSome then SidebarHeaderExtension(productionBasePath.Value) else SidebarHeaderExtension()
+            pipeline.Extensions.Add(x)
             pipeline
