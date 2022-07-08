@@ -38,6 +38,6 @@ let tests =
         test "basePathPipeline" {
             let markdown = """# Start testing!:/docs/start-testing"""
             let result = Markdown.ToHtml(markdown, basePathPipeline)
-            Expect.equal result $"""<h1 slot="inner" href="TestURL/docs/start-testing">Start testing!</h1>{'\010'}""" ""
+            Expect.equal result $"""<h1 slot="inner" href="/TestURL/docs/start-testing">Start testing!</h1>{'\010'}""" ""
         }
     ]

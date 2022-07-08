@@ -42,11 +42,10 @@ module NfdiSidebarElementHeader =
 
             let attr = hb.GetAttributes()
             attr.AddProperty("slot", "inner")
+
             if href.IsSome then 
-                attr.AddProperty(
-                    "href", 
-                    if productionBasePath.IsSome then System.IO.Path.Combine(productionBasePath.Value, href.Value) else href.Value
-                )
+                let nextHref = if productionBasePath.IsSome then "/" + productionBasePath.Value.Trim([|'/'|]) + "/" + href.Value.Trim([|'/'|]) else href.Value
+                attr.AddProperty("href", nextHref)
 
             if (renderer.EnableHtmlForBlock) then
                 renderer.Write('<') |> ignore
@@ -83,5 +82,6 @@ module NfdiSidebarElementHeader =
         // <param name="pipeline">The Markdig <see cref="MarkdownPipelineBuilder"/> to add the extension to</param>
         static member UseSidebarHeader(pipeline : MarkdownPipelineBuilder, ?productionBasePath) =
             let x = if productionBasePath.IsSome then SidebarHeaderExtension(productionBasePath.Value) else SidebarHeaderExtension()
+            printfn "HIT: %A" productionBasePath
             pipeline.Extensions.Add(x)
             pipeline
