@@ -45,7 +45,7 @@ module internal Aux =
         |> fun (key, v) -> 
             v 
             |> Option.map(fun v -> (key, v))
-
+        
     let internal trimString (str : string) =
         str.Trim().TrimEnd('"').TrimStart('"')
         
@@ -53,10 +53,12 @@ module internal Aux =
     ///`fileConfig` - Metadata at the top of an .md file
     let getConfig (fileContent : string) =
         let fileContent = fileContent.Split '\n'
+        if fileContent.[0].Trim()  <> "---" then failwith """File must start with metadata block opener "---"."""
         let fileContent = fileContent |> Array.skip 1 //First line must be ---
-        let indexOfSeperator = fileContent |> Array.findIndex isSeparator
+        let indexOfSeperator = fileContent |> Array.tryFindIndex isSeparator
+        if indexOfSeperator.IsNone then failwith """File does not contain closing line for metadata block "---"."""
         fileContent
-        |> Array.splitAt indexOfSeperator
+        |> Array.splitAt indexOfSeperator.Value
         |> fst
         |> Seq.choose splitKey'
         |> Map.ofSeq
@@ -139,37 +141,46 @@ module Docs =
     /// <param name="filePath">Relative path to specific `.md` file.</param>
     /// <returns>Returns html as string.</returns>
     let loadFile (rootDir: string) (contentDir: string) (filePath: string) =
-        let text = File.ReadAllText filePath
+        try 
+            let text = File.ReadAllText filePath
 
-        let config = Aux.getConfig text
+            let config = Aux.getConfig text
 
-        let title = config |> Map.find "title" |> Aux.trimString
-        let author = config |> Map.tryFind "author" |> Option.map Aux.trimString
-        let published = config |> Map.tryFind "published" |> Option.map (Aux.trimString >> System.DateTime.Parse)
-        let addToc = config |> Map.tryFind "add toc" |> Option.map (Aux.trimString >> System.Boolean.Parse) |> Option.defaultValue true
-        let addSidebar = 
-            let docsPath = Path.Combine(rootDir, contentDir)
-            config |> Map.tryFind "add sidebar" |> Option.map (Aux.trimString >> fun x -> Path.Combine(docsPath, x.Replace('\\','/')))
+            let title = 
+                config |> Map.tryFind "title" 
+                // same as "fun x -> match x with"
+                |> function | Some title -> Aux.trimString title | None -> failwith $"""Could not find "Title"-metadata."""
+            let author = 
+                config |> Map.tryFind "author" |> Option.map Aux.trimString
+            let published = 
+                config |> Map.tryFind "published" |> Option.map (Aux.trimString >> System.DateTime.Parse)
+            let addToc = 
+                config |> Map.tryFind "add toc" |> Option.map (Aux.trimString >> System.Boolean.Parse) |> Option.defaultValue true
+            let addSidebar = 
+                let docsPath = Path.Combine(rootDir, contentDir)
+                config |> Map.tryFind "add sidebar" |> Option.map (Aux.trimString >> fun x -> Path.Combine(docsPath, x.Replace('\\','/')))
 
-        let content = Aux.getContent text
-        let sidebar = addSidebar |> Option.map (Aux.getSidebar contentDir) 
-        let chopLength =
-            if rootDir.EndsWith(Path.DirectorySeparatorChar) then rootDir.Length
-            else rootDir.Length + 1
+            let content = Aux.getContent text
+            let sidebar = addSidebar |> Option.map (Aux.getSidebar contentDir) 
+            let chopLength =
+                if rootDir.EndsWith(Path.DirectorySeparatorChar) then rootDir.Length
+                else rootDir.Length + 1
 
-        let dirPart =
-            filePath
-            |> Path.GetDirectoryName
-            |> fun x -> x.[chopLength .. ]
+            let dirPart =
+                filePath
+                |> Path.GetDirectoryName
+                |> fun x -> x.[chopLength .. ]
 
-        let file = Path.Combine(dirPart, (filePath |> Path.GetFileNameWithoutExtension) + ".md").Replace("\\", "/")
-        let link = "/" + Path.Combine(dirPart, (filePath |> Path.GetFileNameWithoutExtension) + ".html").Replace("\\", "/")
+            let file = Path.Combine(dirPart, (filePath |> Path.GetFileNameWithoutExtension) + ".md").Replace("\\", "/")
+            let link = "/" + Path.Combine(dirPart, (filePath |> Path.GetFileNameWithoutExtension) + ".html").Replace("\\", "/")
 
-        {   file = file
-            link = link
-            title = title
-            author = author
-            published = published
-            content = content 
-            add_toc = addToc 
-            sidebar = if sidebar.IsSome then sidebar.Value else [||] }    
+            {   file = file
+                link = link
+                title = title
+                author = author
+                published = published
+                content = content 
+                add_toc = addToc 
+                sidebar = if sidebar.IsSome then sidebar.Value else [||] }    
+        with
+            | e -> failwith $"""[Error in file {filePath}] {e.Message}"""
