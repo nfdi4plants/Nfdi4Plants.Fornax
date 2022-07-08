@@ -6,7 +6,7 @@ open Fornax
 open Docsloader
 
 let generate' (ctx : SiteContents) (_: string) =
-    let docs0 = ctx.TryGetValues<Nfdi4Plants.DocsData> () |> Option.defaultValue Seq.empty
+    let docs0 = ctx.TryGetValues<Nfdi4Plants.Docs> () |> Option.defaultValue Seq.empty
     printfn "GENERATOR: %i" <| Seq.length docs0
 
     let landingPage = docs0 |> Seq.tryFind(fun x -> x.title = "Index" || x.title = "Home")

@@ -6,9 +6,7 @@ This fornax template implements the existing [nfdi-web-components](https://githu
 
 You can find the loader and generator functions on nuget: 
 
-```
-wip
-```
+Best use this repo as implemented in [web-components-docs](https://github.com/nfdi4plants/web-components)
 
 ## usage
 

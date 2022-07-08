@@ -1,3 +1,9 @@
+### 0.4.0+9e56047 (Released 2022-7-8)
+* Additions:
+    * latest commit #9e56047
+    * [[#9e56047](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/9e56047125b584ad5fcf34487858f822a7f592bc)] Deprecate DocsData :boom: 
+    * Implement `Docs` type with optional BasePath.
+
 ### 0.3.0+e40d9be (Released 2022-7-8)
 * Additions:
     * latest commit #e40d9be

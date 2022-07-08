@@ -7,7 +7,7 @@ open Docsloader
 
 let generate' (ctx : SiteContents) (page: string) =
     let doc =
-        ctx.TryGetValues<Nfdi4Plants.DocsData> ()
+        ctx.TryGetValues<Nfdi4Plants.Docs> ()
         |> Option.defaultValue Seq.empty
         |> Seq.findBack (fun n -> n.file = page)
 

@@ -1,11 +1,10 @@
 #r "../_lib/Fornax.Core.dll"
 #r "../_lib/Markdig.dll"
 // This can be used to access local .nupkg, thanks to the nuget.config file.
-#r "nuget: Nfdi4Plants.Fornax, 0.2.2"
+#r "nuget: Nfdi4Plants.Fornax, 0.4.0"
 
 open System.IO
 open Fornax
-open Fornax.Nfdi4Plants
 
 let contentDir = "docs"
 
@@ -19,12 +18,13 @@ let loader (projectRoot: string) (siteContent: SiteContents) =
         Directory.GetFiles(docsPath, "*")
         |> Array.filter (fun n -> n.EndsWith ".md")
         |> Array.filter (fun n -> n.Contains "README.md" |> not)
+    let loadDocs (filePath:string) = Nfdi4Plants.Docs.loadFile(projectRoot, contentDir, filePath)
     let docs = 
         files 
-        |> Array.map (Docs.loadFile projectRoot contentDir)
+        |> Array.map loadDocs
 
     let doc =
-        siteContent.TryGetValues<Nfdi4Plants.DocsData> ()
+        siteContent.TryGetValues<Nfdi4Plants.Docs> ()
         |> Option.defaultValue Seq.empty
 
     printfn "LOADER CURRENT DOCS: %i" <| Seq.length doc
@@ -37,7 +37,7 @@ let loader (projectRoot: string) (siteContent: SiteContents) =
     |> Array.iter siteContent.Add
 
     let doc2 =
-        siteContent.TryGetValues<Nfdi4Plants.DocsData> ()
+        siteContent.TryGetValues<Nfdi4Plants.Docs> ()
         |> Option.defaultValue Seq.empty
 
     printfn "LOADER NEXT DOCS: %i" <| Seq.length doc2

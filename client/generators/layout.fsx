@@ -97,8 +97,8 @@ let layout (ctx : SiteContents) (activePageTitle: string) bodyCnt =
         custom "nfdi-footer" [] []
     ]
 
-open Fornax.Nfdi4Plants
 open Docsloader
+open Fornax
 
 let render (ctx : SiteContents) cnt =
     let disableLiveRefresh = ctx.TryGetValue<DocsConfig> () |> Option.map (fun n -> n.disableLiveRefresh) |> Option.defaultValue false
@@ -106,11 +106,11 @@ let render (ctx : SiteContents) cnt =
     |> HtmlElement.ToString
     |> fun n -> if disableLiveRefresh then n else injectWebsocketCode n
 
-let docsLayout (docs: DocsData) =
+let docsLayout (docs: Nfdi4Plants.Docs) =
     // just an example url
-    Components.docsLayout "https://github.com/nfdi4plants/nfdi4plants.github.io/tree/main/src/" docs
+    Nfdi4Plants.Components.docsLayout("https://github.com/nfdi4plants/nfdi4plants.github.io/tree/main/src/", docs)
 
-let docsMinimalLayout (docs: DocsData) =
+let docsMinimalLayout (docs: Nfdi4Plants.Docs) =
     div [Class "tile is-4 is-parent"] [
         div [Class "tile is-child box"] [
         p [Class "title"] [ a [Href docs.link] [!! docs.title] ]
