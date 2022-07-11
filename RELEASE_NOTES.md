@@ -1,3 +1,9 @@
+### 0.5.3+da2f374 (Released 2022-7-11)
+* Additions:
+    * latest commit #da2f374
+* Bugfixes:
+    * [[#da2f374](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/da2f374d1273f0e49a08325f02041bf6b1858699)] productionbasePath wasnt fully implemented .. :bug:
+
 ### 0.5.2+b44e9a5 (Released 2022-7-11)
 * Additions:
     * latest commit #b44e9a5
