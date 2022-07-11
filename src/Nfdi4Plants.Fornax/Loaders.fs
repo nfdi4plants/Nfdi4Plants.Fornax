@@ -25,18 +25,6 @@ type SidebarElement = {
     Content: string
 }
 
-[<System.ObsoleteAttribute("Start using the Docs type")>]
-type DocsData = {
-    file: string
-    link : string
-    title: string
-    author: string option
-    published: System.DateTime option
-    add_toc: bool
-    sidebar: SidebarElement []
-    content: string
-}
-
 type Docs =
     {
         file: string
@@ -144,62 +132,6 @@ module internal Aux =
             |> String.concat "\n"
 
         Markdig.Markdown.ToHtml(content, Pipelines.markdownPipeline)  
-
-[<System.Obsolete("Start using the Docs type")>]
-module Docs = 
-
-    open System.IO
-    
-    /// <summary>Parse markdown `fileContent` to HTML with markdig and custom nfdi-webcomponent converter.</summary>
-    /// <param name="rootDir">Base root directory path, will be appended to 'contentDir'.</param>
-    /// <param name="contentDir">Folder which to search for docs .md files. This folder will be used a relative root for sidebars.</param>
-    /// <param name="filePath">Relative path to specific `.md` file.</param>
-    /// <returns>Returns html as string.</returns>
-    [<System.Obsolete("Start using the Docs.load type")>]
-    let loadFile (rootDir: string) (contentDir: string) (filePath: string) : DocsData =
-        try 
-            let text = File.ReadAllText filePath
-
-            let config = Aux.getConfig text
-
-            let title = 
-                config |> Map.tryFind "title" 
-                // same as "fun x -> match x with"
-                |> function | Some title -> Aux.trimString title | None -> failwith $"""Could not find "Title"-metadata."""
-            let author = 
-                config |> Map.tryFind "author" |> Option.map Aux.trimString
-            let published = 
-                config |> Map.tryFind "published" |> Option.map (Aux.trimString >> System.DateTime.Parse)
-            let addToc = 
-                config |> Map.tryFind "add toc" |> Option.map (Aux.trimString >> System.Boolean.Parse) |> Option.defaultValue true
-            let addSidebar = 
-                let docsPath = Path.Combine(rootDir, contentDir)
-                config |> Map.tryFind "add sidebar" |> Option.map (Aux.trimString >> fun x -> Path.Combine(docsPath, x.Replace('\\','/')))
-
-            let content = Aux.getContent text
-            let sidebar = addSidebar |> Option.map (Aux.getSidebar contentDir None) 
-            let chopLength =
-                if rootDir.EndsWith(Path.DirectorySeparatorChar) then rootDir.Length
-                else rootDir.Length + 1
-
-            let dirPart =
-                filePath
-                |> Path.GetDirectoryName
-                |> fun x -> x.[chopLength .. ]
-
-            let file = Path.Combine(dirPart, (filePath |> Path.GetFileNameWithoutExtension) + ".md").Replace("\\", "/")
-            let link = "/" + Path.Combine(dirPart, (filePath |> Path.GetFileNameWithoutExtension) + ".html").Replace("\\", "/")
-
-            {   file = file
-                link = link
-                title = title
-                author = author
-                published = published
-                content = content 
-                add_toc = addToc 
-                sidebar = if sidebar.IsSome then sidebar.Value else [||] }    
-        with
-            | e -> failwith $"""[Error in file {filePath}] {e.Message}"""
 
 type Docs with
 

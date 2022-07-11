@@ -1,9 +1,11 @@
-### 0.5.0+1de8f07 (Released 2022-7-8)
+### 0.5.0+df516b0 (Released 2022-7-11)
 * Additions:
-    * latest commit #1de8f07
+    * latest commit #df516b0
     * [[#6aec175](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/6aec175b5141ad87f113b6a0ac5e7bcf9d740850)] Update to rm deprecated from test client
     * [[#3036cf4](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/3036cf47d8a46e9b4f3084d1e4430267d60173ae)] Merge branch 'main' of https://github.com/Freymaurer/nfdi4plants-fornax-template
     * [[#1de8f07](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/1de8f0722c7d61c82441e2f3af5536be9ee10f52)] add sidebar basepath logic
+* Bugfixes:
+    * [[#df516b0](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/df516b0fcef211b3d2d6a727987fbd976d9d531e)] Fix basepath parsing issues :bug:
 
 ### 0.4.0+9e56047 (Released 2022-7-8)
 * Additions:
