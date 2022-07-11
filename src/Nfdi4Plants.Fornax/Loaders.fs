@@ -163,11 +163,7 @@ type Docs with
 
             let content = Aux.getContent text
             let sidebar = 
-                #if WATCH
-                addSidebar |> Option.map (Aux.getSidebar contentDir None) 
-                #else 
                 addSidebar |> Option.map (Aux.getSidebar contentDir productionBasePath) 
-                #endif
             let chopLength =
                 if rootDir.EndsWith(Path.DirectorySeparatorChar) then rootDir.Length
                 else rootDir.Length + 1
