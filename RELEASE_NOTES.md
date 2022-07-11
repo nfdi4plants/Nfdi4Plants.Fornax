@@ -1,3 +1,9 @@
+### 0.5.1+b277eab (Released 2022-7-11)
+* Additions:
+    * latest commit #b277eab
+* Bugfixes:
+    * [[#b277eab](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/b277eab3632cc2f0a7d083105f8de405b1b694f4)] Try fix path change for sidebarurls
+
 ### 0.5.0+30baf0a (Released 2022-7-11)
 * Additions:
     * latest commit #30baf0a
