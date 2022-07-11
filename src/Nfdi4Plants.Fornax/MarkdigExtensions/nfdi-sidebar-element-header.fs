@@ -43,14 +43,9 @@ module NfdiSidebarElementHeader =
             let attr = hb.GetAttributes()
             attr.AddProperty("slot", "inner")
 
-            #if WATCH
-            if href.IsSome then
-                attr.AddProperty("href", href.Value)
-            #else
             if href.IsSome then 
                 let nextHref = if productionBasePath.IsSome then "/" + productionBasePath.Value.Trim([|'/'|]) + "/" + href.Value.Trim([|'/'|]) else href.Value
                 attr.AddProperty("href", nextHref)
-            #endif
 
 
             if (renderer.EnableHtmlForBlock) then
