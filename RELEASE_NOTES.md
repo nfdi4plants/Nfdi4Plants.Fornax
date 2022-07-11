@@ -1,6 +1,7 @@
-### 0.5.0+df516b0 (Released 2022-7-11)
+### 0.5.0+30baf0a (Released 2022-7-11)
 * Additions:
-    * latest commit #df516b0
+    * latest commit #30baf0a
+    * [[#30baf0a](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/30baf0a5d1d91f43f15c42561d18bf2875e91183)] rm deprecated :boom:
     * [[#6aec175](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/6aec175b5141ad87f113b6a0ac5e7bcf9d740850)] Update to rm deprecated from test client
     * [[#3036cf4](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/3036cf47d8a46e9b4f3084d1e4430267d60173ae)] Merge branch 'main' of https://github.com/Freymaurer/nfdi4plants-fornax-template
     * [[#1de8f07](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/1de8f0722c7d61c82441e2f3af5536be9ee10f52)] add sidebar basepath logic
