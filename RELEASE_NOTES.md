@@ -1,3 +1,9 @@
+### 0.5.2+b44e9a5 (Released 2022-7-11)
+* Additions:
+    * latest commit #b44e9a5
+* Bugfixes:
+    * [[#b44e9a5](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/b44e9a590407e687d829dd7a64ac10e3ffe4becd)] Try fix path bug :bug:
+
 ### 0.5.1+b277eab (Released 2022-7-11)
 * Additions:
     * latest commit #b277eab

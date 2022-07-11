@@ -15,10 +15,15 @@ module Pipelines =
             .UseNFDICodeBlock()
             .Build()
 
-    let sidebarMarkdownPipeline =
-        MarkdownPipelineBuilder()
-            .UseSidebarHeader()
-            .Build()
+    let sidebarMarkdownPipeline(productionBasePath: string option) =
+        if productionBasePath.IsSome then
+            MarkdownPipelineBuilder()
+                .UseSidebarHeader(productionBasePath.Value)
+                .Build()
+        else
+            MarkdownPipelineBuilder()
+                .UseSidebarHeader()
+                .Build()
 
 type SidebarElement = {
     Title: string
@@ -110,7 +115,7 @@ module internal Aux =
                 let c = lines |> List.rev |> String.concat "\n"
                 {
                     Title = title
-                    Content = Markdig.Markdown.ToHtml(c, Pipelines.sidebarMarkdownPipeline)
+                    Content = Markdig.Markdown.ToHtml(c, Pipelines.sidebarMarkdownPipeline(productionBasePath))
                 }
             )
             |> List.rev
