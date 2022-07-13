@@ -1,7 +1,7 @@
 #r "../_lib/Fornax.Core.dll"
 #r "../_lib/Markdig.dll"
 // This can be used to access local .nupkg, thanks to the nuget.config file.
-#r "nuget: Nfdi4Plants.Fornax, 0.5.0"
+#r "nuget: Nfdi4Plants.Fornax, 0.5.5"
 
 open System.IO
 open Fornax

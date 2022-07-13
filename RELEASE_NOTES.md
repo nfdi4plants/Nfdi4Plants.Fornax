@@ -1,3 +1,9 @@
+### 0.5.5+ccf803d (Released 2022-7-13)
+* Additions:
+    * latest commit #ccf803d
+* Bugfixes:
+    * [[#ccf803d](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/ccf803de344d52b599406801b308d7396c8e34c6)] Fix markdig codeblock extension for < and > :bug:
+
 ### 0.5.4+8b01eb5 (Released 2022-7-13)
 * Additions:
     * latest commit #8b01eb5
