@@ -18,9 +18,6 @@ To-Dos:
 ## DataPLANT Support:/docs/metadata.html#dataplant-support
 ```
 
-```Data Management Plan
-# Data Management Plan:/docs/DataManagementPlan.html
-## Advantages of a DMP:/docs/DataManagementPlan.html#advantages-of-a-dmp
-## Elements of a DMP:/docs/DataManagementPlan.html#elements-of-a-dmp
-## DataPLANT's Data Management Plan Generator:/docs/DataManagementPlan.html#dataplants-data-management-plan-generator
+```Fornax Testing Example
+# Code Examples:/docs/CodeExamples.html
 ```

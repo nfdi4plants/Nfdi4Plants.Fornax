@@ -30,8 +30,8 @@ let loader (projectRoot: string) (siteContent: SiteContents) =
     printfn "LOADER CURRENT DOCS: %i" <| Seq.length doc
     printfn "LOADER ADDING DOCS: %i" <| Seq.length docs
 
-    /// Alternative.
-    let sc = new SiteContents()
+    // Alternative
+    // let sc = new SiteContents()
 
     docs 
     |> Array.iter siteContent.Add

@@ -28,7 +28,7 @@ let someCode = 42
 ```
 """
             let result = Markdown.ToHtml(markdown, pipeline)
-            let expected = $"""<p>Test line</p>{'\010'}<nfdi-code>let someCode = 42</nfdi-code>{'\010'}"""
+            let expected = $"""<p>Test line</p>{'\010'}<nfdi-code>let someCode = 42{'\010'}</nfdi-code>{'\010'}"""
             Expect.equal result expected ""
         }
         test "Fenced code block" {
@@ -38,7 +38,15 @@ let someCode = 42
 ```
 """
             let result = Markdown.ToHtml(markdown, pipeline)
-            let expected = $"""<p>Test line</p>{'\010'}<nfdi-code class="language-fsharp">let someCode = 42</nfdi-code>{'\010'}"""
+            let expected = $"""<p>Test line</p>{'\010'}<nfdi-code class="language-fsharp">let someCode = 42{'\010'}</nfdi-code>{'\010'}"""
+            Expect.equal result expected ""
+        }
+        test "html like structure case" {
+            let markdown = """```
+# https://git.nfdi4plants.org/<yourusername>/<yourarc>
+```"""
+            let result = Markdown.ToHtml(markdown, pipeline)
+            let expected = $"""<nfdi-code># https://git.nfdi4plants.org/&lt;yourusername>/&lt;yourarc>{'\010'}</nfdi-code>{'\010'}"""
             Expect.equal result expected ""
         }
     ]

@@ -1,3 +1,8 @@
+### 0.5.4+8b01eb5 (Released 2022-7-13)
+* Additions:
+    * latest commit #8b01eb5
+    * [[#8b01eb5](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/8b01eb56b01e47ddf5a07d7cdef97368bc266914)] Update terser rollup config
+
 ### 0.5.3+da2f374 (Released 2022-7-11)
 * Additions:
     * latest commit #da2f374

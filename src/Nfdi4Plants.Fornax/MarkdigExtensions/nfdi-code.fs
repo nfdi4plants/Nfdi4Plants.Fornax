@@ -15,26 +15,26 @@ module NfdiCode =
     type NFDICodeBlockRenderer() =
         inherit HtmlObjectRenderer<CodeBlock>()
 
-        let extractSourcecode (node: LeafBlock) = 
-            let code = new StringBuilder()
-            let lines = node.Lines.Lines
-            let totalLines = lines.Length
-            let rec appendLines (counter: int) (c: StringBuilder) =
-                if counter >= totalLines then
-                    c
-                else
-                    let line = lines[counter]
-                    let slice = line.Slice
-                    if isNull slice.Text then
-                        appendLines (counter + 1) c
-                    else
-                        let lineText = slice.Text.Substring(slice.Start, slice.Length);
-                        if counter > 0 then 
-                            appendLines (counter+1) (c.AppendLine().Append(lineText))
-                        else
-                            appendLines (counter+1) (c.Append(lineText))
-            appendLines 0 code
-            |> fun x -> x.ToString()
+        //let extractSourcecode (node: LeafBlock) = 
+        //    let code = new StringBuilder()
+        //    let lines = node.Lines.Lines
+        //    let totalLines = lines.Length
+        //    let rec appendLines (counter: int) (c: StringBuilder) =
+        //        if counter >= totalLines then
+        //            c
+        //        else
+        //            let line = lines[counter]
+        //            let slice = line.Slice
+        //            if isNull slice.Text then
+        //                appendLines (counter + 1) c
+        //            else
+        //                let lineText = slice.Text.Substring(slice.Start, slice.Length);
+        //                if counter > 0 then 
+        //                    appendLines (counter+1) (c.AppendLine().Append(lineText))
+        //                else
+        //                    appendLines (counter+1) (c.Append(lineText))
+        //    appendLines 0 code
+        //    |> fun x -> x.ToString()
 
         override this.Write(renderer : HtmlRenderer , cb : CodeBlock ) =
 
@@ -42,11 +42,10 @@ module NfdiCode =
                 let fcb = cb :?> FencedCodeBlock
                 let parser = cb.Parser :?> FencedCodeBlockParser
                 let languageCode = fcb.Info.Replace(parser.InfoPrefix, "").Trim()
-                let code = extractSourcecode(cb)
                 if languageCode = "" then
                     renderer
                         .Write("<nfdi-code>")
-                        .Write(code)
+                        .WriteLeafRawLines(cb, true, true, true)
                         .Write("</nfdi-code>")
                     |> ignore
                 else
@@ -57,7 +56,7 @@ module NfdiCode =
                         .Write("<nfdi-code")
                         .WriteAttributes(attributes)
                         .Write(">")
-                        .Write(code)
+                        .WriteLeafRawLines(cb, true, true, true)
                         .Write("</nfdi-code>")
                     |> ignore
                 renderer.EnsureLine() |> ignore
