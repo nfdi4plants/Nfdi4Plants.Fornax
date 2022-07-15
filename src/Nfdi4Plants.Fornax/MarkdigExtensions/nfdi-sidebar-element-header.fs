@@ -12,7 +12,7 @@ module internal Aux =
     let splitKey (line: string) =
         let seperatorIndex = line.IndexOf(':')
         if seperatorIndex > 0 then
-            let key = line.[.. seperatorIndex - 1].Trim()
+            let key = line.[.. seperatorIndex - 1].Trim().ToLower()
             let value = line.[seperatorIndex + 1 ..].Trim()
             key, Some value
         else

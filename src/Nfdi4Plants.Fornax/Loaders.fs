@@ -81,7 +81,7 @@ module Aux =
             .[1 .. str.Length - 2]
             // split by ","
             .Split(",")
-        |> Array.map (fun keyValuePair ->
+        |> Array.choose (fun keyValuePair ->
             keyValuePair
             // trim leftover whitespace
             |> trimString
@@ -100,50 +100,95 @@ module Aux =
         fileContent
         |> Array.splitAt indexOfSeperator.Value
         |> fst
-        |> Seq.choose splitKey'
-        |> Map.ofSeq
+        |> Array.choose splitKey'
 
     type Docs with
 
-        static member createFromConfig (configArr: (string * string) [], existingDocs: Docs) =
-            let title = 
-                configArr 
-                |> Array.tryFind (fun x -> fst x = "title")
-                |> Option.map snd
-                // same as "fun x -> match x with"
-                |> function | Some title -> trimString title | None -> failwith $"""Could not find "Title"-metadata."""
-            let author = 
-                configArr 
-                |> Array.tryFind (fun x -> fst x = "author")
-                |> Option.map snd
-                |> Option.map trimString
-            let published = 
-                configArr 
-                |> Array.tryFind (fun x -> fst x = "date" || fst x = "published") 
-                |> Option.map (snd >> trimString >> System.DateTime.Parse)
-            let addToc = 
-                configArr 
-                |> Array.tryFind (fun x -> fst x = "add toc") 
-                |> Option.map (snd >> trimString >> System.Boolean.Parse) 
-                |> Option.defaultValue true
-            let addSupport = 
-                configArr 
-                |> Array.tryFind (fun x -> fst x = "add support") 
-                |> Option.map (snd >> trimString >> System.Boolean.Parse) 
-                |> Option.defaultValue true
-            {
-                existingDocs with
-                    title = title
-                    authors = if author.IsSome then Author.createNameOnly author.Value |> Array.singleton else [||]
-                    published = published
-                    add_toc = addToc
-                    add_support = addSupport
-            }
+        static member private getVal (key:string) (configArr: (string * string) []) =
+            configArr
+            |> Array.tryFind (fun x -> fst x = key)
+            |> Option.map snd
+            |> function | Some title -> trimString title | None -> failwith $"""Could not find "{key}"-metadata. UP {configArr}""" 
+
+        static member private tryGetVal (key:string) (configArr: (string * string) []) =
+            configArr
+            |> Array.tryFind (fun x -> fst x = key)
+            |> Option.map snd
+            |> function | Some title -> Some <| trimString title | None -> None
+
+        static member private getTitle(configArr: (string * string) []) =
+            configArr |> Docs.getVal "title"
+
+        static member private getAuthor(configArr: (string * string) []) =
+            configArr 
+            |> Array.filter (fun x -> fst x = "author")
+            |> Array.map (
+                snd 
+                >> trimString
+                >> fun authorValue ->
+                if isJSONObject authorValue then
+                    let authorValArray = parseJSONObject authorValue
+                    let name = Docs.getVal "name" authorValArray
+                    let github = Docs.tryGetVal "github" authorValArray
+                    let orcid = Docs.tryGetVal "orcid" authorValArray
+                    Author.create name github orcid
+                else
+                    Author.createNameOnly authorValue
+            )
+
+        static member private getPublished(configArr: (string * string) []) =
+            configArr 
+            |> Docs.tryGetVal "date"
+            |> function 
+                | None -> Docs.tryGetVal "published" configArr
+                | Some date -> Some date
+            |> Option.map System.DateTime.Parse
+                
+
+        static member private getAddToc(configArr: (string * string) []) =
+            configArr 
+            |> Docs.tryGetVal "add toc"
+            |> Option.map System.Boolean.Parse
+            |> Option.defaultValue true
+
+        static member private getAddSupport(configArr: (string * string) []) =
+            configArr 
+            |> Docs.tryGetVal "add support"
+            |> Option.map System.Boolean.Parse
+            |> Option.defaultValue true
+
+        //static member createFromConfig (configArr: (string * string) [], existingDocs: Docs) =
+        //    let title = Docs.getTitle configArr
+        //    let author = Docs.getAuthor configArr
+        //    let published = Docs.getPublished configArr
+        //    let addToc = Docs.getAddToc configArr
+        //    let addSupport = Docs.getAddSupport configArr
+        //    {
+        //        existingDocs with
+        //            title = title
+        //            authors = if author.IsSome then Author.createNameOnly author.Value |> Array.singleton else [||]
+        //            published = published
+        //            add_toc = addToc
+        //            add_support = addSupport
+        //    }
 
         static member createFromConfig (configArr: (string * string) []) =
-
-            0
-
+            let title = Docs.getTitle configArr
+            let author = Docs.getAuthor configArr
+            let published = Docs.getPublished configArr
+            let addToc = Docs.getAddToc configArr
+            let addSupport = Docs.getAddSupport configArr
+            {
+                file = ""
+                link = ""
+                title = title
+                authors = author
+                published = published
+                add_toc = addToc 
+                add_support = addSupport
+                content = "" 
+                sidebar = [||] 
+            } 
 
     open System.IO
 
@@ -213,6 +258,8 @@ module Aux =
 
         Markdig.Markdown.ToHtml(content, Pipelines.markdownPipeline)  
 
+open Aux
+
 type Docs with
 
     /// <summary>Parse markdown `fileContent` to HTML with markdig and custom nfdi-webcomponent converter.</summary>
@@ -226,16 +273,19 @@ type Docs with
             let text = File.ReadAllText filePath
 
             let config = Aux.getConfig text
+            let docsFromConfig = Docs.createFromConfig config
 
-            
-           
             let addSidebar = 
                 let docsPath = Path.Combine(rootDir, contentDir)
-                config |> Map.tryFind "add sidebar" |> Option.map (Aux.trimString >> fun x -> Path.Combine(docsPath, x.Replace('\\','/')))
+                config 
+                |> Array.tryFind (fun x -> fst x = "add sidebar") 
+                |> Option.map (snd >> Aux.trimString >> fun x -> Path.Combine(docsPath, x.Replace('\\','/')))
 
-            let content = Aux.getContent text
             let sidebar = 
                 addSidebar |> Option.map (Aux.getSidebar contentDir productionBasePath) 
+
+            let content = Aux.getContent text
+
             let chopLength =
                 if rootDir.EndsWith(Path.DirectorySeparatorChar) then rootDir.Length
                 else rootDir.Length + 1
@@ -248,15 +298,13 @@ type Docs with
             let file = Path.Combine(dirPart, (filePath |> Path.GetFileNameWithoutExtension) + ".md").Replace("\\", "/")
             let link = "/" + Path.Combine(dirPart, (filePath |> Path.GetFileNameWithoutExtension) + ".html").Replace("\\", "/")
 
-            {   file = file
-                link = link
-                title = title
-                authors = if author.IsSome then Author.createNameOnly author.Value |> Array.singleton else [||]
-                published = published
-                add_toc = addToc 
-                add_support = false
-                content = content 
-                sidebar = if sidebar.IsSome then sidebar.Value else [||] }    
+            {
+                docsFromConfig with
+                    file = file
+                    link = link
+                    content = content
+                    sidebar = if sidebar.IsSome then sidebar.Value else [||]
+            } 
         with
             | e -> failwith $"""[Error in file {filePath}] {e.Message}"""
     
