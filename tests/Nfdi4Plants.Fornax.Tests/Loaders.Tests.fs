@@ -138,16 +138,7 @@ author: {name: Kevin Frey, github: https://github.com/Freymaurer, orcid: 0000-00
             let docs = Docs.createFromConfig config
             Expect.equal docs.authors [|Author.create "Kevin Frey" (Some "https://github.com/Freymaurer") (Some "0000-0002-8510-6810")|] ""
         }
-        test "config_author_jsonObj" {
-            let test_case = """---    
-title: My awesome title    
-author: {name: Kevin Frey, github: https://github.com/Freymaurer, orcid: 0000-0002-8510-6810 }
----"""
-            let config = getConfig test_case
-            let docs = Docs.createFromConfig config
-            Expect.equal docs.authors [|Author.create "Kevin Frey" (Some "https://github.com/Freymaurer") (Some "0000-0002-8510-6810")|] ""
-        }
-        test "config_authors" {
+        test "config_authors_mixed" {
             let test_case = """---    
 title: My awesome title    
 author: John Doe
@@ -161,7 +152,7 @@ author: {name: Kevin Frey, github: https://github.com/Freymaurer, orcid: 0000-00
             |]
             Expect.equal docs.authors expected ""
         }
-        test "config_authors_multiple_JSON" {
+        test "config_authors_multipleMixed" {
             let test_case = """---    
 title: My awesome title    
 author: {name: John Doe, github: https://github.com/JohnDoe, orcid: 0000-0000-0000-0000}

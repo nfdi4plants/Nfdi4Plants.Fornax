@@ -65,7 +65,7 @@ module Aux =
         Fornax.Nfdi4Plants.MarkdigExtensions.Aux.splitKey line
         |> fun (key, v) -> 
             v 
-            |> Option.map(fun v -> (key, v))
+            |> Option.map(fun v -> (key.ToLower(), v))
 
     let internal trimString (str : string) =
         str.Trim().TrimEnd('"').TrimStart('"')
