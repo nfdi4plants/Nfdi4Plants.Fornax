@@ -30,37 +30,70 @@ type SidebarElement = {
     Content: string
 }
 
-type Docs =
-    {
-        file: string
-        link : string
-        title: string
-        author: string option
-        published: System.DateTime option
-        add_toc: bool
-        sidebar: SidebarElement []
-        content: string
-    }
+type Author = {
+    Name: string
+    // url to profile
+    GitHub: string option
+    // id
+    ORCID: string option
+} with
+    static member create name github orcid = {Name = name; GitHub = github; ORCID = orcid}
 
-module internal Aux =
+    static member createNameOnly name = {Name = name; GitHub = None; ORCID = None}
+
+type Docs = {
+    file: string
+    link : string
+    title: string
+    authors: Author []
+    /// The last time the document was updated
+    published: System.DateTime option
+    /// Bool if automated nfdi-toc should be added
+    add_toc: bool
+    /// Bool if automated "Dataplant Support" block should be added
+    add_support: bool
+    sidebar: SidebarElement []
+    content: string
+} 
+
+module Aux =
     
-    let private isSeparator (input : string) =
+    let internal isSeparator (input : string) =
         input.StartsWith "---"
 
-    let private splitKey' (line: string) =
+    let internal splitKey' (line: string) =
         Fornax.Nfdi4Plants.MarkdigExtensions.Aux.splitKey line
         |> fun (key, v) -> 
             v 
             |> Option.map(fun v -> (key, v))
-        
+
     let internal trimString (str : string) =
         str.Trim().TrimEnd('"').TrimStart('"')
+        
+    let internal isJSONObject (str:string) =
+        str
+        |> trimString
+        |> fun trimmedStr -> trimmedStr.StartsWith "{" && trimmedStr.EndsWith "}"
+
+    let internal parseJSONObject (str:string) =
+        str
+            // remove "{" and "}" at start/end
+            .[1 .. str.Length - 2]
+            // split by ","
+            .Split(",")
+        |> Array.map (fun keyValuePair ->
+            keyValuePair
+            // trim leftover whitespace
+            |> trimString
+            // split keys
+            |> splitKey'
+        )
         
     // Parse over line to find area between "---". Parse input, very simple by separating by ":"
     ///`fileConfig` - Metadata at the top of an .md file
     let getConfig (fileContent : string) =
         let fileContent = fileContent.Split '\n'
-        if fileContent.[0].Trim()  <> "---" then failwith """File must start with metadata block opener "---"."""
+        if fileContent.[0].Trim() <> "---" then failwithf """File must start with metadata block opener "---", but started with "%s".""" <| fileContent.[0].Trim()
         let fileContent = fileContent |> Array.skip 1 //First line must be ---
         let indexOfSeperator = fileContent |> Array.tryFindIndex isSeparator
         if indexOfSeperator.IsNone then failwith """File does not contain closing line for metadata block "---"."""
@@ -69,6 +102,42 @@ module internal Aux =
         |> fst
         |> Seq.choose splitKey'
         |> Map.ofSeq
+
+    type Docs with
+
+        static member createFromConfig (configArr: (string * string) [], existingDocs: Docs) =
+            let title = 
+                configArr 
+                |> Array.tryFind (fun x -> fst x = "title")
+                |> Option.map snd
+                // same as "fun x -> match x with"
+                |> function | Some title -> trimString title | None -> failwith $"""Could not find "Title"-metadata."""
+            let author = 
+                configArr 
+                |> Array.tryFind (fun x -> fst x = "author")
+                |> Option.map snd
+                |> Option.map trimString
+            let published = 
+                configArr 
+                |> Array.tryFind (fun x -> fst x = "date" || fst x = "published") 
+                |> Option.map (snd >> trimString >> System.DateTime.Parse)
+            let addToc = 
+                configArr 
+                |> Array.tryFind (fun x -> fst x = "add toc") 
+                |> Option.map (snd >> trimString >> System.Boolean.Parse) 
+                |> Option.defaultValue true
+            {
+                existingDocs with
+                    title = title
+                    authors = if author.IsSome then Author.createNameOnly author.Value |> Array.singleton else [||]
+                    published = published
+                    add_toc = addToc
+            }
+
+        static member createFromConfig (configArr: (string * string) []) =
+
+            0
+
 
     open System.IO
 
@@ -152,16 +221,8 @@ type Docs with
 
             let config = Aux.getConfig text
 
-            let title = 
-                config |> Map.tryFind "title" 
-                // same as "fun x -> match x with"
-                |> function | Some title -> Aux.trimString title | None -> failwith $"""Could not find "Title"-metadata."""
-            let author = 
-                config |> Map.tryFind "author" |> Option.map Aux.trimString
-            let published = 
-                config |> Map.tryFind "published" |> Option.map (Aux.trimString >> System.DateTime.Parse)
-            let addToc = 
-                config |> Map.tryFind "add toc" |> Option.map (Aux.trimString >> System.Boolean.Parse) |> Option.defaultValue true
+            
+           
             let addSidebar = 
                 let docsPath = Path.Combine(rootDir, contentDir)
                 config |> Map.tryFind "add sidebar" |> Option.map (Aux.trimString >> fun x -> Path.Combine(docsPath, x.Replace('\\','/')))
@@ -184,10 +245,11 @@ type Docs with
             {   file = file
                 link = link
                 title = title
-                author = author
+                authors = if author.IsSome then Author.createNameOnly author.Value |> Array.singleton else [||]
                 published = published
-                content = content 
                 add_toc = addToc 
+                add_support = false
+                content = content 
                 sidebar = if sidebar.IsSome then sidebar.Value else [||] }    
         with
             | e -> failwith $"""[Error in file {filePath}] {e.Message}"""
