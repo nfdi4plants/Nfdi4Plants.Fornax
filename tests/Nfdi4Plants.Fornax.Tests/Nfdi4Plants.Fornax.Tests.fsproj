@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
@@ -15,7 +15,17 @@
     <PackageReference Include="Expecto" Version="9.*" />
     <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
+	<Reference Include="Fornax">
+		<HintPath>..\..\src\Nfdi4Plants.Fornax\_lib\Fornax.Core.dll</HintPath>
+	</Reference>
   </ItemGroup>
+    <ItemGroup>
+	    <Content Include="..\..\src\Nfdi4Plants.Fornax\_lib\Fornax.Core.dll">
+		    <Pack>true</Pack>
+		    <PackagePath>lib\$(TargetFramework)</PackagePath>
+	    </Content>
+	    <None Include="../../LICENSE" Pack="true" PackagePath=""/>
+    </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Nfdi4Plants.Fornax\Nfdi4Plants.Fornax.fsproj" />
   </ItemGroup>

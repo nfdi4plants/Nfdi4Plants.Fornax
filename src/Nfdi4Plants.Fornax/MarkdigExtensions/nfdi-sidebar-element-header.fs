@@ -5,8 +5,6 @@ open Markdig
 open Markdig.Renderers.Html
 open Markdig.Syntax
 
-open System
-
 module internal Aux =
 
     let splitKey (line: string) =

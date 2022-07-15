@@ -1,6 +1,5 @@
 namespace Fornax.Nfdi4Plants.MarkdigExtensions
 
-open System.Text
 open Markdig.Parsers;
 open Markdig.Renderers;
 open Markdig.Renderers.Html;

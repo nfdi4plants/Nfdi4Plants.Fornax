@@ -1,3 +1,14 @@
+### 0.6.0+61e662d (Released 2022-7-15)
+* Additions:
+    * latest commit #61e662d
+    * [[#affd55a](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/affd55aafd2a5df478f9da0fde1649889b36e697)] Add "date" option to yaml docs metadata (Issue #22)
+    * [[#183bb9c](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/183bb9cc64a08d34a0992f65eb11ba87c32c3f1d)] Add "add support" yml docs metadata support (Issue #23)
+    * [[#6d1e4e3](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/6d1e4e35a978ce47f5eb54471ab921f376e01139)] Add extended author yml docs metadata support (Issue #25)
+    * [[#3e3586a](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/3e3586a0c3475abbdd77906161610a3a911efb6c)] Add unit tests (Issue #25) :white_check_mark:
+* Bugfixes:
+    * [[#61e662d](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/61e662d08b13582b7567b581a0c3ef407c13e69b)] Fix issue with new implementations :heavy_check_mark:
+    * [[#d746c59](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/d746c59d80d6b45c8e9496886590141ae72ba125)] fixed & tested issue #1
+
 ### 0.5.5+ccf803d (Released 2022-7-13)
 * Additions:
     * latest commit #ccf803d

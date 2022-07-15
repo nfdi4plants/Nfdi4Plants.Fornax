@@ -190,8 +190,6 @@ module Aux =
                 sidebar = [||] 
             } 
 
-    open System.IO
-
     /// <summary>Read sidebar markdown file at `sidebarPath` to and parse it nfdi-sidebar-element's.</summary>
     /// <param name="contentDir">Name of the subfolder in which the docs files are.</param>
     /// <param name="sidebarPath">Relative path to sidebar file.</param>
