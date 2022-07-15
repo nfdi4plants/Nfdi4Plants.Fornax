@@ -126,12 +126,18 @@ module Aux =
                 |> Array.tryFind (fun x -> fst x = "add toc") 
                 |> Option.map (snd >> trimString >> System.Boolean.Parse) 
                 |> Option.defaultValue true
+            let addSupport = 
+                configArr 
+                |> Array.tryFind (fun x -> fst x = "add support") 
+                |> Option.map (snd >> trimString >> System.Boolean.Parse) 
+                |> Option.defaultValue true
             {
                 existingDocs with
                     title = title
                     authors = if author.IsSome then Author.createNameOnly author.Value |> Array.singleton else [||]
                     published = published
                     add_toc = addToc
+                    add_support = addSupport
             }
 
         static member createFromConfig (configArr: (string * string) []) =

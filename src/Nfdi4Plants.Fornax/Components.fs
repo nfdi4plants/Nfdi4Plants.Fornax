@@ -30,14 +30,15 @@ type Components = class end
             !! docs.content
 
             // support contact
-            h3 [] [!! "Dataplant Support"]
-            div [] [
-                !! "Besides these technical solutions, DataPLANT supports you with community-engaged data stewardship. For further assistance, feel free to reach out via our "
-                a [Href "https://support.nfdi4plants.org"] [!! "helpdesk"]
-                !! " or by contacting us " 
-                a [Href "javascript:location='mailto:\u0069\u006e\u0066\u006f\u0040\u006e\u0066\u0064\u0069\u0034\u0070\u006c\u0061\u006e\u0074\u0073\u002e\u006f\u0072\u0067';void 0"] [!! "directly"]
-                !! "."
-            ]
+            if docs.add_support then
+                h3 [] [!! "Dataplant Support"]
+                div [] [
+                    !! "Besides these technical solutions, DataPLANT supports you with community-engaged data stewardship. For further assistance, feel free to reach out via our "
+                    a [Href "https://support.nfdi4plants.org"] [!! "helpdesk"]
+                    !! " or by contacting us " 
+                    a [Href "javascript:location='mailto:\u0069\u006e\u0066\u006f\u0040\u006e\u0066\u0064\u0069\u0034\u0070\u006c\u0061\u006e\u0074\u0073\u002e\u006f\u0072\u0067';void 0"] [!! "directly"]
+                    !! "."
+                ]
 
             // Edit this page link
             // https://github.com/nfdi4plants/nfdi4plants.github.io/tree/main/src/
