@@ -5,6 +5,7 @@
     <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Loaders.Tests.fs" />
     <Compile Include="nfdi-code.tests.fs" />
     <Compile Include="nfdi-header.tests.fs" />
     <Compile Include="nfdi-sidebar-element-header.tests.fs" />
