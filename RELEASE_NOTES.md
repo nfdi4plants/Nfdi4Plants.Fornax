@@ -1,3 +1,9 @@
+### 0.7.1+1b6a8ce (Released 2022-9-2)
+* Additions:
+    * latest commit #1b6a8ce
+    * [[#1b6a8ce](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/1b6a8cee42e3286776e33edd9a22a21c1eec0381)] Update README.md
+    * [[#5463c1e](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/5463c1e762104a0c49fc90c6af5ea7ca489ea053)] Add docs, test and finetune :spakles:
+
 ### 0.7.0+82c70db (Released 2022-9-2)
 * Additions:
     * latest commit #82c70db

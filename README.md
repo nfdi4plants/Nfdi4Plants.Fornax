@@ -26,6 +26,10 @@ See the official [@nfdi4plants/web-components docs](https://nfdi4plants.github.i
     - In `client\loaders\_lib.fsx`.
     - 👀 It might be necessary to clear nuget cache if the version was not changed for it to update.
 5. [Test](##start-test-client) the new version.    
+6. Verify template is working correctly:
+    - `dotnet new --uninstall Nfdi4Plants.Fornax.Template`
+    - `dotnet new --install pkg\Nfdi4Plants.Fornax.Template.X.X.X.nupkg`, adjust semver accordingly.
+    - Create a new folder somewhere and do `dotnet new nfdidocs` inside. Then follow the freshly created README.md.
 
 ## update web-components
 
