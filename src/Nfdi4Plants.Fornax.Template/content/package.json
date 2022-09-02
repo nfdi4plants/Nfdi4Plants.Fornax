@@ -1,6 +1,6 @@
 {
     "name": "nfdi4plants-fornax-template",
-    "version": "0.6.0",
+    "version": "0.7.0+82c70",
     "description": "A fornax template implementing nfdi4plants web-components for documentation.",
     "repository": {
       "url": "https://github.com/Freymaurer/Nfdi4Plants.Fornax"

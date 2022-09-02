@@ -1,3 +1,10 @@
+### 0.7.0+82c70db (Released 2022-9-2)
+* Additions:
+    * latest commit #82c70db
+    * [[#82c70db](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/82c70db2230748e7c7ad90670626baae8b29f297)] Set up template
+* Bugfixes:
+    * [[#0103166](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/010316603977c958e244b160dce4ba36010caafe)] Fix test project dependencies :bug:
+
 ### 0.6.0+61e662d (Released 2022-7-15)
 * Additions:
     * latest commit #61e662d
