@@ -6,11 +6,12 @@
 		<NoBuild>true</NoBuild>
 		<TargetFramework>net5.0</TargetFramework>
 		<DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
-		<!--https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-template-package-->
+		<!-- https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-template-package -->
 		<IncludeContentInPack>true</IncludeContentInPack>
 		<IncludeBuildOutput>false</IncludeBuildOutput>
 		<ContentTargetFolders>content</ContentTargetFolders>
 		<NoWarn>$(NoWarn);NU5128</NoWarn>
+        <NoDefaultExcludes>true</NoDefaultExcludes>
 	</PropertyGroup>
 	<PropertyGroup>
 		<Title>Nfdi4Plants.Fornax.Template</Title>

@@ -15,7 +15,7 @@ open System.IO
 /// copy the fresh nuget packages to fornax test client dependency folder
 let copy_nupkg() =
     // copy the fresh nuget packages to fornax test client dependency folder
-    let files = Directory.GetFiles(pkgDir, "*.nupkg")
+    let files = Directory.GetFiles(pkgDir, "*.nupkg") |> Array.filter (fun x -> x.Contains "Nfdi4Plants.Fornax.Template" |> not)
     Trace.trace "Copy .nupkg files to test client dependency folder"
     files |> Array.iter (fun x -> 
         let fileName = Path.GetFileName(x)
