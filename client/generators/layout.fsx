@@ -109,11 +109,3 @@ let render (ctx : SiteContents) cnt =
 let docsLayout (docs: Nfdi4Plants.Docs) =
     // just an example url
     Nfdi4Plants.Components.docsLayout("https://github.com/nfdi4plants/nfdi4plants.github.io/tree/main/src/", docs)
-
-let docsMinimalLayout (docs: Nfdi4Plants.Docs) =
-    div [Class "tile is-4 is-parent"] [
-        div [Class "tile is-child box"] [
-        p [Class "title"] [ a [Href docs.link] [!! docs.title] ]
-        p [] [ !! $"""by {docs.author.Value}, {docs.published.Value.ToString("yyyy-MM-dd")}""" ]
-        ]
-    ]

@@ -4,6 +4,7 @@ open BlackFox.Fake
 open Fake.IO
 open Fake.DotNet
 open Fake.IO.Globbing.Operators
+open System.IO
 
 open ProjectInfo
 
@@ -25,6 +26,17 @@ let clean = BuildTask.create "Clean" [] {
 }
 
 let build = BuildTask.create "Build" [clean] {
-    solutionFile
-    |> DotNet.build id
+    //solutionFile
+    //|> DotNet.build
+    let srcFolder = "src"
+    let projects = 
+        Directory.GetFiles(
+            srcFolder, 
+            "*.fsproj", 
+            new EnumerationOptions() |> fun x -> x.RecurseSubdirectories <- true; x
+        )
+        // need to remove template project. Would error otherwise because of NoBuild param in .fsproj file.
+        |> Array.filter (fun x -> x.EndsWith "Nfdi4Plants.Fornax.Template.fsproj" |> not)
+    projects
+    |> Array.iter (DotNet.build id)
 }

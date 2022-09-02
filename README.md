@@ -23,7 +23,7 @@ See the official [@nfdi4plants/web-components docs](https://nfdi4plants.github.i
     - Build the library
     - Create a nuget package and copy it to the client test folder.
 4. Update nuget reference for library to new version.
-    - In `client\loaders\docsloader.fsx`.
+    - In `client\loaders\_lib.fsx`.
     - 👀 It might be necessary to clear nuget cache if the version was not changed for it to update.
 5. [Test](##start-test-client) the new version.    
 

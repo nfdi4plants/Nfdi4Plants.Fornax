@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Kevin Frey",
+    "classifications": ["DataPlant", "nfdi4plants", "Docs" ],
+    "name": "Nfdi4Plants.Fornax.Template",
+    "tags": {
+      "language": "F#",
+      "type": "project"
+    },
+    "identity": "Nfdi4Plants.Fornax.Template",
+    "shortName": "NFDIdocs",
+    "sourceName": "Nfdi4Plants.Fornax.Template",
+  }

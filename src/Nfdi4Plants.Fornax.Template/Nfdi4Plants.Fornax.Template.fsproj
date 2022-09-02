@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<PackageType>Template</PackageType>
+		<NoBuild>true</NoBuild>
+		<TargetFramework>net5.0</TargetFramework>
+		<DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+		<!--https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-template-package-->
+		<IncludeContentInPack>true</IncludeContentInPack>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<ContentTargetFolders>content</ContentTargetFolders>
+		<NoWarn>$(NoWarn);NU5128</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Title>Nfdi4Plants.Fornax.Template</Title>
+		<PackageId>Nfdi4Plants.Fornax.Template</PackageId>
+		<Authors>Kevin Frey</Authors>
+		<Description>Create Fornax template with Nfdi4Plants.Fornax.</Description>
+		<Summary>Create Fornax template with Nfdi4Plants.Fornax</Summary>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/Freymaurer/Nfdi4Plants.Fornax</PackageProjectUrl>
+		<PackageTags>"DataPlant", "nfdi4plants", "Docs"</PackageTags>
+		<RepositoryUrl>https://github.com/Freymaurer/Nfdi4Plants.Fornax</RepositoryUrl>
+	</PropertyGroup>
+	<PropertyGroup>
+		<ExcludeFromPackage>
+			../../client/_public/**/*;
+			../../client/_lib/*.nupkg;
+            ../../client/loaders/_lib.fsx
+		</ExcludeFromPackage>
+	</PropertyGroup>
+	<ItemGroup>
+		<Content Include="../../client/**/*" Exclude="$(ExcludeFromPackage)">
+            <PackagePath>Content\src</PackagePath>
+        </Content>
+		<Content Include="content/**/*">
+            <PackagePath>Content\</PackagePath>
+        </Content>
+		<Compile Remove="**\*" />
+	</ItemGroup>
+
+</Project>
