@@ -1,7 +1,7 @@
-### 0.8.0+8a7489d (Released 2022-9-26)
+### 0.8.0+704b7fb (Released 2022-9-26)
 * Additions:
-    * latest commit #8a7489d
-    * [[#14ffee7](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/14ffee71712c1186f70a99eeb14fa2483c9e22ca)] Template. Recurse search for docs through directories (Issue #2)
+    * [[#704b7fb](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/704b7fb6f39fb99bce556ae06aa5736c7acebc57)] Update build dependencies :arrow_up:
+    * [[#14ffee7](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/14ffee71712c1186f70a99eeb14fa2483c9e22ca)] Recurse search for docs through directories (Issue #2).
     * [[#172cbcb](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/172cbcbbc580d95f9c80f8c110844d53c75ad8f7)] Change some styling in template
 * Bugfixes:
     * [[#8a7489d](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/8a7489df718aed6d92533d194e9b41dc265ae4e1)] Fix formatting (Issue #3).
@@ -76,7 +76,7 @@
 ### 0.4.0+9e56047 (Released 2022-7-8)
 * Additions:
     * latest commit #9e56047
-    * [[#9e56047](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/9e56047125b584ad5fcf34487858f822a7f592bc)] Deprecate DocsData :boom: 
+    * [[#9e56047](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/9e56047125b584ad5fcf34487858f822a7f592bc)] Deprecate DocsData :boom:
     * Implement `Docs` type with optional BasePath.
 
 ### 0.3.0+e40d9be (Released 2022-7-8)
@@ -147,3 +147,4 @@
 ### 0.0.0 (Released 2022-6-13)
 * Additions:
     * Initial set up for RELEASE_Notes.md
+
