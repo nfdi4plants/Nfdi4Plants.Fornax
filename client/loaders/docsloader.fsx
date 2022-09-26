@@ -49,11 +49,11 @@ let loader (projectRoot: string) (siteContent: SiteContents) =
     docs 
     |> Array.iter sc.Add
 
-    let sc =
+    let scTest =
         siteContent.TryGetValues<Nfdi4Plants.Docs> ()
         |> Option.defaultValue Seq.empty
 
-    printfn "LOADER NEXT DOCS: %i" <| Seq.length sc
+    printfn "LOADER NEXT DOCS: %i" <| Seq.length scTest
 
-    siteContent.Add({disableLiveRefresh = false})
-    siteContent
+    sc.Add({disableLiveRefresh = false})
+    sc
