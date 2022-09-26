@@ -8,9 +8,9 @@ let createAssemblyVersion = BuildTask.create "createvfs" [] {
 }
 
 let updateReleaseNotes = BuildTask.createFn "ReleaseNotes" [] (fun config ->
-    Release.exists()
+    ReleaseNotes.ensure()
 
-    Release.update(ProjectInfo.gitOwner, ProjectInfo.project, config)
+    ReleaseNotes.update(ProjectInfo.gitOwner, ProjectInfo.project, config)
 
     let semVer = 
         Fake.Core.ReleaseNotes.load "RELEASE_NOTES.md"

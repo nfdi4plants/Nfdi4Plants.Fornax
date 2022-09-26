@@ -1,3 +1,11 @@
+### 0.8.0+8a7489d (Released 2022-9-26)
+* Additions:
+    * latest commit #8a7489d
+    * [[#14ffee7](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/14ffee71712c1186f70a99eeb14fa2483c9e22ca)] Template. Recurse search for docs through directories (Issue #2)
+    * [[#172cbcb](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/172cbcbbc580d95f9c80f8c110844d53c75ad8f7)] Change some styling in template
+* Bugfixes:
+    * [[#8a7489d](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/8a7489df718aed6d92533d194e9b41dc265ae4e1)] Fix formatting (Issue #3).
+
 ### 0.7.1+67cd4bf (Released 2022-9-2)
 * Additions:
     * latest commit #67cd4bf

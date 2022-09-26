@@ -1,9 +1,10 @@
 ﻿module ProjectInfo
 
 open Fake.Core
-open Fake.Extensions.Release
 
-Release.exists()
+
+// Create RELEASE_NOTES.md if not existing. Or "release" would throw an error.
+Fake.Extensions.Release.ReleaseNotes.ensure()
 
 let fornaxTestClientDependencies = "client/_lib"
 
