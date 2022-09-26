@@ -57,7 +57,7 @@ let layout (ctx : SiteContents) (activePageTitle: string) bodyCnt =
             style [] [
                 !! """
                     body {
-                    margin: 0px;
+                        margin: 0px;
                     }
 
                     thead tr th, strong {
@@ -65,15 +65,20 @@ let layout (ctx : SiteContents) (activePageTitle: string) bodyCnt =
                     }
 
                     a {
-                    color: var(--link-color, #4FB3D9) !important;
+                        color: var(--link-color, #4FB3D9) !important;
                     }
 
                     a:hover {
-                    color: var(--link-hover-color, #3A3A3A) !important;
+                        color: var(--link-hover-color, #3A3A3A) !important;
                     }
                     
                     thead {
-                    font-size: 1.2rem;
+                        font-size: 1rem;
+                    }
+
+                    table {
+                        display: block;
+                        overflow: scroll
                     }
 
                     nfdi-toc, nfdi-body {
