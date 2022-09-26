@@ -1,8 +1,12 @@
-### 0.7.1+1b6a8ce (Released 2022-9-2)
+### 0.7.1+67cd4bf (Released 2022-9-2)
 * Additions:
-    * latest commit #1b6a8ce
+    * latest commit #67cd4bf
+    * [[#67cd4bf](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/67cd4bf13ca9afd6d17524a3ad802b14f92f7c2b)] Update README.md
     * [[#1b6a8ce](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/1b6a8cee42e3286776e33edd9a22a21c1eec0381)] Update README.md
     * [[#5463c1e](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/5463c1e762104a0c49fc90c6af5ea7ca489ea053)] Add docs, test and finetune :spakles:
+* Deletions:
+    * [[#9ce87b8](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/9ce87b83d2591043cffdee8f0f0bcc05bd2859fc)] Remove unused files :fire:
+    * [[#1be5c45](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/1be5c4570338b23880ff229d26bf4b01d0e29f33)] Remove unused files :fire:
 
 ### 0.7.0+82c70db (Released 2022-9-2)
 * Additions:
