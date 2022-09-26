@@ -1,4 +1,4 @@
-### 0.8.0+f7b971c (Released 2022-9-26)
+### 0.8.0+6578871 (Released 2022-9-26)
 * Additions:
     * [[#704b7fb](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/704b7fb6f39fb99bce556ae06aa5736c7acebc57)] Update build dependencies :arrow_up:
     * [[#14ffee7](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/14ffee71712c1186f70a99eeb14fa2483c9e22ca)] Recurse search for docs through directories (Issue #2).
