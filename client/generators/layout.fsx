@@ -106,10 +106,11 @@ open Docsloader
 open Fornax
 
 let render (ctx : SiteContents) cnt =
-    let disableLiveRefresh = ctx.TryGetValue<DocsConfig> () |> Option.map (fun n -> n.disableLiveRefresh) |> Option.defaultValue false
     cnt
     |> HtmlElement.ToString
-    |> fun n -> if disableLiveRefresh then n else injectWebsocketCode n
+    #if WATCH
+    |> injectWebsocketCode 
+    #endif
 
 let docsLayout (docs: Nfdi4Plants.Docs) =
     // just an example url
