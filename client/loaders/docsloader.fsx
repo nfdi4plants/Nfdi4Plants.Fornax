@@ -6,6 +6,10 @@
 open System.IO
 open Fornax
 
+///<summary>This is used to append a subpath to the url to create relative urls.</summary>
+///<example>"nfdi4plants.knowledgebase", https://github.com/nfdi4plants/nfdi4plants.knowledgebase/blob/1aca2e019b7f9fff9c14c9d85caac3641f82314f/src/loaders/docsloader.fsx#L31</example>
+let productionBasePath = "placeholder"
+
 let contentDir = "docs"
 
 type DocsConfig = {
@@ -29,7 +33,7 @@ let loader (projectRoot: string) (siteContent: SiteContents) =
             #if WATCH
             Nfdi4Plants.Docs.loadFile(projectRoot, contentDir, filePath)
             #else
-            Nfdi4Plants.Docs.loadFile(projectRoot, contentDir, filePath, productionBasePath = "placeholder")
+            Nfdi4Plants.Docs.loadFile(projectRoot, contentDir, filePath, productionBasePath = productionBasePath)
             #endif
         files 
         |> Array.map loadDocs

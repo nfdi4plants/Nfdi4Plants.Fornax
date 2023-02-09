@@ -7,6 +7,10 @@
 
 open Html
 
+///<summary>This is used for the "edit this page" button</summary>
+///<example>https://github.com/nfdi4plants/nfdi4plants.knowledgebase/blob/main/src/</example>
+let baseUrl = "placeholder"
+
 let injectWebsocketCode (webpage:string) =
     let websocketScript =
         """
@@ -114,4 +118,4 @@ let render (ctx : SiteContents) cnt =
 
 let docsLayout (docs: Nfdi4Plants.Docs) =
     // just an example url
-    Nfdi4Plants.Components.docsLayout("https://github.com/nfdi4plants/nfdi4plants.github.io/tree/main/src/", docs)
+    Nfdi4Plants.Components.docsLayout(baseUrl, docs)

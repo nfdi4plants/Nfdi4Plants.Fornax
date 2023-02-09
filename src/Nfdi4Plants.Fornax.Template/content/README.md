@@ -1,6 +1,11 @@
 # Nfdi4Plants.Fornax.Template
 
-After initializing this template please run the following commands to get started:
+After initializing this template please replace two placeholder variables:
+
+1. `src/generators/layout.fsx`, replace `"placeholder"` in `let baseUrl = "placeholder"` with the correct base url. See example above.
+2. `src/loaders/docsloader.fsx`, replace `"placeholder"` in `let productionBasePath = "placeholder"` with the repository name if for example hosted on GitHub pages.
+
+Then run the following commands to get started: 
 
 1. `dotnet tool restore`, will restore local dotnet tools _fornax_ and _paket_.
 2. `dotnet paket install`, will download the Nfdi4Plants.Fornax library.
