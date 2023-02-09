@@ -1,3 +1,8 @@
+### 0.9.0+b1dfefb (Released 2023-2-9)
+* Additions:
+    * [[#b1dfefb](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/b1dfefbec46e53e05d6a0da3ea221a760dea96ac)] Update build workflow
+    * [[#0f468e2](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/0f468e216c1bc2cdbbbdc38f9017cc8e5fb9a726)] Update version
+
 ### 0.8.1+281e496 (Released 2023-2-9)
 * Additions:
     * [[#0a66086](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/0a660869e72df0b385dae9ca4bde0535c6441128)] Update template rollup command (#5)
