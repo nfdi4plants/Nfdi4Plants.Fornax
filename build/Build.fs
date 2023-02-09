@@ -26,7 +26,7 @@ let _ = watchFornax
 let _release = 
     BuildTask.createEmpty 
         "Release" 
-        [clean; build; runTests; pack; createTag; publishNuget;]
+        [clean; build; runTests; pack; createTag; ] //publishNuget;
 
 /// Full release of nuget package for the prerelease version.
 let _preRelease = 
