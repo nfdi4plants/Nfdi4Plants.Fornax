@@ -1,3 +1,10 @@
+### 0.8.1+281e496 (Released 2023-2-9)
+* Additions:
+    * [[#0a66086](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/0a660869e72df0b385dae9ca4bde0535c6441128)] Update template rollup command (#5)
+    * [[#281e496](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/281e4963e7189e47fa8ef8c11ff08e9c7e51d363)] Update template README.md
+* Bugfixes:
+    * [[#5b69edf](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/5b69edf80bf613317e9f523dc98e8274f34a9170)] fix refresh loop issue :bug: (#4)
+
 ### 0.8.0+6578871 (Released 2022-9-26)
 * Additions:
     * [[#704b7fb](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/704b7fb6f39fb99bce556ae06aa5736c7acebc57)] Update build dependencies :arrow_up:
