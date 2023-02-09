@@ -1,5 +1,6 @@
-### 0.9.0+b1dfefb (Released 2023-2-9)
+### 0.9.0+c27f6f1 (Released 2023-2-9)
 * Additions:
+    * [[#c27f6f1](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/c27f6f19415c9e35bf3d8e176c970fddefd44978)] Update to net6.0 :tada:
     * [[#b1dfefb](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/b1dfefbec46e53e05d6a0da3ea221a760dea96ac)] Update build workflow
     * [[#0f468e2](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/0f468e216c1bc2cdbbbdc38f9017cc8e5fb9a726)] Update version
 
