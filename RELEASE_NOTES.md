@@ -1,5 +1,6 @@
-### 0.10.0+fd81a2c (Released 2023-2-10)
+### 0.10.0+5a704a5 (Released 2023-2-10)
 * Additions:
+    * [[#5a704a5](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/5a704a5c5ab786aa3a6484743eafe4e6750d7d01)] Downgrade core .net dependency to net5.0
     * [[#fd81a2c](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/fd81a2c82c58c878a92333ffdc26408b2ad7f39a)] Update template dependency
 
 ### 0.9.0+c27f6f1 (Released 2023-2-9)
