@@ -1,3 +1,7 @@
+### 0.10.0+fd81a2c (Released 2023-2-10)
+* Additions:
+    * [[#fd81a2c](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/fd81a2c82c58c878a92333ffdc26408b2ad7f39a)] Update template dependency
+
 ### 0.9.0+c27f6f1 (Released 2023-2-9)
 * Additions:
     * [[#c27f6f1](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/c27f6f19415c9e35bf3d8e176c970fddefd44978)] Update to net6.0 :tada:

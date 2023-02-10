@@ -4,7 +4,7 @@
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<PackageType>Template</PackageType>
 		<NoBuild>true</NoBuild>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net5.0</TargetFramework>
 		<DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
 		<!-- https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-template-package -->
 		<IncludeContentInPack>true</IncludeContentInPack>
