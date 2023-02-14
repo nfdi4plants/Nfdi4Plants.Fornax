@@ -1,3 +1,7 @@
+### 0.11.0+cf0e048 (Released 2023-2-14)
+* Bugfixes:
+    * [[#cf0e048](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/cf0e048e31fd509e8d47386c809c980b7658ae84)] Fix dependency downgrade issues
+
 ### 0.10.0+5a704a5 (Released 2023-2-10)
 * Additions:
     * [[#5a704a5](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/5a704a5c5ab786aa3a6484743eafe4e6750d7d01)] Downgrade core .net dependency to net5.0
