@@ -1,3 +1,8 @@
+### 0.12.0+fb80a9f (Released 2023-2-14)
+* Additions:
+    * [[#fb80a9f](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/fb80a9f12d98a3c340a308202f97dfefde2c179d)] Update docs :books:
+    * [[#ffb42a6](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/ffb42a6dc84a4740c6ba62f0ff5d5d6406652421)] update template dependencies
+
 ### 0.11.0+cf0e048 (Released 2023-2-14)
 * Bugfixes:
     * [[#cf0e048](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/cf0e048e31fd509e8d47386c809c980b7658ae84)] Fix dependency downgrade issues
