@@ -34,7 +34,7 @@ See the official [@nfdi4plants/web-components docs](https://nfdi4plants.github.i
         - rebuild with package with `.\build.cmd release`
     - `dotnet new --uninstall Nfdi4Plants.Fornax.Template`
     - `dotnet new --install pkg\Nfdi4Plants.Fornax.Template.X.X.X.nupkg`, adjust semver accordingly.
-    - Create a new folder somewhere and do `dotnet new nfdidocs` inside. Then follow the freshly created README.md.
+    - Create a new folder somewhere and do `dotnet new NFDIdocs` inside. Then follow the freshly created README.md.
 
 ## update web-components
 
