@@ -1,4 +1,4 @@
-### 0.12.0+fb85070 (Released 2023-2-14)
+### 0.12.0+5c0afa7 (Released 2023-5-8)
 * Additions:
     * [[#fb85070](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/fb850707c53f259ef667e40210280f283d1935d5)] Add github workflows :sparkles:
     * [[#fb80a9f](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/fb80a9f12d98a3c340a308202f97dfefde2c179d)] Update docs :books:

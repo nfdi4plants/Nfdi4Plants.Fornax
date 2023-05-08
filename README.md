@@ -13,9 +13,6 @@ See the official [@nfdi4plants/web-components docs](https://nfdi4plants.github.i
 
 ## contribute to library
 
-- Library is located in `src`.
-- Tests can be found in `tests`.
-
 1. Make changes to library and add unit tests.
 2. Run `.\build.cmd releasenotes semver:xxx`, where `xxx` can be minor, major or patch. (This will also update the version in `package.json` inside the template project.)
 3. Run `.\build.cmd release`. This will:

@@ -1,7 +1,7 @@
 // Import rollup plugins
-import {copy} from '@web/rollup-plugin-copy';
-import resolve from '@rollup/plugin-node-resolve';
-import {terser} from 'rollup-plugin-terser';
+import { copy } from '@web/rollup-plugin-copy';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import summary from 'rollup-plugin-summary';
 
@@ -11,9 +11,9 @@ export default {
     input: 'client/js/main.js',
     plugins: [
       // Resolve bare module specifiers to relative paths
-      resolve(),
+      nodeResolve(),
       // Minify HTML template literals
-      minifyHTML(),
+      minifyHTML,
       // Minify JS
       terser({
         ecma: 2020,
@@ -21,7 +21,7 @@ export default {
         warnings: true,
       }),
       // Print bundle summary
-      summary(),
+      summary,
       // Optional: copy any static assets to build directory
       copy({
         patterns: ['images/**/*'],
@@ -29,7 +29,8 @@ export default {
     ],
     output: {
         file: 'client/js/bundle.js',
-        format: 'cjs'
+        format: 'cjs',
+        inlineDynamicImports: true
     },
     preserveEntrySignatures: 'strict',
 };

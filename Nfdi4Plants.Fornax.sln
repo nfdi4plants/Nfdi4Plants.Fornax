@@ -11,6 +11,7 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "build", "build\build.fsproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{698B3036-4F3E-451C-AEFA-6BE8117B322E}"
 	ProjectSection(SolutionItems) = preProject
+		package.json = package.json
 		README.md = README.md
 		RELEASE_NOTES.md = RELEASE_NOTES.md
 		rollup.config.js = rollup.config.js

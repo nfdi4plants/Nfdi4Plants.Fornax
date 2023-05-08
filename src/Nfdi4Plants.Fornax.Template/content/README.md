@@ -22,7 +22,7 @@ Check out the docs for usage [here](https://nfdi4plants.github.io/web-components
 _Might need to install rollup globally before._
 
 1. `npm install @nfdi4plants/web-components@latest`
-2. `rollup --config rollup.config.js --bundleConfigAsCjs`
+2. `npm run bundle`
 
 ## Update Nfdi4Plants.Fornax
 
