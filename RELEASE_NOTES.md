@@ -1,3 +1,7 @@
+### 0.13.0+e490d2a (Released 2023-5-8)
+* Bugfixes:
+    * [[#e490d2a](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/e490d2afa1ad1d770ffa3f60ec442db3e69fc1e5)] Fix rollup issues with new mermaid support :bug:
+
 ### 0.12.0+5c0afa7 (Released 2023-5-8)
 * Additions:
     * [[#fb85070](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/fb850707c53f259ef667e40210280f283d1935d5)] Add github workflows :sparkles:

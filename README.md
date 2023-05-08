@@ -2,6 +2,9 @@
 
 This fornax template implements the existing [nfdi-web-components](https://github.com/nfdi4plants/web-components) for **documentation**.
 
+![Nfdi4Plants.Fornax.Template NuGet downloads](https://img.shields.io/nuget/dt/Nfdi4Plants.Fornax.Template?label=Nfdi4Plants.Fornax.Template%20downloads&style=flat-square)
+![Nfdi4Plants.Fornax NuGet downloads](https://img.shields.io/nuget/dt/Nfdi4Plants.Fornax?label=Nfdi4Plants.Fornax%20downloads&style=flat-square)
+
 ## install & usage
 
 See the official [@nfdi4plants/web-components docs](https://nfdi4plants.github.io/web-components-docs/docs/SupportedStaticSiteGenerators#Fornax.html) for fornax support.
