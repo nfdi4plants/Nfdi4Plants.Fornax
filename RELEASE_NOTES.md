@@ -1,3 +1,11 @@
+### 1.0.0+3a35af7 (Released 2023-5-16)
+* Additions:
+    * [[#3a35af7](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/3a35af7aeddf772a1913c8f9439b68755993d278)] Add searchbar and new sidebar support #7 #8
+    * [[#a1dff67](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/a1dff67cedbefdf4378882caa07f0dad91894d94)] Implement sidebar-eleneo parsing :sparkles:
+    * [[#63eae69](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/63eae6978926ff52281191bc0d5c352e0e816182)] new release :sparkles:
+* Bugfixes:
+    * [[#335b961](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/335b96101ed30d230ff536077ebe6219787eaf3b)] Fix test task :bug:
+
 ### 0.13.0+e490d2a (Released 2023-5-8)
 * Bugfixes:
     * [[#e490d2a](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/e490d2afa1ad1d770ffa3f60ec442db3e69fc1e5)] Fix rollup issues with new mermaid support :bug:
