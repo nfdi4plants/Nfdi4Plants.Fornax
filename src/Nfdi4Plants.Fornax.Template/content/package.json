@@ -7,7 +7,9 @@
       "url": "https://github.com/Freymaurer/Nfdi4Plants.Fornax"
     },
     "scripts": {
-        "bundle": "rollup --config rollup.config.js"
+      "bundle": "rollup --config rollup.config.js",
+      "index": "npx -y pagefind --source ./src/_public",
+      "indexserve": "npx -y pagefind --source ./src/_public --serve"
     },
     "author": "",
     "license": "ISC",
