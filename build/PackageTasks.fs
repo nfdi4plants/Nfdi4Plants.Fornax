@@ -56,7 +56,7 @@ let pack = BuildTask.create "Pack" [clean; build; runTests] {
 }
 
 let packPrerelease = BuildTask.create "PackPrerelease" [setPrereleaseTag; clean; build; runTests] {
-    if promptYesNo (sprintf "package tag will be %s OK?" prereleaseTag )
+    if promptYesNo (sprintf "Creating stable package with version %s OK?" prereleaseTag )
         then 
             !! "src/**/*.*proj"
             -- "src/bin/*"

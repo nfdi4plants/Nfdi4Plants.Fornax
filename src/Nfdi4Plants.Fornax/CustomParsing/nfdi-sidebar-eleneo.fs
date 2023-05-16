@@ -30,6 +30,11 @@ module SidebarEleneo =
                 Children = Option.defaultValue [] children
             } 
 
+        let filterNonHashContent (contentArr: string []) =
+            contentArr 
+            |> Array.filter (fun x -> x.StartsWith "#")
+            |> Array.map (fun x -> x.Trim())
+
         let inline splitSeq (array: seq<'T>) (predicate: 'T -> bool) =
             array
             |> Seq.fold (fun (current, result) ele -> 
@@ -55,10 +60,8 @@ module SidebarEleneo =
                 |> List.map (fun sublist ->
                     match sublist with
                     | head::[] ->
-                        // printfn "[INDEX %i] Hit no child" index
                         SidebarEleneo.create(head.Content)    
                     | head::tail ->
-                        // printfn "[INDEX %i] %A" index (List.map (fun x -> x.Content) tail)
                         let children = sort tail
                         SidebarEleneo.create(head.Content, children)
                     | [] -> failwith "Should never return empty list."
@@ -70,14 +73,21 @@ module SidebarEleneo =
 
         open Html
 
-        let rec sidebarEleneoToHtml (isRoot:bool) (ele:SidebarEleneo) =
+        let rec sidebarEleneoToHtml (productionBasePath: string option) (isRoot:bool) (ele:SidebarEleneo) =
             let linkInfo = ele.mainToLink
+            let href = 
+                match productionBasePath, linkInfo.href with
+                | Some baseUrl, s when s.StartsWith("/") ->
+                    "/" + baseUrl.Trim([|'/'|]) + "/" + s.Trim([|'/'|])
+                | Some baseUrl, s when s.StartsWith("./") ->
+                    "./" + baseUrl.Trim([|'/'|]) + "/" + s.Trim([|'/'; '.'|])
+                | _, s -> s
             let hasChildren = List.isEmpty ele.Children |> not
             // not root and no children
             let link = 
                 a [
                     if ((not hasChildren) && (not isRoot)) then HtmlProperties.Custom ("slot", "child")
-                    Href linkInfo.href
+                    Href href
                 ] [
                     !!linkInfo.innerHtml
                 ]
@@ -87,16 +97,18 @@ module SidebarEleneo =
                     if isRoot then HtmlProperties.Custom ("slot", "sidebar") else HtmlProperties.Custom ("slot", "child")
                 ] [
                     link
-                    yield! ele.Children |> List.map (fun x -> sidebarEleneoToHtml false x)
+                    yield! ele.Children |> List.map (fun x -> sidebarEleneoToHtml productionBasePath false x)
                 ]
             else
                 link
 
     let read (content: string []) =
+        if Array.isEmpty content then failwith "Could not find any content for sidebar"
         content
+        |> HelperRead.filterNonHashContent
         |> HelperRead.sortMarkdown
 
-    let write (isRoot:bool) (ele:SidebarEleneo) =
-        HelperWrite.sidebarEleneoToHtml isRoot ele
+    let write (productionBasePath: string option) (isRoot:bool) (ele:SidebarEleneo) =
+        HelperWrite.sidebarEleneoToHtml productionBasePath isRoot ele
 
 

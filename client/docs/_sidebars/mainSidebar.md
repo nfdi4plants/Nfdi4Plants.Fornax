@@ -1,5 +1,5 @@
 ---
-published: 2022-05-09
+published: 2023-05-16
 Article Status: Publishable
 To-Dos: 
     - Update links to other KB articles
@@ -15,11 +15,4 @@ To-Dos:
 ### [Sharing and curation](/docs/metadata.html#sharing-and-curation)
 ## [How does DataPLANT support me in metadata annotation](/docs/metadata.html#how-does-dataplant-support-me-in-metadata-annotation)
 ## [DataPLANT Support](/docs/metadata.html#dataplant-support)
-# [Test 1](/path/any)
-# [Test 1](/path/any)
-## [Test 2](/path/any)
-## [Test 2](/path/any)
-## [Test 2](/path/any)
-### [Test 3](/path/any)
-#### [Test 4](/path/any)
-##### [Test 5](/path/any)
+# [Code Examples](/docs/CodeExamples.html)

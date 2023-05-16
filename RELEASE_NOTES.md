@@ -1,3 +1,5 @@
+### 1.0.1+8b7e242 (Released 2023-5-16)
+
 ### 1.0.0+3a35af7 (Released 2023-5-16)
 * Additions:
     * [[#3a35af7](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/3a35af7aeddf772a1913c8f9439b68755993d278)] Add searchbar and new sidebar support #7 #8

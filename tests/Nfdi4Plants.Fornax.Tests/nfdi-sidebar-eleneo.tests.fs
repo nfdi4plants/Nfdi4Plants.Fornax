@@ -131,7 +131,7 @@ let main =
                     SidebarEleneo.create("## [Test 2.2](/path/any)")
                 ])
             |]
-            let readIn = sidebarEle |> Array.map (write true)
+            let readIn = sidebarEle |> Array.map (write None true)
             test "toString-first" {
                 let actual_first = readIn.[0] |> HtmlElement.ToString
                 let expected_first = $"""<nfdi-sidebar-eleneo slot="sidebar">

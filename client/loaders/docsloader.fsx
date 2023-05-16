@@ -30,12 +30,39 @@ let loader (projectRoot: string) (siteContent: SiteContents) =
     let docs = 
         let loadDocs (filePath:string) = 
             #if WATCH
-            Nfdi4Plants.Docs.loadFile(projectRoot, contentDir, filePath)
+            Nfdi4Plants.Docs.loadFile(projectRoot, contentDir, filePath, includeSearchbar = true, useNewSidebar = true)
             #else
-            Nfdi4Plants.Docs.loadFile(projectRoot, contentDir, filePath, productionBasePath = productionBasePath)
+            Nfdi4Plants.Docs.loadFile(projectRoot, contentDir, filePath, includeSearchbar = true, useNewSidebar = true, productionBasePath = productionBasePath)
             #endif
         files 
         |> Array.map loadDocs
+
+    docs
+    |> Array.iter(fun doc ->
+        doc.sidebar.Length |> printfn "[Count %s] %A" doc.title
+    )
+
+    // let test =
+    //     let getSidebar (contentDir: string) (productionBasePath: string option) (sidebarPath: string) =
+    //         let isSeparator (input : string) = input.StartsWith "---"
+    //         let fileContent = 
+    //             let docsPath = Path.Combine(contentDir, sidebarPath)
+    //             File.ReadAllLines(docsPath) 
+    //             |> Array.skip 1 //First line must be ---
+    //         let indexOfSeperator = fileContent |> Array.findIndex isSeparator
+    //         let content = 
+    //             fileContent 
+    //             |> Array.splitAt indexOfSeperator 
+    //             |> snd 
+    //             |> Array.skip 1 // starts with ---
+    //             |> Array.filter(fun x -> x <> "")
+    //         content 
+    //         |> Array.iteri (fun i x -> printfn "[%i] %A" i x)
+    //         let sidebar =
+    //             Fornax.Nfdi4Plants.CustomParsing.SidebarEleneo.read content
+    //             |> List.map (Fornax.Nfdi4Plants.CustomParsing.SidebarEleneo.write true)
+    //         sidebar.Length |> printfn "[Count Sidebar] %A"
+    //     getSidebar contentDir None @"_sidebars\mainSidebar.md"
 
     let doc =
         siteContent.TryGetValues<Nfdi4Plants.Docs> ()
@@ -43,9 +70,6 @@ let loader (projectRoot: string) (siteContent: SiteContents) =
 
     printfn "LOADER CURRENT DOCS: %i" <| Seq.length doc
     printfn "LOADER ADDING DOCS: %i" <| Seq.length docs
-
-    // Alternative
-    // let sc = new SiteContents()
 
     let sc = new SiteContents()
 

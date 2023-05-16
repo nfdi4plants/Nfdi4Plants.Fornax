@@ -18,16 +18,12 @@ let createTag = BuildTask.create "CreateTag" [clean; build; runTests; pack] {
     if promptYesNo (sprintf "tagging branch with %s OK?" stableVersionTag ) then
         Git.Branches.tag "" stableVersionTag
         Git.Branches.pushTag "" projectRepo stableVersionTag
-    else
-        failwith "aborted"
 }
 
 let createPrereleaseTag = BuildTask.create "CreatePrereleaseTag" [setPrereleaseTag; clean; build; runTests; packPrerelease] {
     if promptYesNo (sprintf "tagging branch with %s OK?" prereleaseTag ) then 
         Git.Branches.tag "" prereleaseTag
         Git.Branches.pushTag "" projectRepo prereleaseTag
-    else
-        failwith "aborted"
 }
 
 

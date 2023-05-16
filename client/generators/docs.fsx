@@ -10,7 +10,7 @@ let generate' (ctx : SiteContents) (page: string) =
         ctx.TryGetValues<Nfdi4Plants.Docs> ()
         |> Option.defaultValue Seq.empty
         |> Seq.findBack (fun n -> n.file = page)
-
+        
     Layout.layout ctx doc.title [
         Layout.docsLayout doc
     ]

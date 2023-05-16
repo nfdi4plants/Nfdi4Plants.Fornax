@@ -167,10 +167,10 @@ module Aux =
     /// <param name="contentDir">Name of the subfolder in which the docs files are.</param>
     /// <param name="sidebarPath">Relative path to sidebar file.</param>
     /// <returns>Array of all sidebar elements processed to html and metadata.</returns>
-    let getSidebar (contentDir: string) (productionBasePath: string option) (useOldSidebar:bool) (sidebarPath: string) =
+    let getSidebar (contentDir: string) (productionBasePath: string option) (useNewSidebar:bool) (sidebarPath: string) =
         let fileContent = 
             let docsPath = Path.Combine(contentDir, sidebarPath)
-            File.ReadAllLines(docsPath) 
+            File.ReadAllLines(docsPath)
             |> Array.skip 1 //First line must be ---
         let indexOfSeperator = fileContent |> Array.findIndex isSeparator
         let content = 
@@ -178,13 +178,14 @@ module Aux =
             |> Array.splitAt indexOfSeperator 
             |> snd 
             |> Array.skip 1 // starts with ---
+            |> Array.filter(fun x -> x <> "")
         let sidebar =
-            if useOldSidebar then 
+            if useNewSidebar then 
+                Fornax.Nfdi4Plants.CustomParsing.SidebarEleneo.read content
+                |> List.map (Fornax.Nfdi4Plants.CustomParsing.SidebarEleneo.write productionBasePath true)
+            else
                 Fornax.Nfdi4Plants.CustomParsing.SidebarElement.read productionBasePath content
                 |> Fornax.Nfdi4Plants.CustomParsing.SidebarElement.write
-            else
-                Fornax.Nfdi4Plants.CustomParsing.SidebarEleneo.read content
-                |> List.map (Fornax.Nfdi4Plants.CustomParsing.SidebarEleneo.write true)
         sidebar
 
     /// <summary>Parse markdown `fileContent` to HTML with markdig and custom nfdi-webcomponent converter.</summary>
@@ -213,11 +214,11 @@ type Docs with
     /// <param name="filePath">Relative path to specific `.md` file.</param>
     /// <param name="productionBasePath">This path can be used if the base path in production is not `/`. This happens in some gh-pages projects.</param>
     /// <returns>Returns html as string.</returns>
-    static member loadFile(rootDir: string, contentDir: string, filePath: string, ?productionBasePath, ?includeSearchbar:bool, ?useOldSidebar: bool) : Docs =
+    static member loadFile(rootDir: string, contentDir: string, filePath: string, ?productionBasePath, ?includeSearchbar:bool, ?useNewSidebar: bool) : Docs =
         try 
             let text = File.ReadAllText filePath
             let includeSearchbar = Option.defaultValue false includeSearchbar
-            let useOldSidebar = Option.defaultValue false useOldSidebar
+            let useNewSidebar = Option.defaultValue false useNewSidebar
             let config = Aux.getConfig text
             let docsFromConfig = Docs.createFromConfig config
 
@@ -228,7 +229,7 @@ type Docs with
                 |> Option.map (snd >> Aux.trimString >> fun x -> Path.Combine(docsPath, x.Replace('\\','/')))
 
             let sidebar = 
-                addSidebar |> Option.map (Aux.getSidebar contentDir productionBasePath useOldSidebar) 
+                addSidebar |> Option.map (Aux.getSidebar contentDir productionBasePath useNewSidebar) 
 
             let searchbar =
                 if includeSearchbar then SubComponents.PagefindSearchbar.create(?productionBasePath=productionBasePath) |> Some else None
@@ -256,5 +257,5 @@ type Docs with
                     searchbar = searchbar
             } 
         with
-            | e -> failwith $"""[Error in file {filePath}] {e.Message}"""
+            | e -> failwith $"""[Error in file {filePath}] {e.Message}, {e.Source}, {e.InnerException}"""
     
