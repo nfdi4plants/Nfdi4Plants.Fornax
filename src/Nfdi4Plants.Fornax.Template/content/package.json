@@ -1,6 +1,6 @@
 {
     "name": "nfdi4plants-fornax-template",
-    "version": "1.0.2+24106b3",
+    "version": "1.0.2+363462c",
     "description": "A fornax template implementing nfdi4plants web-components for documentation.",
     "type": "module",
     "repository": {

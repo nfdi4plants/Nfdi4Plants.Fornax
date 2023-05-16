@@ -1,4 +1,6 @@
-### 1.0.2+24106b3 (Released 2023-5-17)
+### 1.0.2+363462c (Released 2023-5-17)
+* Additions:
+    * [[#363462c](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/363462ca1d0f574e5916b7003978b026dee9e46c)] Update template dependencies
 
 ### 1.0.1+1c064d7 (Released 2023-5-16)
 * Additions:
