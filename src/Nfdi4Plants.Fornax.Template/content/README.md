@@ -28,6 +28,20 @@ _Might need to install rollup globally before._
 
 `dotnet paket update Nfdi4Plants.Fornax`
 
+## Update Searchbar
+
+We use [Pagefinder](https://pagefind.app/docs/) as basis for static website search.
+It generates the `src/_public/_pagefind` folder, containing css and js to power the searchbar.
+
+If the searchbar is not visible (should be above sidebar) you need to rerun pagefind.
+
+**Run**: `npm run index` 
+
+This will create the necessary files. But *at the moment* will not correctly work when [Using the testclient](##start-test-client). 
+It will show the ui part but will not function.
+
+To test the searchfunction you can use: `npm run indexserve`.
+
 ## Schedule automatic updates for gh-pages
 
 See [here](https://nfdi4plants.github.io/web-components-docs/docs/ScheduledUpdates.html).

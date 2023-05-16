@@ -44,3 +44,19 @@ Check out the installation docs on [nfdi4plants/web-components](https://github.c
 
 1. Run `.\build.cmd fornax` in root folder.
 2. Open page [http://127.0.0.1:8080](http://127.0.0.1:8080) in browser.
+
+## Update Searchbar
+
+We use [Pagefinder](https://pagefind.app/docs/) as basis for static website search.
+It generates the `client/_public/_pagefind` folder, containing css and js to power the searchbar.
+
+If the searchbar is not visible (should be above sidebar) you need to rerun pagefind.
+
+**Run**: `npx -y pagefind --source .\client\_public\` 
+
+This will create the necessary files. But *at the moment* will not correctly work when [Using the testclient](##start-test-client). 
+It will show the ui part but will not function.
+
+To test the searchfunction you can use: `npx -y pagefind --source .\client\_public\ --serve`.
+
+
