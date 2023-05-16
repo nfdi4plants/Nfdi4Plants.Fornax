@@ -1,4 +1,10 @@
-### 1.0.1+8b7e242 (Released 2023-5-16)
+### 1.0.1+1c064d7 (Released 2023-5-16)
+* Additions:
+    * [[#1c064d7](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/1c064d7ce66f037bfab57d00d5d786b7e444dd7b)] Update deploy
+    * [[#800847e](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/800847ea6f8f971189309668d4b8e11e284b4c74)] Update README for pagefinder :books:
+    * [[#ddc3754](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/ddc37544b9da607b2badfa4f88b13ab8db770dcc)] Test pagefinder
+* Bugfixes:
+    * [[#4fe5a51](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/4fe5a5118e93a76b12366ce81bea0423928c9530)] Fix reading issue :bug:
 
 ### 1.0.0+3a35af7 (Released 2023-5-16)
 * Additions:
