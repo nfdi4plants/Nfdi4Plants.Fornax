@@ -1,3 +1,5 @@
+### 1.0.2+24106b3 (Released 2023-5-17)
+
 ### 1.0.1+1c064d7 (Released 2023-5-16)
 * Additions:
     * [[#1c064d7](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/1c064d7ce66f037bfab57d00d5d786b7e444dd7b)] Update deploy
