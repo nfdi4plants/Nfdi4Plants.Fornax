@@ -13,5 +13,6 @@ let allTests = testList "Main" [
     nfdi_sidebar_eleneo.main
 ]
 
+[<EntryPoint>]
 let main argv =
     runTestsWithCLIArgs [] [||] allTests
