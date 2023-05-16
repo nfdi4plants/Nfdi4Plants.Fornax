@@ -28,6 +28,8 @@ for f in *.md; do pandoc -s -o "${f%.md}.docx" "$f"; done
 
 This file is used to test sidebar in-page navigation. All links are possibly not working.
 
+<kbd>Test</kbd>
+
 ## What is metadata?
 
 Metadata is "data that provides information about other data"[^1][Merriam]. In order to put some (plant) life into this web dictionary explanation, let us explore metadata with a plant biology example:

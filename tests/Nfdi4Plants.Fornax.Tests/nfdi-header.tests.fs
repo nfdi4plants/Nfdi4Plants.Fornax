@@ -13,7 +13,6 @@ let pipeline =
         .UseNFDIHeader()
         .Build()
 
-[<Tests>]
 let tests = 
     testList "UseNFDIHeader" [
         test "basic case" {

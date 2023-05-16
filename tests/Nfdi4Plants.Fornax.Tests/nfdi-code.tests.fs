@@ -13,7 +13,6 @@ let pipeline =
         .UseNFDICodeBlock()
         .Build()
 
-[<Tests>]
 let tests = 
     testList "UseNFDICodeBlock" [
         test "basic case" {

@@ -18,6 +18,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CustomParsing\nfdi-sidebar-eleneo.fs" />
     <Compile Include="MarkdigExtensions/nfdi-code.fs" />
     <Compile Include="MarkdigExtensions/nfdi-header.fs" />
     <Compile Include="MarkdigExtensions/nfdi-sidebar-element-header.fs" />
@@ -38,6 +39,6 @@
       <Pack>true</Pack>
       <PackagePath>lib\$(TargetFramework)</PackagePath>
     </Content>
-    <None Include="../../LICENSE" Pack="true" PackagePath=""/>
+    <None Include="../../LICENSE" Pack="true" PackagePath="" />
   </ItemGroup>
 </Project>

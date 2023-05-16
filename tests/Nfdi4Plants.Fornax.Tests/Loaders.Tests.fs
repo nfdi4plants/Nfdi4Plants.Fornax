@@ -5,7 +5,6 @@ open Fornax.Nfdi4Plants
 
 open Aux
 
-[<Tests>]
 let getConfigTests = 
     testList "getConfig" [
         // Test whitespace after first separator

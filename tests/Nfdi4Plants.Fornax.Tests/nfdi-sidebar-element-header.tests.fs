@@ -17,7 +17,6 @@ let basePathPipeline =
         .UseSidebarHeader("TestURL")
         .Build()        
 
-[<Tests>]
 let tests = 
     testList "UseSidebarHeader" [
         test "basic case" {

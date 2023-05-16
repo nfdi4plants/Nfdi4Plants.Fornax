@@ -1,16 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-    <GenerateProgramFile>false</GenerateProgramFile>
+    <TargetFramework>net6.0</TargetFramework>
+    <!--<GenerateProgramFile>false</GenerateProgramFile>-->
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Loaders.Tests.fs" />
-    <Compile Include="nfdi-code.tests.fs" />
-    <Compile Include="nfdi-header.tests.fs" />
-    <Compile Include="nfdi-sidebar-element-header.tests.fs" />
-    <Compile Include="main.fs" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <PackageReference Include="Expecto" Version="9.*" />
     <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.*" />
@@ -24,7 +18,13 @@
 		    <Pack>true</Pack>
 		    <PackagePath>lib\$(TargetFramework)</PackagePath>
 	    </Content>
-	    <None Include="../../LICENSE" Pack="true" PackagePath=""/>
+	    <None Include="../../LICENSE" Pack="true" PackagePath="" />
+	    <Compile Include="nfdi-sidebar-eleneo.tests.fs" />
+	    <Compile Include="Loaders.Tests.fs" />
+	    <Compile Include="nfdi-code.tests.fs" />
+	    <Compile Include="nfdi-header.tests.fs" />
+	    <Compile Include="nfdi-sidebar-element-header.tests.fs" />
+	    <Compile Include="main.fs" />
     </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Nfdi4Plants.Fornax\Nfdi4Plants.Fornax.fsproj" />
