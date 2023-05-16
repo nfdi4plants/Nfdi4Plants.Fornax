@@ -112,9 +112,9 @@ open Fornax
 let render (ctx : SiteContents) cnt =
     cnt
     |> HtmlElement.ToString
-    #if WATCH
-    |> injectWebsocketCode 
-    #endif
+    // #if WATCH
+    // |> injectWebsocketCode 
+    // #endif
 
 let docsLayout (docs: Nfdi4Plants.Docs) =
     // just an example url
