@@ -18,15 +18,18 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CustomParsing\nfdi-sidebar-eleneo.fs" />
     <Compile Include="MarkdigExtensions/nfdi-code.fs" />
     <Compile Include="MarkdigExtensions/nfdi-header.fs" />
     <Compile Include="MarkdigExtensions/nfdi-sidebar-element-header.fs" />
+    <Compile Include="MarkdigExtensions\Pipelines.fs" />
+    <Compile Include="CustomParsing\nfdi-sidebar-eleneo.fs" />
+    <Compile Include="CustomParsing\nfdi-sidebar-element.fs" />
+    <Compile Include="SubComponents\PagefindSearchbar.fs" />
     <Compile Include="Loaders.fs" />
     <Compile Include="Components.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="5.0.2" />
+    <PackageReference Update="FSharp.Core" Version="[6.0.7]" />
     <PackageReference Include="Markdig" Version="0.30.2" />
   </ItemGroup>
   <ItemGroup>

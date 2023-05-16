@@ -1,35 +1,6 @@
 namespace Fornax.Nfdi4Plants
 open System.IO
 
-module Pipelines =
-    open Markdig
-    open Fornax.Nfdi4Plants.MarkdigExtensions.NfdiCode
-    open Fornax.Nfdi4Plants.MarkdigExtensions.NfdiHeader
-    open Fornax.Nfdi4Plants.MarkdigExtensions.NfdiSidebarElementHeader
-
-    let markdownPipeline =
-        MarkdownPipelineBuilder()
-            .UseAdvancedExtensions()
-            .UseEmojiAndSmiley()
-            .UseNFDIHeader()
-            .UseNFDICodeBlock()
-            .Build()
-
-    let sidebarMarkdownPipeline(productionBasePath: string option) =
-        if productionBasePath.IsSome then
-            MarkdownPipelineBuilder()
-                .UseSidebarHeader(productionBasePath.Value)
-                .Build()
-        else
-            MarkdownPipelineBuilder()
-                .UseSidebarHeader()
-                .Build()
-
-type SidebarElement = {
-    Title: string
-    Content: string
-}
-
 type Author = {
     Name: string
     // url to profile
@@ -52,7 +23,8 @@ type Docs = {
     add_toc: bool
     /// Bool if automated "Dataplant Support" block should be added
     add_support: bool
-    sidebar: SidebarElement []
+    sidebar: HtmlElement list
+    searchbar: HtmlElement option
     content: string
 } 
 
@@ -187,14 +159,15 @@ module Aux =
                 add_toc = addToc 
                 add_support = addSupport
                 content = "" 
-                sidebar = [||] 
+                sidebar = []
+                searchbar = None
             } 
 
     /// <summary>Read sidebar markdown file at `sidebarPath` to and parse it nfdi-sidebar-element's.</summary>
     /// <param name="contentDir">Name of the subfolder in which the docs files are.</param>
     /// <param name="sidebarPath">Relative path to sidebar file.</param>
     /// <returns>Array of all sidebar elements processed to html and metadata.</returns>
-    let getSidebar (contentDir: string) (productionBasePath: string option) (sidebarPath: string) =
+    let getSidebar (contentDir: string) (productionBasePath: string option) (useOldSidebar:bool) (sidebarPath: string) =
         let fileContent = 
             let docsPath = Path.Combine(contentDir, sidebarPath)
             File.ReadAllLines(docsPath) 
@@ -206,38 +179,12 @@ module Aux =
             |> snd 
             |> Array.skip 1 // starts with ---
         let sidebar =
-            content 
-            |> List.ofArray 
-            |> List.fold (fun acc line -> 
-                // opens new sidebar element with title
-                // ` = '\096'
-                if line.Trim() = "```" then 
-                    acc
-                elif line.StartsWith "```" then
-                    // get sidebar element title
-                    let title = line.Replace("`", "").Trim()
-                    // add to list collection with empty list.
-                    // empty list will be used to add all related lines
-                    (title, List.empty)::acc
-                elif line.Trim() <> "" then
-                    // match with list collection to check if it is empty (should not be empty, this is error prediction)
-                    match acc with
-                    // if has element, add line to sidebar element
-                    | h::t -> (fst h, line::snd h)::t
-                    // if is empty add sidebar placeholder
-                    | [] -> ("Sidebar", line::[])::acc
-                else 
-                    acc
-            ) []
-            |> List.map (fun (title, lines) ->
-                let c = lines |> List.rev |> String.concat "\n"
-                {
-                    Title = title
-                    Content = Markdig.Markdown.ToHtml(c, Pipelines.sidebarMarkdownPipeline(productionBasePath))
-                }
-            )
-            |> List.rev
-            |> Array.ofList
+            if useOldSidebar then 
+                Fornax.Nfdi4Plants.CustomParsing.SidebarElement.read productionBasePath content
+                |> Fornax.Nfdi4Plants.CustomParsing.SidebarElement.write
+            else
+                Fornax.Nfdi4Plants.CustomParsing.SidebarEleneo.read content
+                |> List.map (Fornax.Nfdi4Plants.CustomParsing.SidebarEleneo.write true)
         sidebar
 
     /// <summary>Parse markdown `fileContent` to HTML with markdig and custom nfdi-webcomponent converter.</summary>
@@ -254,7 +201,7 @@ module Aux =
             |> Array.skip 1 // starts with ---
             |> String.concat "\n"
 
-        Markdig.Markdown.ToHtml(content, Pipelines.markdownPipeline)  
+        Markdig.Markdown.ToHtml(content, MarkdigExtensions.Pipelines.markdownPipeline)  
 
 open Aux
 
@@ -266,10 +213,11 @@ type Docs with
     /// <param name="filePath">Relative path to specific `.md` file.</param>
     /// <param name="productionBasePath">This path can be used if the base path in production is not `/`. This happens in some gh-pages projects.</param>
     /// <returns>Returns html as string.</returns>
-    static member loadFile(rootDir: string, contentDir: string, filePath: string, ?productionBasePath) : Docs =
+    static member loadFile(rootDir: string, contentDir: string, filePath: string, ?productionBasePath, ?includeSearchbar:bool, ?useOldSidebar: bool) : Docs =
         try 
             let text = File.ReadAllText filePath
-
+            let includeSearchbar = Option.defaultValue false includeSearchbar
+            let useOldSidebar = Option.defaultValue false useOldSidebar
             let config = Aux.getConfig text
             let docsFromConfig = Docs.createFromConfig config
 
@@ -280,7 +228,10 @@ type Docs with
                 |> Option.map (snd >> Aux.trimString >> fun x -> Path.Combine(docsPath, x.Replace('\\','/')))
 
             let sidebar = 
-                addSidebar |> Option.map (Aux.getSidebar contentDir productionBasePath) 
+                addSidebar |> Option.map (Aux.getSidebar contentDir productionBasePath useOldSidebar) 
+
+            let searchbar =
+                if includeSearchbar then SubComponents.PagefindSearchbar.create(?productionBasePath=productionBasePath) |> Some else None
 
             let content = Aux.getContent text
 
@@ -301,7 +252,8 @@ type Docs with
                     file = file
                     link = link
                     content = content
-                    sidebar = if sidebar.IsSome then sidebar.Value else [||]
+                    sidebar = if sidebar.IsSome then sidebar.Value else []
+                    searchbar = searchbar
             } 
         with
             | e -> failwith $"""[Error in file {filePath}] {e.Message}"""

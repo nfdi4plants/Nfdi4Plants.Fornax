@@ -11,17 +11,11 @@ type Components = class end
     static member docsLayout (contentGithubUrl:string, docs: Docs) =
 
         let publishedDate = docs.published.Value.ToString("yyyy-MM-dd")
-        let sidebar = [
-            if Array.isEmpty docs.sidebar |> not then 
-                for sidebarEle in docs.sidebar do
-                    yield custom "nfdi-sidebar-element" [HtmlProperties.Custom ("slot", "sidebar"); HtmlProperties.Custom ("isActive","true") ] [
-                        div [HtmlProperties.Custom ("slot", "title")] [!! sidebarEle.Title]
-                        !! sidebarEle.Content
-                    ]
-            else ()
-        ]
-        custom "nfdi-body" [Class "content"; if Array.isEmpty docs.sidebar |> not then HtmlProperties.Custom("hasSidebar", "true")] [
-            yield! sidebar
+        let hasSidebar = List.isEmpty docs.sidebar |> not
+        custom "nfdi-body" [Class "content"; if hasSidebar then HtmlProperties.Custom("hasSidebar", "true")] [
+
+            if docs.searchbar.IsSome then docs.searchbar.Value
+            if hasSidebar then yield! docs.sidebar
             
             h1 [Class "front-header"] [!! docs.title]
             i [Class "help" ] [!! $"last updated at {publishedDate}" ]
