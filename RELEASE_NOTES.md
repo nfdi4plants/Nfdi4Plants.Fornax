@@ -1,5 +1,6 @@
-### 1.0.5+ee95381 (Released 2023-5-17)
+### 1.0.5+3bd71fd (Released 2023-5-17)
 * Additions:
+    * [[#3bd71fd](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/3bd71fd31568b9b38a66abc8333861bba558c3ff)] Update template readme :books: and npm scripts
     * [[#ee95381](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/ee95381b1dbac11b16c531b06ef1eae7f7d69b58)] Add pagefind basepath
 * Bugfixes:
     * [[#b41b773](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/b41b7736ab85de612467d0b28f89f7cb0fbbd1fa)] Try fix link issue in production :bug:
