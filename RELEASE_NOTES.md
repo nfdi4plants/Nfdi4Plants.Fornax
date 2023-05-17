@@ -1,3 +1,7 @@
+### 1.0.3+139d516 (Released 2023-5-17)
+* Bugfixes:
+    * [[#139d516](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/139d51685308c064eb84c7b831118a21f86513c3)] Fix url issue for searchbar :bug:
+
 ### 1.0.2+363462c (Released 2023-5-17)
 * Additions:
     * [[#363462c](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/363462ca1d0f574e5916b7003978b026dee9e46c)] Update template dependencies
