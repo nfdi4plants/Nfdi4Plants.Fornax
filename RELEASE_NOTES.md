@@ -1,3 +1,10 @@
+### 1.0.5+ee95381 (Released 2023-5-17)
+* Additions:
+    * [[#ee95381](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/ee95381b1dbac11b16c531b06ef1eae7f7d69b58)] Add pagefind basepath
+* Bugfixes:
+    * [[#b41b773](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/b41b7736ab85de612467d0b28f89f7cb0fbbd1fa)] Try fix link issue in production :bug:
+    * [[#652a5c4](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/652a5c45623ee6895d755e0860703123f505fa9b)] Revert test :bug:
+
 ### 1.0.4+9ccd312 (Released 2023-5-17)
 * Bugfixes:
     * [[#9ccd312](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/9ccd312169f12a2cdb48ae617652a0fdc94f9ddb)] Try fix production reference :bug:

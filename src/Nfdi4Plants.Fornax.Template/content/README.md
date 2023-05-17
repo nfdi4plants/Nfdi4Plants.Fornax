@@ -9,7 +9,7 @@ Then run the following commands to get started:
 
 1. `dotnet tool restore`, will restore local dotnet tools _fornax_ and _paket_.
 2. `dotnet paket install`, will download the Nfdi4Plants.Fornax library.
-3. `cd src` -> `dotnet fornax watch`
+3. `npm run fornax`
 
 Done! 🎉 You can now open your static website on http://127.0.0.1:8080
 
