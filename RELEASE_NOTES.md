@@ -1,3 +1,7 @@
+### 1.0.4+9ccd312 (Released 2023-5-17)
+* Bugfixes:
+    * [[#9ccd312](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/9ccd312169f12a2cdb48ae617652a0fdc94f9ddb)] Try fix production reference :bug:
+
 ### 1.0.3+139d516 (Released 2023-5-17)
 * Bugfixes:
     * [[#139d516](https://github.com/Freymaurer/Nfdi4Plants.Fornax/commit/139d51685308c064eb84c7b831118a21f86513c3)] Fix url issue for searchbar :bug:

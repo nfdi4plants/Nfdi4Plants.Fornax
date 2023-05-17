@@ -11,8 +11,8 @@ type PagefindSearchbar = class end
             else
                 url
         div [HtmlProperties.Custom("slot","searchbar")] [
-            link [Href <| appendBasePath "/_pagefind/pagefind-ui.css"; Rel "stylesheet"]
-            script [Src <| appendBasePath "/_pagefind/pagefind-ui.js"; Type "text/javascript"] []
+            link [Href <| appendBasePath "/pagefind/pagefind-ui.css"; Rel "stylesheet"]
+            script [Src <| appendBasePath "/pagefind/pagefind-ui.js"; Type "text/javascript"] []
             div [Id "search"] []
             script [] [
                 !!"""window.addEventListener('DOMContentLoaded', (event) => {
