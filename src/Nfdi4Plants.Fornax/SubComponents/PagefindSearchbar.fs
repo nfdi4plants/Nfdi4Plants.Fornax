@@ -6,8 +6,10 @@ type PagefindSearchbar = class end
     with
     static member create (?productionBasePath: string) =
         let appendBasePath (url: string) = 
-            let p = Option.defaultValue "" productionBasePath
-            p.TrimEnd([|'/'; '\\'|]) + url
+            if productionBasePath.IsSome then
+                "/" + productionBasePath.Value.Trim([|'/'; '\\'|]) + url
+            else
+                url
         div [HtmlProperties.Custom("slot","searchbar")] [
             link [Href <| appendBasePath "/_pagefind/pagefind-ui.css"; Rel "stylesheet"]
             script [Src <| appendBasePath "/_pagefind/pagefind-ui.js"; Type "text/javascript"] []
