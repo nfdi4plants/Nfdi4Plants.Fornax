@@ -232,7 +232,7 @@ type Docs with
                 addSidebar |> Option.map (Aux.getSidebar contentDir productionBasePath useNewSidebar) 
 
             let searchbar =
-                if includeSearchbar then SubComponents.PagefindSearchbar.create((*?productionBasePath=productionBasePath*)) |> Some else None
+                if includeSearchbar then SubComponents.PagefindSearchbar.create(?productionBasePath=productionBasePath) |> Some else None
 
             let content = Aux.getContent text
 
