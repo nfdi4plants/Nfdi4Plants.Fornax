@@ -1,3 +1,6 @@
+> [!CAUTION]
+> This repository is archived and not further developed!
+
 # Nfdi4Plants.Fornax
 
 This fornax template implements the existing [nfdi-web-components](https://github.com/nfdi4plants/web-components) for **documentation**.
